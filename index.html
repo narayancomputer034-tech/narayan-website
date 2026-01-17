@@ -9,7 +9,7 @@
         /* --- MASTER THEME --- */
         :root {
             --primary: #2874f0; /* Flipkart Blue */
-            --dark-blue: #172337; /* Footer Color */
+            --dark-blue: #172337;
             --secondary: #fb641b; /* Orange */
             --bg: #f2f2f2;
             --white: #ffffff;
@@ -17,74 +17,66 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; }
         body { background-color: var(--bg); padding-bottom: 60px; -webkit-tap-highlight-color: transparent; }
 
-        /* --- LOGIN OVERLAY --- */
+        /* --- LOGIN & UI --- */
         #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; transition: 0.3s; }
-        .login-card { width: 100%; max-width: 350px; text-align: center; }
         .inp-field { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; margin: 10px 0; font-size: 16px; outline: none; }
         .btn-full { width: 100%; padding: 14px; background: var(--secondary); color: white; border: none; font-weight: bold; font-size: 16px; border-radius: 2px; cursor: pointer; margin-top: 10px; }
         .hidden { display: none !important; }
 
-        /* --- HEADER & MARQUEE --- */
+        /* --- HEADER --- */
         header { background: var(--primary); padding: 12px 15px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .logo { color: white; font-size: 19px; font-weight: bold; font-style: italic; flex-grow: 1; }
         .cart-icon { position: relative; color: white; font-size: 22px; cursor: pointer; }
         .badge { position: absolute; top: -6px; right: -8px; background: #ff6161; color: white; font-size: 11px; padding: 2px 5px; border-radius: 10px; border: 1px solid white; }
-        
-        /* Offer Running Line */
-        .offer-line { background: #ffe500; color: #212121; font-size: 12px; padding: 5px; font-weight: bold; overflow: hidden; white-space: nowrap; }
+        .offer-line { background: #ffe500; color: #212121; font-size: 12px; padding: 5px; font-weight: bold; white-space: nowrap; overflow: hidden; }
 
         /* --- SEARCH & SLIDER --- */
         .search-area { background: white; padding: 8px; margin: 8px; border-radius: 2px; display: flex; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         .search-area input { border: none; flex: 1; outline: none; margin-left: 10px; font-size: 14px; }
-        
         .slider { width: 100%; height: 170px; overflow: hidden; position: relative; background: #ddd; }
         .slides-container { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
-        .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); background-size: cover; background-position: center; }
+        .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; background-size: cover; background-position: center; }
 
-        /* --- CATEGORIES --- */
+        /* --- CATEGORIES & GRID --- */
         .cat-row { display: flex; overflow-x: auto; padding: 10px; background: white; gap: 15px; scrollbar-width: none; margin-bottom: 5px; }
         .cat-box { min-width: 70px; text-align: center; cursor: pointer; }
         .cat-circle { width: 55px; height: 55px; background: #e0f7fa; border-radius: 50%; margin: 0 auto 5px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--primary); border: 2px solid transparent; }
         .cat-box.active .cat-circle { border-color: var(--secondary); background: white; }
 
-        /* --- PRODUCT GRID --- */
-        .section-title { padding: 15px; background: white; font-weight: bold; font-size: 16px; margin-top: 10px; border-bottom: 1px solid #eee; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; }
         .card { background: white; padding: 10px; position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
         .card img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 10px; }
         .p-title { font-size: 13px; color: #333; height: 38px; overflow: hidden; margin-bottom: 5px; }
         .p-price { font-size: 16px; font-weight: 600; color: #212121; }
-        .p-off { font-size: 12px; color: green; font-weight: bold; margin-left: 5px; }
         .btn-add { width: 100%; padding: 8px; border: 1px solid #ddd; background: white; color: var(--primary); font-weight: bold; margin-top: 8px; border-radius: 2px; cursor: pointer; }
 
-        /* --- FOOTER & FLOATING BTN --- */
+        /* --- FOOTER & CONTACT --- */
         .footer { background: var(--dark-blue); color: white; padding: 20px 15px; margin-top: 20px; font-size: 13px; line-height: 2; padding-bottom: 80px; }
-        .footer h3 { color: #ddd; margin-bottom: 5px; font-size: 15px; border-bottom: 1px solid #444; padding-bottom: 5px; margin-top: 15px; }
-        .footer a { color: white; text-decoration: none; display: block; }
         .seller-btn { display: inline-block; background: var(--secondary); color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 3px; margin-top: 10px; width: 100%; text-align: center; }
-
-        /* Floating Contact Button */
         .float-contact { position: fixed; bottom: 70px; right: 20px; background: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1400; cursor: pointer; animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
-        /* --- PAGES --- */
+        /* --- PAGES & QR --- */
         .page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f2f2f2; z-index: 2000; overflow-y: auto; display: none; padding-bottom: 60px; }
         .page.active { display: block; animation: slideIn 0.3s; }
         @keyframes slideIn { from{transform:translateX(100%)} to{transform:translateX(0)} }
         .page-header { background: white; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #ddd; font-weight: bold; font-size: 16px; position: sticky; top: 0; z-index: 10; }
+
+        /* QR CODE BOX */
+        .qr-box { display: none; text-align: center; background: white; padding: 15px; margin-top: 10px; border: 2px dashed var(--primary); border-radius: 5px; }
+        .qr-img { width: 200px; height: 200px; object-fit: contain; margin: 10px auto; display: block; }
         
-        /* --- NAV BAR --- */
+        /* NAV BAR */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1500; }
         .nav-item { text-align: center; color: #555; font-size: 10px; flex: 1; cursor: pointer; }
         .nav-item i { font-size: 20px; display: block; margin-bottom: 3px; }
         .nav-item.active { color: var(--primary); }
-
     </style>
 </head>
 <body>
 
     <div id="login-overlay">
-        <div class="login-card">
+        <div class="login-card" style="text-align:center; width:100%; max-width:350px;">
             <h2 style="color:var(--primary); font-size:28px; font-style:italic;">Narayan<span style="color:#ffe500">Plus</span></h2>
             <p style="color:#666; margin-bottom:20px;">Welcome! Please Login.</p>
             <div id="step-1">
@@ -97,98 +89,92 @@
             </div>
             <div id="step-3" class="hidden">
                 <input type="text" id="u-name" class="inp-field" placeholder="Your Name">
-                <button class="btn-full" onclick="finishLogin()">Start</button>
+                <button class="btn-full" onclick="finishLogin()">Start Shopping</button>
             </div>
         </div>
     </div>
 
-    <div id="app-container">
+    <div id="view-home" style="display:block;">
+        <header>
+            <div class="logo">Narayan<span style="color:#ffe500">Plus</span></div>
+            <div class="cart-icon" onclick="openPage('view-cart')"><i class="fas fa-shopping-cart"></i><span class="badge" id="cart-badge">0</span></div>
+        </header>
+
+        <marquee class="offer-line" direction="left" scrollamount="5">🔥 Dhamaka Sale: 50% Off on Electronics! Free Delivery near Runnisaidpur. Call 9708797335 for Help. 🔥</marquee>
+
+        <div class="search-area">
+            <i class="fas fa-search" style="color:#888; padding:5px;"></i>
+            <input type="text" placeholder="Search Products..." onkeyup="searchProduct(this.value)">
+        </div>
+
+        <div class="slider">
+            <div class="slides-container" id="slider-track">
+                <div class="slide" style="background: linear-gradient(45deg, #FF512F, #DD2476);">BIG SALE LIVE</div>
+                <div class="slide" style="background: linear-gradient(45deg, #11998e, #38ef7d);">BEST OFFERS</div>
+                <div class="slide" style="background: linear-gradient(45deg, #2193b0, #6dd5ed);">NEW ARRIVALS</div>
+            </div>
+        </div>
+
+        <div class="cat-row">
+            <div class="cat-box active" onclick="filterCat('All', this)"><div class="cat-circle"><i class="fas fa-th-large"></i></div>All</div>
+            <div class="cat-box" onclick="filterCat('Laptop', this)"><div class="cat-circle"><i class="fas fa-laptop"></i></div>Laptop</div>
+            <div class="cat-box" onclick="filterCat('Mobile', this)"><div class="cat-circle"><i class="fas fa-mobile-alt"></i></div>Mobile</div>
+            <div class="cat-box" onclick="filterCat('Audio', this)"><div class="cat-circle"><i class="fas fa-headphones"></i></div>Audio</div>
+        </div>
+
+        <div class="section-title">Latest Products</div>
+        <div class="grid" id="product-list"></div>
+
+        <div class="footer">
+            <div style="text-align:center; font-weight:bold; font-size:16px;">Contact Us</div>
+            <p><i class="fas fa-map-marker-alt"></i> Near DAV School, Runnisaidpur, Sitamarhi - 843328</p>
+            <p><i class="fas fa-phone"></i> +91 9708797335</p>
+
+            <h3>Business with Us</h3>
+            <a href="https://wa.me/919708797335?text=I+want+to+sell+on+Narayan+Plus" class="seller-btn"><i class="fas fa-hand-holding-usd"></i> Sell on Narayan Plus</a>
+
+            <h3>Customer Area</h3>
+            <a href="#" onclick="openPage('view-account')">Your Orders</a>
+            <br><div style="text-align:center;">&copy; 2026 Narayan Services</div>
+        </div>
+    </div>
+
+    <div id="view-cart" class="page">
+        <div class="page-header"><i class="fas fa-arrow-left" onclick="closePage('view-cart')" style="margin-right:15px;"></i> My Cart</div>
+        <div id="cart-content" style="padding:15px;"></div>
         
-        <div id="view-home" style="display:block;">
-            <header>
-                <div class="logo">Narayan<span style="color:#ffe500">Plus</span></div>
-                <div class="cart-icon" onclick="openPage('view-cart')">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge" id="cart-badge">0</span>
-                </div>
-            </header>
-
-            <marquee class="offer-line" direction="left" scrollamount="5">
-                🔥 BIG SALE LIVE: Get 50% Off on Laptops & Mobiles! | Free Delivery on Prepaid Orders | Call 9708797335 for Support 🔥
-            </marquee>
-
-            <div class="search-area">
-                <i class="fas fa-search" style="color:#888; padding:5px;"></i>
-                <input type="text" placeholder="Search Products..." onkeyup="searchProduct(this.value)">
+        <div style="padding:15px; background:white; margin-top:10px;">
+            <h3>Checkout Details</h3>
+            <input id="chk-addr" class="inp-field" placeholder="Full Delivery Address">
+            
+            <p style="margin:10px 0; font-weight:bold;">Payment Method:</p>
+            <div style="display:flex; gap:10px;">
+                <button class="btn-add" onclick="setPay('COD')">Cash on Delivery</button>
+                <button class="btn-add" onclick="setPay('UPI')">Scan & Pay (UPI)</button>
             </div>
 
-            <div class="slider">
-                <div class="slides-container" id="slider-track">
-                    <div class="slide" style="background: linear-gradient(45deg, #FF512F, #DD2476);">DHAMAKA SALE</div>
-                    <div class="slide" style="background: linear-gradient(45deg, #11998e, #38ef7d);">BEST OFFERS</div>
-                    <div class="slide" style="background: linear-gradient(45deg, #2193b0, #6dd5ed);">NEW ARRIVALS</div>
-                </div>
+            <div id="qr-section" class="qr-box">
+                <p style="font-weight:bold; color:var(--primary);">Scan to Pay</p>
+                <img src="qrcode.jpg" class="qr-img" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg'">
+                <p style="font-size:12px; color:red;">*Scan code and pay. Order will be confirmed on WhatsApp.*</p>
             </div>
-
-            <div class="cat-row">
-                <div class="cat-box active" onclick="filterCat('All', this)"><div class="cat-circle"><i class="fas fa-th-large"></i></div>All</div>
-                <div class="cat-box" onclick="filterCat('Laptop', this)"><div class="cat-circle"><i class="fas fa-laptop"></i></div>Laptop</div>
-                <div class="cat-box" onclick="filterCat('Mobile', this)"><div class="cat-circle"><i class="fas fa-mobile-alt"></i></div>Mobile</div>
-                <div class="cat-box" onclick="filterCat('Audio', this)"><div class="cat-circle"><i class="fas fa-headphones"></i></div>Audio</div>
-            </div>
-
-            <div class="section-title">Latest Products</div>
-            <div class="grid" id="product-list"></div>
-
-            <div class="footer">
-                <div style="text-align:center; font-weight:bold; font-size:16px; margin-bottom:10px;">Contact Us</div>
-                <p><i class="fas fa-map-marker-alt"></i> Near DAV School, Runnisaidpur,<br>Sitamarhi, Bihar - 843328</p>
-                <p><i class="fas fa-phone"></i> +91 9708797335</p>
-
-                <h3>Business with Us</h3>
-                <a href="https://wa.me/919708797335?text=Hello+Narayan+Plus,+I+want+to+earn+money+by+selling+products+with+you." class="seller-btn">
-                    <i class="fas fa-hand-holding-usd"></i> Earn Money With Us
-                </a>
-
-                <h3>Customer Area</h3>
-                <a href="#" onclick="openPage('view-account')">Your Orders</a>
-                <a href="#">Help Center</a>
-                <br>
-                <div style="text-align:center;">&copy; 2026 Narayan Services</div>
-            </div>
+            
+            <button class="btn-full" onclick="placeOrder()">CONFIRM ORDER</button>
         </div>
-
-        <div id="view-cart" class="page">
-            <div class="page-header"><i class="fas fa-arrow-left" onclick="closePage('view-cart')" style="margin-right:15px;"></i> My Cart</div>
-            <div id="cart-content" style="padding:15px;"></div>
-            <div style="padding:15px; background:white; margin-top:10px;">
-                <h3>Checkout Details</h3>
-                <input id="chk-addr" class="inp-field" placeholder="Full Delivery Address">
-                <p style="margin:10px 0; font-weight:bold;">Payment:</p>
-                <div style="display:flex; gap:10px;">
-                    <button class="btn-add" onclick="payMode='COD'; alert('Cash on Delivery Selected')">COD</button>
-                    <button class="btn-add" onclick="payMode='UPI'; alert('UPI Selected')">UPI/Online</button>
-                </div>
-                <button class="btn-full" onclick="placeOrder()">CONFIRM ORDER</button>
-            </div>
-        </div>
-
-        <div id="view-account" class="page">
-            <div class="page-header">My Profile</div>
-            <div style="background:var(--primary); color:white; padding:30px; display:flex; align-items:center; gap:15px;">
-                <div style="width:60px; height:60px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:24px;"><i class="fas fa-user"></i></div>
-                <div><h2 id="acc-name-display">User</h2><p id="acc-phone-display">+91...</p></div>
-            </div>
-            <div class="section-title">My Orders</div>
-            <div id="order-history" style="padding-bottom:50px;"></div>
-            <button onclick="logout()" style="width:90%; margin:20px 5%; padding:15px; background:white; border:1px solid red; color:red; font-weight:bold;">LOGOUT</button>
-        </div>
-
     </div>
 
-    <a href="https://wa.me/919708797335?text=Hi,+I+need+help+with+shopping" class="float-contact">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <div id="view-account" class="page">
+        <div class="page-header">My Profile</div>
+        <div style="background:var(--primary); color:white; padding:30px; display:flex; align-items:center; gap:15px;">
+            <div style="width:60px; height:60px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:24px;"><i class="fas fa-user"></i></div>
+            <div><h2 id="acc-name-display">User</h2><p id="acc-phone-display">+91...</p></div>
+        </div>
+        <div class="section-title">My Orders</div>
+        <div id="order-history" style="padding-bottom:50px;"></div>
+        <button onclick="logout()" style="width:90%; margin:20px 5%; padding:15px; background:white; border:1px solid red; color:red; font-weight:bold;">LOGOUT</button>
+    </div>
+
+    <a href="https://wa.me/919708797335?text=Hi,+I+need+help" class="float-contact"><i class="fab fa-whatsapp"></i></a>
 
     <div class="nav-bar">
         <div class="nav-item active" onclick="closePage('all')"><i class="fas fa-home"></i>Home</div>
@@ -198,7 +184,7 @@
     </div>
 
     <script>
-        // --- DATA ---
+        // DATA
         const products = [
             { id:1, name:"HP 15s Ryzen 3", cat:"Laptop", price:35990, mrp:45000, img:"https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg" },
             { id:2, name:"Samsung M14 5G", cat:"Mobile", price:12490, mrp:18990, img:"https://m.media-amazon.com/images/I/817WWpaQqbL._AC_UY327_FMwebp_QL65_.jpg" },
@@ -207,120 +193,68 @@
             { id:5, name:"Wireless Mouse", cat:"Laptop", price:499, mrp:999, img:"https://m.media-amazon.com/images/I/51kdFkdrVXL._AC_UY327_FMwebp_QL65_.jpg" }
         ];
 
-        let cart = [], payMode = "COD";
-        let user = JSON.parse(localStorage.getItem('narayan_user_v3'));
+        let cart = [], payMode = "COD", user = JSON.parse(localStorage.getItem('user_v4'));
+        if(user) { document.getElementById('login-overlay').classList.add('hidden'); updateAcc(); }
 
-        // --- LOGIN ---
-        if(user) { document.getElementById('login-overlay').classList.add('hidden'); loadAccount(); }
-        
-        function getOTP() {
-            if(document.getElementById('u-phone').value.length < 10) return alert("Valid Number Required");
-            document.getElementById('step-1').classList.add('hidden');
-            document.getElementById('step-2').classList.remove('hidden');
-            alert("OTP: 1234");
-        }
-        function verifyOTP() {
-            if(document.getElementById('u-otp').value == "1234") {
-                document.getElementById('step-2').classList.add('hidden');
-                document.getElementById('step-3').classList.remove('hidden');
-            } else alert("Wrong OTP");
-        }
-        function finishLogin() {
-            let name = document.getElementById('u-name').value;
-            let phone = document.getElementById('u-phone').value;
-            if(!name) return alert("Enter Name");
-            user = { name, phone };
-            localStorage.setItem('narayan_user_v3', JSON.stringify(user));
-            document.getElementById('login-overlay').classList.add('hidden');
-            loadAccount();
-        }
-        function logout() { localStorage.removeItem('narayan_user_v3'); location.reload(); }
-        function loadAccount() {
-            if(user) {
-                document.getElementById('acc-name-display').innerText = user.name;
-                document.getElementById('acc-phone-display').innerText = user.phone;
-                loadOrders();
-            }
-        }
+        // LOGIN
+        function getOTP() { if(document.getElementById('u-phone').value.length<10)alert("Invalid No"); else { document.getElementById('step-1').classList.add('hidden'); document.getElementById('step-2').classList.remove('hidden'); alert("OTP: 1234"); } }
+        function verifyOTP() { if(document.getElementById('u-otp').value=="1234"){ document.getElementById('step-2').classList.add('hidden'); document.getElementById('step-3').classList.remove('hidden'); } else alert("Wrong OTP"); }
+        function finishLogin() { let n=document.getElementById('u-name').value; let p=document.getElementById('u-phone').value; if(n){ user={name:n, phone:p}; localStorage.setItem('user_v4', JSON.stringify(user)); document.getElementById('login-overlay').classList.add('hidden'); updateAcc(); } else alert("Name Req"); }
+        function logout() { localStorage.removeItem('user_v4'); location.reload(); }
+        function updateAcc() { document.getElementById('acc-name-display').innerText=user.name; document.getElementById('acc-phone-display').innerText=user.phone; loadOrders(); }
 
-        // --- APP LOGIC ---
-        function renderGrid(list) {
-            const div = document.getElementById('product-list');
-            div.innerHTML = "";
-            list.forEach(p => {
-                let off = Math.round(((p.mrp - p.price)/p.mrp)*100);
-                div.innerHTML += `
-                    <div class="card">
-                        <img src="${p.img}">
-                        <div class="p-title">${p.name}</div>
-                        <div><span class="p-price">₹${p.price}</span><span class="p-off">${off}% OFF</span></div>
-                        <button class="btn-add" onclick="addToCart(${p.id})">ADD</button>
-                    </div>`;
+        // CORE
+        function render(list) {
+            let d = document.getElementById('product-list'); d.innerHTML="";
+            list.forEach(p=>{
+                let off=Math.round(((p.mrp-p.price)/p.mrp)*100);
+                d.innerHTML+=`<div class="card"><img src="${p.img}"><div class="p-title">${p.name}</div><div><span class="p-price">₹${p.price}</span> <span class="p-off">${off}% OFF</span></div><button class="btn-add" onclick="add(${p.id})">ADD</button></div>`;
             });
         }
-        renderGrid(products);
+        render(products);
 
-        function filterCat(cat, el) {
-            document.querySelectorAll('.cat-box').forEach(c=>c.classList.remove('active'));
-            if(el) el.classList.add('active');
-            renderGrid(cat === 'All' ? products : products.filter(p => p.cat === cat));
-        }
-        function searchProduct(q) { renderGrid(products.filter(p => p.name.toLowerCase().includes(q.toLowerCase()))); }
+        function filterCat(c,e) { document.querySelectorAll('.cat-box').forEach(x=>x.classList.remove('active')); if(e)e.classList.add('active'); render(c==='All'?products:products.filter(p=>p.cat===c)); }
+        function searchProduct(q) { render(products.filter(p=>p.name.toLowerCase().includes(q.toLowerCase()))); }
+        function add(id) { cart.push(products.find(p=>p.id===id)); document.getElementById('cart-badge').innerText=cart.length; alert("Added!"); }
+        
+        function openPage(id) { document.querySelectorAll('.page').forEach(x=>x.classList.remove('active')); if(id!=='all'){ document.getElementById(id).classList.add('active'); if(id==='view-cart')renderCart(); } }
+        function closePage(id) { if(id==='all')document.querySelectorAll('.page').forEach(x=>x.classList.remove('active')); else document.getElementById(id).classList.remove('active'); }
 
-        function addToCart(id) {
-            cart.push(products.find(p => p.id === id));
-            document.getElementById('cart-badge').innerText = cart.length;
-            alert("Added!");
-        }
-
-        function openPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            if(id !== 'all') {
-                document.getElementById(id).classList.add('active');
-                if(id === 'view-cart') renderCartItems();
-            }
-        }
-        function closePage(id) {
-            if(id === 'all') document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            else document.getElementById(id).classList.remove('active');
+        function renderCart() {
+            let d=document.getElementById('cart-content'); d.innerHTML=""; let t=0;
+            if(cart.length===0) d.innerHTML="Empty";
+            cart.forEach(i=>{ t+=i.price; d.innerHTML+=`<div style="border-bottom:1px solid #eee; padding:10px 0; display:flex; justify-content:space-between;"><span>${i.name}</span><b>₹${i.price}</b></div>`; });
+            d.innerHTML+=`<h3 style="text-align:right; margin-top:10px;">Total: ₹${t}</h3>`;
         }
 
-        function renderCartItems() {
-            const div = document.getElementById('cart-content');
-            div.innerHTML = "";
-            let total = 0;
-            if(cart.length===0) div.innerHTML = "Cart Empty";
-            cart.forEach(i => { total += i.price; div.innerHTML += `<div style="border-bottom:1px solid #eee; padding:10px 0; display:flex; justify-content:space-between;"><span>${i.name}</span><b>₹${i.price}</b></div>`; });
-            div.innerHTML += `<h3 style="text-align:right; margin-top:10px;">Total: ₹${total}</h3>`;
-        }
+        function setPay(m) { payMode=m; document.getElementById('qr-section').style.display = (m==='UPI') ? 'block' : 'none'; }
 
         function placeOrder() {
             let addr = document.getElementById('chk-addr').value;
-            if(!addr) return alert("Enter Address");
+            if(!addr) return alert("Address Required");
             if(cart.length===0) return;
             
-            let items = cart.map(i => i.name).join(", ");
+            let items = cart.map(i=>i.name).join(", ");
             let total = cart.reduce((a,b)=>a+b.price,0);
             
-            window.open(`https://wa.me/919708797335?text=*NEW ORDER*%0AUser: ${user.name}%0APhone: ${user.phone}%0AAddress: ${addr}%0AItems: ${items}%0APay: ${payMode}%0ATotal: ₹${total}`);
+            let url = `https://wa.me/919708797335?text=*NEW ORDER*%0AUser: ${user.name}%0APhone: ${user.phone}%0AAddr: ${addr}%0AItems: ${items}%0APay: ${payMode}%0ATotal: ₹${total}`;
+            window.open(url);
             
-            let hist = JSON.parse(localStorage.getItem('n_orders_v3')) || [];
-            hist.unshift({ date: new Date().toLocaleDateString(), items, total, status: "Placed" });
-            localStorage.setItem('n_orders_v3', JSON.stringify(hist));
+            let h = JSON.parse(localStorage.getItem('hist_v4'))||[];
+            h.unshift({date:new Date().toLocaleDateString(), items, total, status:"Placed"});
+            localStorage.setItem('hist_v4', JSON.stringify(h));
             
-            cart = []; document.getElementById('cart-badge').innerText = 0;
+            cart=[]; document.getElementById('cart-badge').innerText=0;
             closePage('view-cart'); openPage('view-account'); loadOrders();
         }
 
         function loadOrders() {
-            let hist = JSON.parse(localStorage.getItem('n_orders_v3')) || [];
-            let div = document.getElementById('order-history');
-            div.innerHTML = "";
-            hist.forEach(o => { div.innerHTML += `<div style="background:#f9f9f9; padding:10px; margin:10px; border-left:4px solid green;"><div style="font-size:12px;">${o.date}</div><div><b>${o.items}</b></div><div style="margin-top:5px;">Total: ₹${o.total} <span style="color:orange; float:right;">${o.status}</span></div></div>`; });
+            let h = JSON.parse(localStorage.getItem('hist_v4'))||[];
+            let d = document.getElementById('order-history'); d.innerHTML="";
+            h.forEach(o=>{ d.innerHTML+=`<div style="background:#f9f9f9; padding:10px; margin:10px; border-left:4px solid green;"><div style="font-size:12px;">${o.date}</div><div><b>${o.items}</b></div><div>Total: ₹${o.total} <span style="float:right; color:orange;">${o.status}</span></div></div>`; });
         }
 
-        let sIdx = 0;
-        setInterval(() => { sIdx = (sIdx > 2) ? 0 : sIdx + 1; document.getElementById('slider-track').style.transform = `translateX(-${sIdx * 100}%)`; }, 3000);
+        let si=0; setInterval(()=>{ si=(si>2)?0:si+1; document.getElementById('slider-track').style.transform=`translateX(-${si*100}%)`; }, 3000);
     </script>
 </body>
 </html>
