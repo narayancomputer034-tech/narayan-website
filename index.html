@@ -6,75 +6,94 @@
     <title>Narayan Computer Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- AMAZON/MEESHO STYLE CSS --- */
+        /* --- STYLE CSS --- */
         :root {
-            --primary: #232f3e; /* Amazon Dark Blue */
-            --secondary: #ff9900; /* Amazon Orange */
-            --bg: #e3e6e6;
-            --white: #ffffff;
-            --text: #111;
+            --primary: #2874f0;
+            --secondary: #ff9f00;
+            --bg: #f1f3f6;
+            --text: #212121;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: var(--bg); padding-bottom: 70px; } /* Bottom Nav ke liye jagah */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; }
+        body { background-color: var(--bg); padding-bottom: 70px; }
 
-        /* TOP HEADER */
-        header { background: #2874f0; /* Flipkart Blue style for fresh look */ color: white; padding: 10px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .menu-icon { font-size: 20px; }
+        /* HEADER */
+        header { background: var(--primary); color: white; padding: 12px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .menu-icon { font-size: 20px; cursor: pointer; }
         .logo { font-size: 18px; font-weight: bold; flex-grow: 1; }
         .cart-icon { position: relative; font-size: 22px; cursor: pointer; }
-        .cart-badge { position: absolute; top: -5px; right: -8px; background: red; color: white; font-size: 10px; padding: 2px 5px; border-radius: 50%; }
+        .cart-badge { position: absolute; top: -6px; right: -6px; background: #ff6161; color: white; font-size: 10px; padding: 2px 5px; border-radius: 50%; border: 1px solid white; }
+
+        /* SIDE MENU (DRAWER) */
+        .side-menu { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: white; z-index: 2500; transition: 0.3s; box-shadow: 2px 0 5px rgba(0,0,0,0.3); padding-top: 60px; }
+        .side-menu.active { left: 0; }
+        .menu-item { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; color: #333; cursor: pointer; }
+        .menu-item:hover { background: #f0f0f0; }
+        .close-menu { position: absolute; top: 15px; right: 15px; font-size: 24px; cursor: pointer; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2400; }
 
         /* SEARCH BAR */
-        .search-container { background: white; padding: 8px; display: flex; margin: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .search-container input { border: none; flex: 1; outline: none; font-size: 15px; }
-        .search-container i { color: #888; padding: 5px; }
+        .search-container { background: white; padding: 10px; margin: 10px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: flex; align-items: center; }
+        .search-container input { border: none; flex: 1; outline: none; font-size: 15px; margin-left: 10px; }
+        .search-container i { color: #878787; }
 
-        /* CATEGORIES (SCROLLABLE) */
-        .categories { display: flex; overflow-x: auto; gap: 15px; padding: 10px; background: white; scrollbar-width: none; }
-        .cat-item { min-width: 70px; text-align: center; font-size: 12px; }
-        .cat-img { width: 50px; height: 50px; background: #f0f0f0; border-radius: 50%; margin-bottom: 5px; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 2px solid transparent; }
-        .cat-img.active { border-color: var(--secondary); }
-        .cat-img i { font-size: 20px; color: #555; }
-
-        /* HERO BANNER */
-        .banner { width: 100%; height: 180px; background: linear-gradient(45deg, #1a2980, #26d0ce); color: white; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; margin-bottom: 10px; }
-        .banner h2 { font-size: 22px; margin-bottom: 5px; }
-        .banner p { font-size: 14px; opacity: 0.9; }
+        /* CATEGORIES */
+        .categories { display: flex; overflow-x: auto; gap: 20px; padding: 15px; background: white; margin-bottom: 10px; scrollbar-width: none; }
+        .cat-item { min-width: 60px; text-align: center; cursor: pointer; }
+        .cat-img { width: 50px; height: 50px; background: #e0f7fa; border-radius: 50%; margin: 0 auto 5px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .cat-item.active .cat-img { background: var(--primary); color: white; }
+        .cat-name { font-size: 12px; font-weight: 500; color: #333; }
 
         /* PRODUCT GRID */
-        .section-title { padding: 10px 15px; font-weight: bold; font-size: 18px; color: #333; background: white; margin-top: 10px; }
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px; }
-        
-        .card { background: white; border-radius: 5px; padding: 10px; position: relative; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; }
-        .wishlist { position: absolute; top: 10px; right: 10px; color: #ccc; }
-        .card-img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 10px; }
-        .title { font-size: 14px; margin-bottom: 5px; line-height: 1.3; height: 36px; overflow: hidden; }
-        .price { font-size: 16px; font-weight: bold; color: #212121; }
-        .mrp { font-size: 12px; text-decoration: line-through; color: #878787; margin-left: 5px; }
-        .off { color: green; font-size: 12px; font-weight: bold; margin-left: 5px; }
-        .free-del { background: #f0f0f0; font-size: 10px; padding: 2px 5px; border-radius: 3px; display: inline-block; margin-top: 5px; color: #555; }
-        
-        .add-btn { background: #ff9f00; color: white; border: none; padding: 8px; width: 100%; border-radius: 4px; font-weight: bold; margin-top: 10px; cursor: pointer; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; }
+        .card { background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; }
+        .card-img { width: 100%; height: 130px; object-fit: contain; margin-bottom: 10px; }
+        .title { font-size: 14px; margin-bottom: 5px; height: 38px; overflow: hidden; color: #333; }
+        .price-row { display: flex; align-items: baseline; gap: 5px; margin-bottom: 5px; }
+        .price { font-size: 16px; font-weight: 600; color: #212121; }
+        .mrp { font-size: 12px; text-decoration: line-through; color: #878787; }
+        .off { font-size: 12px; color: #388e3c; font-weight: 600; }
+        .add-btn { background: var(--secondary); color: white; border: none; padding: 8px; width: 100%; border-radius: 2px; font-weight: 600; cursor: pointer; margin-top: auto; }
 
-        /* BOTTOM NAVIGATION (APP STYLE) */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; z-index: 1000; }
-        .nav-item { text-align: center; color: #666; font-size: 10px; }
-        .nav-item i { font-size: 18px; margin-bottom: 2px; display: block; }
-        .nav-item.active { color: #2874f0; }
+        /* ACCOUNT MODAL */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; justify-content: center; align-items: center; }
+        .modal-content { background: white; width: 90%; max-width: 400px; padding: 20px; border-radius: 8px; position: relative; text-align: center; }
+        .profile-pic { width: 80px; height: 80px; background: #ddd; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #666; }
+        .logout-btn { background: #ff6161; color: white; border: none; padding: 10px 20px; border-radius: 4px; margin-top: 15px; cursor: pointer; }
 
-        /* CART MODAL (POPUP) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: flex-end; }
-        .modal-content { background: white; width: 100%; padding: 20px; border-radius: 15px 15px 0 0; max-height: 80vh; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .whatsapp-btn { background: #25D366; color: white; width: 100%; padding: 15px; border: none; font-size: 16px; font-weight: bold; border-radius: 5px; margin-top: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        /* BOTTOM NAV */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; z-index: 2000; }
+        .nav-item { text-align: center; color: #878787; font-size: 11px; cursor: pointer; }
+        .nav-item i { font-size: 20px; display: block; margin-bottom: 2px; }
+        .nav-item.active { color: var(--primary); }
+
+        /* NOTIFICATION */
+        .toast { visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center; border-radius: 2px; padding: 16px; position: fixed; z-index: 4000; left: 50%; bottom: 80px; transform: translateX(-50%); font-size: 14px; }
+        .toast.show { visibility: visible; -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 80px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 80px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
     </style>
 </head>
 <body>
 
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <span class="close-menu" onclick="toggleMenu()">&times;</span>
+        <div style="text-align: center; padding: 20px; background: var(--primary); color: white; margin-top: -60px;">
+            <h3>Welcome</h3>
+            <p>Narayan Services</p>
+        </div>
+        <div class="menu-item" onclick="filterCategory('all'); toggleMenu()"><i class="fas fa-home"></i> Home</div>
+        <div class="menu-item" onclick="openAccount(); toggleMenu()"><i class="fas fa-user"></i> My Profile</div>
+        <div class="menu-item" onclick="toggleMenu()"><i class="fas fa-box"></i> My Orders</div>
+        <div class="menu-item" onclick="toggleMenu()"><i class="fas fa-phone"></i> Contact Us</div>
+        <div class="menu-item" onclick="toggleMenu()"><i class="fas fa-share-alt"></i> Share App</div>
+    </div>
+
     <header>
-        <i class="fas fa-bars menu-icon"></i>
+        <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
         <div class="logo">Narayan Services</div>
         <div class="cart-icon" onclick="openCart()">
             <i class="fas fa-shopping-cart"></i>
@@ -84,181 +103,203 @@
 
     <div class="search-container">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search for products, brands and more">
+        <input type="text" id="searchInput" placeholder="Search for Laptop, Mobile..." onkeyup="searchProducts()">
     </div>
 
     <div class="categories">
-        <div class="cat-item">
-            <div class="cat-img active"><i class="fas fa-th-large"></i></div>
-            <span>All</span>
+        <div class="cat-item active" onclick="filterCategory('all', this)">
+            <div class="cat-img"><i class="fas fa-th-large"></i></div>
+            <span class="cat-name">All</span>
         </div>
-        <div class="cat-item">
+        <div class="cat-item" onclick="filterCategory('Laptop', this)">
             <div class="cat-img"><i class="fas fa-laptop"></i></div>
-            <span>Laptops</span>
+            <span class="cat-name">Laptop</span>
         </div>
-        <div class="cat-item">
+        <div class="cat-item" onclick="filterCategory('Mobile', this)">
             <div class="cat-img"><i class="fas fa-mobile-alt"></i></div>
-            <span>Mobiles</span>
+            <span class="cat-name">Mobile</span>
         </div>
-        <div class="cat-item">
+        <div class="cat-item" onclick="filterCategory('Audio', this)">
             <div class="cat-img"><i class="fas fa-headphones"></i></div>
-            <span>Audio</span>
+            <span class="cat-name">Audio</span>
         </div>
-        <div class="cat-item">
+        <div class="cat-item" onclick="filterCategory('Printer', this)">
             <div class="cat-img"><i class="fas fa-print"></i></div>
-            <span>Printers</span>
+            <span class="cat-name">Printer</span>
         </div>
     </div>
 
-    <div class="banner">
-        <h2>Big Saving Days</h2>
-        <p>Sale is Live! Upto 60% Off on Electronics</p>
-    </div>
-
-    <div class="section-title">Latest Products</div>
-    
-    <div class="product-grid" id="product-list">
+    <div id="product-list" class="product-grid">
         </div>
-
-    <div style="height: 60px;"></div>
 
     <div class="bottom-nav">
-        <div class="nav-item active">
-            <i class="fas fa-home"></i>
-            Home
+        <div class="nav-item active" onclick="filterCategory('all'); highlightNav(this)">
+            <i class="fas fa-home"></i> Home
         </div>
-        <div class="nav-item">
-            <i class="fas fa-list"></i>
-            Categories
+        <div class="nav-item" onclick="highlightNav(this); document.querySelector('.categories').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-th-list"></i> Category
         </div>
-        <div class="nav-item">
-            <i class="fas fa-user"></i>
-            Account
+        <div class="nav-item" onclick="highlightNav(this); openAccount()">
+            <i class="fas fa-user-circle"></i> Account
         </div>
-        <div class="nav-item" onclick="openCart()">
-            <i class="fas fa-shopping-cart"></i>
-            Cart
+        <div class="nav-item" onclick="highlightNav(this); openCart()">
+            <i class="fas fa-shopping-cart"></i> Cart
         </div>
     </div>
 
     <div class="modal" id="cartModal">
-        <div class="modal-content">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+        <div class="modal-content" style="text-align: left;">
+            <div style="display:flex; justify-content:space-between;">
                 <h2>My Cart</h2>
-                <i class="fas fa-times" onclick="closeCart()" style="font-size:20px;"></i>
+                <i class="fas fa-times" onclick="document.getElementById('cartModal').style.display='none'" style="cursor:pointer; font-size:20px;"></i>
             </div>
-            <div id="cart-items">
-                <p>Your cart is empty.</p>
+            <div id="cart-items" style="max-height: 200px; overflow-y: auto; margin: 15px 0;">
+                <p>Cart is Empty!</p>
             </div>
-            <div style="margin-top:20px; border-top:1px solid #ddd; padding-top:10px; display:flex; justify-content:space-between; font-weight:bold;">
-                <span>Total Amount:</span>
-                <span id="cart-total">₹0</span>
-            </div>
-            <button class="whatsapp-btn" onclick="checkout()">
+            <button class="add-btn" style="background:#25D366;" onclick="checkoutWhatsApp()">
                 <i class="fab fa-whatsapp"></i> Order on WhatsApp
             </button>
         </div>
     </div>
 
+    <div class="modal" id="accountModal">
+        <div class="modal-content">
+            <span style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:24px;" onclick="document.getElementById('accountModal').style.display='none'">&times;</span>
+            <div class="profile-pic"><i class="fas fa-user"></i></div>
+            <h3>Guest User</h3>
+            <p>+91 9708797335</p>
+            <p>Narayancomputer034@gmail.com</p>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+            <p style="color:#666;">Address: DAV School, Runnisaidpur</p>
+            <button class="logout-btn" onclick="alert('Logged out successfully!')">Log Out</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Item added to cart!</div>
+
     <script>
-        // Product Data (Aap yahan aur saman add kar sakte hain)
+        // --- DATA ---
         const products = [
-            { id: 1, name: "HP 15s Ryzen 3", price: 35990, mrp: 45000, img: "https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id: 2, name: "Samsung Galaxy M14 5G", price: 12490, mrp: 18990, img: "https://m.media-amazon.com/images/I/817WWpaQqbL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id: 3, name: "boAt Airdopes 141", price: 1299, mrp: 4490, img: "https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg" },
-            { id: 4, name: "Canon Pixma E477", price: 5999, mrp: 7500, img: "https://m.media-amazon.com/images/I/51+u0a+JpQL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id: 5, name: "Dell Wireless Mouse", price: 599, mrp: 999, img: "https://m.media-amazon.com/images/I/51kdFkdrVXL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id: 6, name: "SanDisk 64GB Pen Drive", price: 450, mrp: 1000, img: "https://m.media-amazon.com/images/I/61aiZlJjWGL._AC_UY327_FMwebp_QL65_.jpg" }
+            { id: 1, name: "HP 15s Ryzen 3 Laptop", category: "Laptop", price: 35990, mrp: 45000, img: "https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id: 2, name: "Dell Vostro 3400", category: "Laptop", price: 38990, mrp: 51000, img: "https://m.media-amazon.com/images/I/61N991G2RHL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id: 3, name: "Samsung Galaxy M14 5G", category: "Mobile", price: 12490, mrp: 18990, img: "https://m.media-amazon.com/images/I/817WWpaQqbL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id: 4, name: "Redmi 12 5G", category: "Mobile", price: 11999, mrp: 15999, img: "https://m.media-amazon.com/images/I/71d7rfSl0wL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id: 5, name: "boAt Airdopes 141", category: "Audio", price: 1299, mrp: 4490, img: "https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg" },
+            { id: 6, name: "Canon Pixma E477", category: "Printer", price: 5999, mrp: 7500, img: "https://m.media-amazon.com/images/I/51+u0a+JpQL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id: 7, name: "HP Wireless Mouse", category: "Laptop", price: 599, mrp: 999, img: "https://m.media-amazon.com/images/I/51kdFkdrVXL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id: 8, name: "Sony Headphones", category: "Audio", price: 999, mrp: 2000, img: "https://m.media-amazon.com/images/I/41Kk+f9rY+L._AC_UY327_FMwebp_QL65_.jpg" }
         ];
 
         let cart = [];
 
-        // Load Products
+        // --- FUNCTIONS ---
+        
+        // 1. Load Products (Initial)
         const productList = document.getElementById('product-list');
-        products.forEach(prod => {
-            const off = Math.round(((prod.mrp - prod.price) / prod.mrp) * 100);
-            productList.innerHTML += `
-                <div class="card">
-                    <i class="fas fa-heart wishlist"></i>
-                    <img src="${prod.img}" class="card-img" alt="${prod.name}">
-                    <div class="title">${prod.name}</div>
-                    <div>
-                        <span class="price">₹${prod.price}</span>
-                        <span class="mrp">₹${prod.mrp}</span>
-                        <span class="off">${off}% off</span>
+        function renderProducts(data) {
+            productList.innerHTML = "";
+            if(data.length === 0) {
+                productList.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding:20px;'>No products found.</p>";
+                return;
+            }
+            data.forEach(prod => {
+                const off = Math.round(((prod.mrp - prod.price) / prod.mrp) * 100);
+                productList.innerHTML += `
+                    <div class="card">
+                        <img src="${prod.img}" class="card-img">
+                        <div class="title">${prod.name}</div>
+                        <div class="price-row">
+                            <span class="price">₹${prod.price}</span>
+                            <span class="mrp">₹${prod.mrp}</span>
+                            <span class="off">${off}% off</span>
+                        </div>
+                        <button class="add-btn" onclick="addToCart(${prod.id})">ADD TO CART</button>
                     </div>
-                    <div class="free-del">Free Delivery</div>
-                    <button class="add-btn" onclick="addToCart(${prod.id})">ADD TO CART</button>
-                </div>
-            `;
-        });
+                `;
+            });
+        }
+        renderProducts(products); // Run on load
 
-        // Add to Cart
+        // 2. Search Functionality
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        // 3. Category Filter
+        function filterCategory(cat, element) {
+            // Highlight active icon
+            if (element) {
+                document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+                element.classList.add('active');
+            }
+            
+            if (cat === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === cat);
+                renderProducts(filtered);
+            }
+        }
+
+        // 4. Add to Cart & Toast
         function addToCart(id) {
             const product = products.find(p => p.id === id);
             cart.push(product);
-            updateCartCount();
-            alert("Item added to cart!");
-        }
-
-        function updateCartCount() {
             document.getElementById('cart-count').innerText = cart.length;
+            showToast();
         }
 
-        // Cart Modal Logic
+        function showToast() {
+            const x = document.getElementById("toast");
+            x.className = "toast show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+
+        // 5. Side Menu
+        function toggleMenu() {
+            document.getElementById('sideMenu').classList.toggle('active');
+            const overlay = document.getElementById('overlay');
+            overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // 6. Account & Cart Modal
+        function openAccount() {
+            document.getElementById('accountModal').style.display = 'flex';
+        }
         function openCart() {
-            const modal = document.getElementById('cartModal');
-            const cartItemsDiv = document.getElementById('cart-items');
-            const cartTotalSpan = document.getElementById('cart-total');
-            
-            modal.style.display = "flex";
-            cartItemsDiv.innerHTML = "";
-            let total = 0;
-
+            document.getElementById('cartModal').style.display = 'flex';
+            const cartDiv = document.getElementById('cart-items');
             if(cart.length === 0) {
-                cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+                cartDiv.innerHTML = "<p>Cart is Empty!</p>";
             } else {
-                cart.forEach((item, index) => {
+                cartDiv.innerHTML = "";
+                let total = 0;
+                cart.forEach(item => {
                     total += item.price;
-                    cartItemsDiv.innerHTML += `
-                        <div class="cart-item">
-                            <div>${item.name}</div>
-                            <div style="font-weight:bold;">₹${item.price}</div>
-                        </div>
-                    `;
+                    cartDiv.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:5px;"><span>${item.name}</span><b>₹${item.price}</b></div>`;
                 });
+                cartDiv.innerHTML += `<hr><h3>Total: ₹${total}</h3>`;
             }
-            cartTotalSpan.innerText = "₹" + total;
         }
 
-        function closeCart() {
-            document.getElementById('cartModal').style.display = "none";
-        }
-
-        // WhatsApp Checkout (MAIN FEATURE)
-        function checkout() {
-            if (cart.length === 0) {
-                alert("Cart is empty!");
-                return;
-            }
-
-            let message = "Hello Narayan Services, I want to order:%0A";
+        // 7. WhatsApp Checkout
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return alert("Cart Empty!");
+            let msg = "Hello Narayan Services, New Order:%0A";
             let total = 0;
-
-            cart.forEach(item => {
-                message += `- ${item.name} (Rs ${item.price})%0A`;
-                total += item.price;
-            });
-
-            message += `%0A*Total Amount: Rs ${total}*`;
-            message += "%0A%0APlease confirm my order.";
-
-            // Aapka Number Yahan Hai
-            const myNumber = "919708797335"; 
-            
-            const url = `https://wa.me/${myNumber}?text=${message}`;
-            window.open(url, '_blank');
+            cart.forEach(i => { msg += `- ${i.name} (Rs ${i.price})%0A`; total += i.price; });
+            msg += `%0A*Total: Rs ${total}*`;
+            window.open(`https://wa.me/919708797335?text=${msg}`, '_blank');
         }
+
+        // 8. Nav Highlight
+        function highlightNav(el) {
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            el.classList.add('active');
+        }
+
     </script>
 </body>
 </html>
