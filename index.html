@@ -3,372 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narayan Online Store</title>
+    <title>Narayan Plus - Premium Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- 1. ADVANCED CSS (Mobile Friendly & Professional) --- */
+        /* --- AMAZON/FLIPKART STYLE THEME --- */
         :root {
-            --primary: #2874f0; /* Flipkart Blue Brand Color */
-            --secondary: #fb641b; /* Action Orange */
-            --bg: #f1f3f6;
+            --primary: #232f3e; /* Amazon Dark Blue */
+            --secondary: #febd69; /* Amazon Yellow */
+            --action: #f0c14b; /* Buy Button Gold */
+            --bg: #eaeded;
             --white: #ffffff;
-            --dark: #212121;
+            --blue-link: #007185;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body { background-color: var(--bg); padding-bottom: 70px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: var(--bg); padding-bottom: 70px; -webkit-tap-highlight-color: transparent; }
 
-        /* HEADER */
-        header { background: var(--primary); padding: 15px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .logo { color: white; font-size: 20px; font-weight: bold; font-style: italic; }
-        .cart-btn { position: relative; color: white; font-size: 22px; cursor: pointer; }
-        .badge { position: absolute; top: -8px; right: -8px; background: #ff6161; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; }
+        /* --- LOGIN OVERLAY --- */
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .login-card { width: 100%; max-width: 350px; text-align: center; border: 1px solid #ddd; padding: 20px; border-radius: 5px; background: white; }
+        .inp-field { width: 100%; padding: 12px; border: 1px solid #aaa; border-radius: 3px; margin: 10px 0; font-size: 14px; outline: none; }
+        .inp-field:focus { border-color: #e77600; box-shadow: 0 0 3px 2px rgba(228,121,17,0.5); }
+        .btn-login { width: 100%; padding: 12px; background: #f0c14b; border: 1px solid #a88734; border-radius: 3px; cursor: pointer; font-size: 14px; }
+        
+        /* --- HEADER --- */
+        header { background: var(--primary); padding: 10px 15px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; }
+        .logo { color: white; font-size: 20px; font-weight: bold; font-style: italic; letter-spacing: -1px; }
+        .logo span { color: var(--secondary); }
+        .header-icons { display: flex; gap: 15px; color: white; align-items: center; }
+        .cart-icon { position: relative; font-size: 24px; cursor: pointer; }
+        .badge { position: absolute; top: -8px; right: -8px; background: var(--secondary); color: black; font-size: 11px; padding: 1px 5px; border-radius: 10px; font-weight: bold; }
 
-        /* PAGES (Tabs) */
-        .page { display: none; padding: 10px; animation: fadeIn 0.4s; }
+        /* --- SEARCH & NAV --- */
+        .search-bar { background: var(--primary); padding: 0 10px 10px 10px; display: flex; }
+        .search-box { width: 100%; padding: 10px; border-radius: 5px; border: none; outline: none; }
+        
+        .cat-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 10px; background: white; scrollbar-width: none; border-bottom: 1px solid #ddd; }
+        .cat-item { min-width: 60px; text-align: center; font-size: 11px; color: #333; cursor: pointer; }
+        .cat-img { width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px; object-fit: cover; }
+
+        /* --- SLIDER --- */
+        .slider { width: 100%; height: 180px; overflow: hidden; position: relative; background: #ddd; margin-bottom: 5px; }
+        .slides { display: flex; height: 100%; transition: 0.5s; }
+        .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; background-size: cover; background-position: center; }
+
+        /* --- PRODUCTS --- */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; }
+        .card { background: white; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .card img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 5px; }
+        .p-name { font-size: 13px; color: #333; height: 38px; overflow: hidden; line-height: 1.3; margin-bottom: 2px; }
+        .rating-stars { color: #ffa41c; font-size: 12px; margin-bottom: 5px; cursor: pointer; }
+        .p-price { font-size: 17px; font-weight: 500; color: #000; }
+        .p-mrp { font-size: 12px; text-decoration: line-through; color: #565959; margin-left: 5px; }
+        .p-off { font-size: 12px; color: #CC0C39; font-weight: bold; }
+        .btn-add { background: #ffd814; border: 1px solid #fcd200; padding: 8px; width: 100%; border-radius: 15px; margin-top: 5px; cursor: pointer; font-size: 12px; }
+
+        /* --- PAGES --- */
+        .page { display: none; padding-bottom: 20px; }
         .page.active { display: block; }
-        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        .page-header { background: #f0f2f2; padding: 15px; border-bottom: 1px solid #ddd; font-weight: bold; display: flex; align-items: center; }
 
-        /* HOME PAGE COMPONENTS */
-        .banner { width: 100%; height: 160px; background: linear-gradient(45deg, #11998e, #38ef7d); border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; margin-bottom: 10px; text-shadow: 1px 1px 2px black; }
-        
-        .cat-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scrollbar-width: none; background: white; margin-bottom: 10px; }
-        .cat-item { min-width: 70px; text-align: center; font-size: 12px; cursor: pointer; }
-        .cat-img { width: 50px; height: 50px; background: #e0f7fa; border-radius: 50%; margin: 0 auto 5px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary); border: 2px solid transparent; }
-        .cat-item.active .cat-img { border-color: var(--secondary); background: white; }
+        /* --- FOOTER --- */
+        .footer { background: #232f3e; color: white; padding: 20px; text-align: center; font-size: 13px; margin-top: 20px; padding-bottom: 80px; }
+        .footer a { color: #ddd; text-decoration: none; display: block; margin: 8px 0; }
+        .biz-btn { background: #4CAF50; color: white; padding: 10px 20px; border-radius: 4px; display: inline-block; margin-top: 10px; font-weight: bold; }
 
-        /* PRODUCT CARD DESIGN */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .card { background: white; border-radius: 5px; padding: 10px; position: relative; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 8px; }
-        .p-name { font-size: 13px; color: #333; height: 36px; overflow: hidden; margin-bottom: 4px; line-height: 1.4; }
-        .p-price { font-size: 16px; font-weight: bold; color: #000; }
-        .p-mrp { font-size: 12px; text-decoration: line-through; color: #878787; margin-left: 5px; }
-        .p-off { font-size: 11px; color: green; font-weight: bold; }
-        .rating { color: orange; font-size: 10px; margin-bottom: 5px; }
-        
-        .btn-buy { width: 100%; background: #ff9f00; color: white; border: none; padding: 8px; font-weight: bold; border-radius: 3px; cursor: pointer; margin-top: 5px; }
-        .btn-whatsapp { width: 100%; background: #25D366; color: white; border: none; padding: 8px; font-weight: bold; border-radius: 3px; cursor: pointer; margin-top: 5px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        /* --- SECRET BUTTON --- */
+        .secret-lock { position: fixed; bottom: 80px; left: 20px; background: #333; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
 
-        /* FOOTER & INFO PAGES */
-        .footer-links { background: #172337; color: white; padding: 20px; margin-top: 20px; font-size: 13px; }
-        .footer-links h3 { border-bottom: 1px solid #555; padding-bottom: 5px; margin-bottom: 10px; color: #ccc; }
-        .info-link { display: block; color: #fff; padding: 5px 0; text-decoration: none; border-bottom: 1px solid #333; }
-        
-        /* ADMIN PANEL & FORMS */
-        .upload-form { background: white; padding: 15px; border: 2px dashed var(--primary); border-radius: 8px; margin-top: 10px; }
-        .inp { width: 100%; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 4px; }
-        .btn-submit { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; }
+        /* --- ADMIN PANELS --- */
+        .admin-panel { padding: 15px; background: white; margin: 10px; border-radius: 8px; border: 1px solid #ddd; }
+        .stat-box { background: #e3f2fd; padding: 15px; margin-bottom: 10px; border-radius: 5px; text-align: center; border: 1px solid #90caf9; }
+        .order-row { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 12px; }
 
-        /* CART & CHECKOUT */
-        .cart-item { display: flex; justify-content: space-between; background: white; padding: 10px; margin-bottom: 5px; border-radius: 4px; }
-        .qr-box { text-align: center; background: white; padding: 15px; margin-top: 10px; border: 1px solid #ddd; display: none; }
-        
-        /* NAVIGATION BAR */
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; }
-        .nav-item { text-align: center; font-size: 10px; color: #666; cursor: pointer; }
+        /* --- NAV BAR --- */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1500; }
+        .nav-item { text-align: center; color: #555; font-size: 10px; cursor: pointer; flex: 1; }
         .nav-item i { font-size: 20px; display: block; margin-bottom: 3px; }
-        .nav-item.active { color: var(--primary); }
-
-        /* FLOATING ADMIN BUTTON */
-        .admin-float { position: fixed; bottom: 80px; right: 20px; background: #333; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1500; }
+        .nav-item.active { color: #007185; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">Narayan Store</div>
-        <div class="cart-btn" onclick="openPage('cart')">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="badge" id="cart-count">0</span>
-        </div>
-    </header>
-
-    <div id="home" class="page active">
-        <div class="banner">BIG SALE LIVE 50% OFF</div>
-
-        <div class="cat-scroll">
-            <div class="cat-item active" onclick="filterProd('All', this)"><div class="cat-img"><i class="fas fa-th-large"></i></div>All</div>
-            <div class="cat-item" onclick="filterProd('Mobile', this)"><div class="cat-img"><i class="fas fa-mobile-alt"></i></div>Mobile</div>
-            <div class="cat-item" onclick="filterProd('Fashion', this)"><div class="cat-img"><i class="fas fa-tshirt"></i></div>Fashion</div>
-            <div class="cat-item" onclick="filterProd('Electronics', this)"><div class="cat-img"><i class="fas fa-laptop"></i></div>Tech</div>
-        </div>
-
-        <h3 style="padding: 10px 0; color: #444;">Latest Products</h3>
-        <div class="grid" id="product-container"></div>
-
-        <div class="footer-links">
-            <h3>About Us</h3>
-            <p>Narayan Store is your trusted local shop for best quality products at affordable prices.</p>
-            
-            <h3 style="margin-top:20px;">Customer Service</h3>
-            <a href="#" class="info-link" onclick="openPage('contact')">Contact Us</a>
-            <a href="#" class="info-link" onclick="openPage('faq')">FAQ / Help</a>
-            <a href="#" class="info-link">Terms & Conditions</a>
-            
-            <div style="margin-top:20px; text-align:center;">&copy; 2026 Narayan Services</div>
+    <div id="login-overlay">
+        <div class="login-card">
+            <h2 style="font-style:italic;">Narayan<span style="color:#f90;">Plus</span></h2>
+            <h3 style="margin-bottom:10px;">Sign-In</h3>
+            <input type="text" id="login-id" class="inp-field" placeholder="Email or Mobile Phone Number">
+            <input type="text" id="login-name" class="inp-field" placeholder="Your Name">
+            <button class="btn-login" onclick="doLogin()">Continue</button>
+            <p style="font-size:11px; margin-top:15px; color:#555;">By continuing, you agree to Narayan Plus Conditions of Use and Privacy Notice.</p>
         </div>
     </div>
 
-    <div id="cart" class="page">
-        <h3 style="padding:10px; background:white;">My Shopping Cart</h3>
-        <div id="cart-list" style="padding:10px 0;"></div>
+    <div id="app" style="display:none;">
         
-        <div style="background:white; padding:15px; margin-top:10px;">
-            <h4>Delivery Address</h4>
-            <input id="c-name" class="inp" placeholder="Full Name">
-            <input id="c-phone" class="inp" type="tel" placeholder="Mobile Number">
-            <textarea id="c-addr" class="inp" placeholder="Full Address with PIN Code"></textarea>
-            
-            <h4>Payment Method</h4>
-            <select id="pay-mode" class="inp" onchange="toggleQR()">
-                <option value="COD">Cash on Delivery (COD)</option>
-                <option value="UPI">Pay via UPI (QR Code)</option>
-            </select>
+        <header>
+            <div class="logo">Narayan<span>Plus</span></div>
+            <div class="header-icons">
+                <span style="font-size:12px;">IN</span>
+                <div class="cart-icon" onclick="openPage('cart')">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="badge">0</span>
+                </div>
+            </div>
+        </header>
 
-            <div id="qr-section" class="qr-box">
-                <p>Scan & Pay</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9708797335@paytm&pn=NarayanServices" style="width:150px;">
-                <p style="font-size:11px; color:red;">*Send payment screenshot on WhatsApp*</p>
+        <div class="search-bar">
+            <input type="text" class="search-box" placeholder="Search Amazon.in" onkeyup="searchProd(this.value)">
+        </div>
+
+        <div class="secret-lock" onclick="handleSecret()"><i class="fas fa-user-lock"></i></div>
+
+        <div id="page-home" class="page active">
+            
+            <div class="cat-scroll">
+                <div class="cat-item" onclick="filter('All')"><img src="https://cdn-icons-png.flaticon.com/512/706/706997.png" class="cat-img"><br>All</div>
+                <div class="cat-item" onclick="filter('Mobile')"><img src="https://cdn-icons-png.flaticon.com/512/15/15777.png" class="cat-img"><br>Mobiles</div>
+                <div class="cat-item" onclick="filter('Laptop')"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-img"><br>Laptops</div>
+                <div class="cat-item" onclick="filter('TV')"><img src="https://cdn-icons-png.flaticon.com/512/716/716429.png" class="cat-img"><br>TVs</div>
+                <div class="cat-item" onclick="filter('Audio')"><img src="https://cdn-icons-png.flaticon.com/512/27/27104.png" class="cat-img"><br>Audio</div>
             </div>
 
-            <button class="btn-submit" onclick="sendWhatsAppOrder()">CONFIRM & ORDER ON WHATSAPP</button>
+            <div class="slider">
+                <div class="slides" id="slides">
+                    <div class="slide" style="background:#232f3e;">GREAT INDIAN FESTIVAL</div>
+                    <div class="slide" style="background:#007185;">UP TO 60% OFF</div>
+                    <div class="slide" style="background:#37475a;">ELECTRONICS SALE</div>
+                </div>
+            </div>
+
+            <h3 style="padding:10px; font-size:16px;">Results for "Electronics"</h3>
+            <div class="grid" id="prod-list"></div>
+
+            <div class="footer">
+                <a href="#top">Back to Top</a>
+                <br>
+                <h3>Make Money with Us</h3>
+                <a href="https://wa.me/919708797335?text=Hello+Narayan+Plus,+I+want+to+do+business+with+you" class="biz-btn">
+                    <i class="fab fa-whatsapp"></i> Business with Us
+                </a>
+                <br><br>
+                <h3>Let Us Help You</h3>
+                <a href="#" onclick="openPage('account')">Your Account</a>
+                <a href="#">Returns Centre</a>
+                <a href="#">Help</a>
+                <br>
+                <p>&copy; 2026 Narayan Services, Inc.</p>
+                <p style="font-size:10px; color:#999;">DAV School, Runnisaidpur, Bihar</p>
+            </div>
         </div>
-    </div>
 
-    <div id="admin" class="page">
-        <h3 style="padding:10px;">Admin Dashboard</h3>
-        
-        <div class="upload-form">
-            <h4>Add New Product</h4>
-            <input id="u-img" class="inp" placeholder="Image URL (Link form Google/Drive)">
-            <input id="u-name" class="inp" placeholder="Product Name">
-            <input id="u-price" type="number" class="inp" placeholder="Sale Price (e.g. 499)">
-            <input id="u-mrp" type="number" class="inp" placeholder="MRP (e.g. 999)">
-            <select id="u-cat" class="inp">
-                <option>Mobile</option>
-                <option>Fashion</option>
-                <option>Electronics</option>
-                <option>Other</option>
-            </select>
-            <textarea id="u-desc" class="inp" placeholder="Short Description"></textarea>
-            <button class="btn-submit" onclick="addProduct()">UPLOAD PRODUCT</button>
+        <div id="page-cart" class="page">
+            <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Cart</div>
+            <div id="cart-content" style="padding:10px;"></div>
+            
+            <div style="padding:15px; background:white; margin-top:10px; border-top:1px solid #ddd;">
+                <h4>Delivery Address</h4>
+                <input id="addr" class="inp-field" placeholder="Full Address with Pincode">
+                
+                <h4>Payment Method</h4>
+                <select id="pay" class="inp-field" onchange="toggleQR()">
+                    <option value="COD">Cash on Delivery</option>
+                    <option value="UPI">UPI / QR Code</option>
+                </select>
+
+                <div id="qr-area" style="display:none; text-align:center; padding:10px; border:1px dashed #333;">
+                    <p><b>Scan & Pay</b></p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9708797335@paytm&pn=NarayanServices" style="width:150px;">
+                </div>
+
+                <button class="btn-login" style="margin-top:15px;" onclick="checkout()">Proceed to Buy</button>
+            </div>
         </div>
 
-        <h4 style="margin-top:20px; padding:10px;">Product List Management</h4>
-        <div id="admin-prod-list"></div>
-    </div>
-
-    <div id="contact" class="page" style="background:white; height:100vh;">
-        <h3 style="padding:15px;">Contact Us</h3>
-        <p style="padding:15px;">Email: Narayancomputer034@gmail.com<br>Phone: +91 9708797335<br>Address: Runnisaidpur, Sitamarhi</p>
-        <button class="btn-submit" style="margin:15px; width:90%;" onclick="openPage('home')">Back to Home</button>
-    </div>
-
-    <div id="faq" class="page" style="background:white; height:100vh;">
-        <h3 style="padding:15px;">FAQ</h3>
-        <div style="padding:15px;">
-            <p><b>Q: How to order?</b><br>A: Select product, add to cart, and send order details on WhatsApp.</p>
-            <hr style="margin:10px 0;">
-            <p><b>Q: Is COD available?</b><br>A: Yes, Cash on Delivery is available.</p>
+        <div id="page-account" class="page">
+            <div class="page-header">My Account</div>
+            <div style="padding:20px; background:white; border-bottom:1px solid #ddd;">
+                <h2 id="u-name-disp">User</h2>
+                <p id="u-id-disp" style="color:#555;">ID: ...</p>
+            </div>
+            
+            <div style="padding:15px;">
+                <h3>Your Orders</h3>
+                <div id="order-history"></div>
+            </div>
+            
+            <button onclick="logout()" style="width:90%; margin:20px 5%; padding:10px; border:1px solid #ddd; background:white; color:red;">Sign Out</button>
         </div>
-        <button class="btn-submit" style="margin:15px; width:90%;" onclick="openPage('home')">Back to Home</button>
-    </div>
 
-    <div class="admin-float" onclick="unlockAdmin()"><i class="fas fa-lock"></i></div>
+        <div id="page-upload" class="page">
+            <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Catalog Uploader</div>
+            <div class="admin-panel">
+                <h3>Add Product</h3>
+                <p style="font-size:11px; color:green;">*Live instantly on your device</p>
+                <input id="new-img" class="inp-field" placeholder="Image Link">
+                <input id="new-name" class="inp-field" placeholder="Product Name">
+                <input id="new-price" class="inp-field" type="number" placeholder="Price">
+                <select id="new-cat" class="inp-field">
+                    <option>Mobile</option><option>Laptop</option><option>TV</option><option>Audio</option>
+                </select>
+                <button class="btn-login" onclick="addProduct()">Upload</button>
+            </div>
+            
+            <div class="admin-panel">
+                <h4>Code for Permanent Add (GitHub)</h4>
+                <textarea id="code-out" style="width:100%; height:60px; font-size:10px;"></textarea>
+            </div>
+        </div>
+
+        <div id="page-admin" class="page">
+            <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Customer Handling</div>
+            
+            <div style="padding:15px;">
+                <div class="stat-box">
+                    <h3>Total Visitors</h3>
+                    <h1 id="visit-count" style="color:var(--primary);">0</h1>
+                    <p style="font-size:10px;">(Simulated Tracker)</p>
+                </div>
+
+                <h3>Recent Local Orders</h3>
+                <div id="admin-orders" style="background:white; padding:10px; border-radius:5px;"></div>
+            </div>
+        </div>
+
+    </div>
 
     <div class="nav-bar">
         <div class="nav-item active" onclick="openPage('home')"><i class="fas fa-home"></i>Home</div>
+        <div class="nav-item" onclick="openPage('account')"><i class="fas fa-user"></i>You</div>
         <div class="nav-item" onclick="openPage('cart')"><i class="fas fa-shopping-cart"></i>Cart</div>
-        <div class="nav-item" onclick="openPage('contact')"><i class="fas fa-user"></i>Support</div>
+        <div class="nav-item" onclick="openPage('home')"><i class="fas fa-bars"></i>Menu</div>
     </div>
 
     <script>
-        // --- 1. DATA MANAGEMENT ---
-        // Initial Products (Default)
-        const defaultProds = [
-            { id: 1, name: "Men's Blue Shirt", price: 499, mrp: 999, cat: "Fashion", img: "https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg", desc: "Pure Cotton, Slim Fit" },
-            { id: 2, name: "Wireless Earbuds", price: 899, mrp: 2499, cat: "Electronics", img: "https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg", desc: "High Bass, 20H Battery" }
+        // --- 1. DATA & SETUP ---
+        // Pre-loaded Electronics (Large Menu)
+        const defaults = [
+            { id:1, name:"Apple iPhone 14", cat:"Mobile", price:56999, mrp:69900, img:"https://m.media-amazon.com/images/I/61bK6PM73YL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:2, name:"Samsung Galaxy M14", cat:"Mobile", price:12490, mrp:18990, img:"https://m.media-amazon.com/images/I/817WWpaQqbL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:3, name:"HP 15s Ryzen Laptop", cat:"Laptop", price:35990, mrp:45000, img:"https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:4, name:"Sony Bravia 43 inch TV", cat:"TV", price:42990, mrp:59900, img:"https://m.media-amazon.com/images/I/81kxV492yEL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:5, name:"boAt Airdopes 141", cat:"Audio", price:1299, mrp:4490, img:"https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:6, name:"Dell Wireless Mouse", cat:"Laptop", price:599, mrp:999, img:"https://m.media-amazon.com/images/I/51kdFkdrVXL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:7, name:"OnePlus Nord CE 3", cat:"Mobile", price:24999, mrp:28999, img:"https://m.media-amazon.com/images/I/6116+s7HByL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:8, name:"JBL Flip 6 Speaker", cat:"Audio", price:9999, mrp:14999, img:"https://m.media-amazon.com/images/I/71yC0d3p1XL._AC_UY327_FMwebp_QL65_.jpg" }
         ];
 
-        // Load Products from LocalStorage (or use default)
-        let products = JSON.parse(localStorage.getItem('narayan_products')) || defaultProds;
+        let uploaded = JSON.parse(localStorage.getItem('my_prods')) || [];
+        let products = [...uploaded, ...defaults];
         let cart = [];
-
-        // --- 2. CORE FUNCTIONS ---
+        let user = JSON.parse(localStorage.getItem('narayan_user_perm'));
         
-        // Render Products
-        function render(list) {
-            const container = document.getElementById('product-container');
-            container.innerHTML = "";
-            list.forEach(p => {
-                let off = Math.round(((p.mrp - p.price) / p.mrp) * 100);
-                container.innerHTML += `
-                    <div class="card">
-                        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
-                        <div class="p-name">${p.name}</div>
-                        <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
-                        <div>
-                            <span class="p-price">₹${p.price}</span>
-                            <span class="p-mrp">₹${p.mrp}</span>
-                            <span class="p-off">${off}% OFF</span>
-                        </div>
-                        <div style="font-size:11px; color:#555; margin-bottom:5px;">${p.desc}</div>
-                        <button class="btn-buy" onclick="addToCart(${p.id})">ADD TO CART</button>
-                        <button class="btn-whatsapp" onclick="directBuy(${p.id})"><i class="fab fa-whatsapp"></i> BUY NOW</button>
-                    </div>
-                `;
-            });
-        }
-        
-        // Filter Categories
-        function filterProd(cat, el) {
-            document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
-            if(el) el.classList.add('active');
-            render(cat === 'All' ? products : products.filter(p => p.cat === cat));
+        // Visitor Counter
+        let v = localStorage.getItem('visits') || 150;
+        v++; localStorage.setItem('visits', v);
+
+        // --- 2. LOGIN LOGIC ---
+        if(user) {
+            document.getElementById('login-overlay').style.display='none';
+            document.getElementById('app').style.display='block';
+            updateUI();
         }
 
-        // --- 3. CART & WHATSAPP LOGIC ---
-
-        function addToCart(id) {
-            let item = products.find(p => p.id === id);
-            cart.push(item);
-            document.getElementById('cart-count').innerText = cart.length;
-            alert("Added to Cart!");
-        }
-
-        function openPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
+        function doLogin() {
+            let id = document.getElementById('login-id').value;
+            let name = document.getElementById('login-name').value;
+            if(!id || !name) return alert("Enter details");
             
-            if (pageId === 'cart') renderCart();
+            user = { id, name };
+            localStorage.setItem('narayan_user_perm', JSON.stringify(user));
+            location.reload();
         }
 
-        function renderCart() {
-            let div = document.getElementById('cart-list');
-            div.innerHTML = "";
-            let total = 0;
-            if (cart.length === 0) div.innerHTML = "<p style='text-align:center'>Cart is empty</p>";
-            cart.forEach((item, index) => {
-                total += parseInt(item.price);
-                div.innerHTML += `
-                    <div class="cart-item">
-                        <div>
-                            <b>${item.name}</b><br>
-                            ₹${item.price}
-                        </div>
-                        <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="remItem(${index})"></i>
-                    </div>
-                `;
+        function logout() {
+            localStorage.removeItem('narayan_user_perm');
+            location.reload();
+        }
+
+        function updateUI() {
+            document.getElementById('u-name-disp').innerText = user.name;
+            document.getElementById('u-id-disp').innerText = user.id;
+            loadOrders();
+        }
+
+        // --- 3. CORE APP ---
+        function render(list) {
+            let d = document.getElementById('prod-list'); d.innerHTML="";
+            list.forEach(p=>{
+                let off = Math.round(((p.mrp-p.price)/p.mrp)*100);
+                d.innerHTML += `
+                    <div class="card">
+                        <img src="${p.img}">
+                        <div class="p-name">${p.name}</div>
+                        <div class="rating-stars" onclick="alert('Thanks for rating!')">★★★★☆ (120)</div>
+                        <div><span class="p-price">₹${p.price}</span> <span class="p-mrp">₹${p.mrp}</span></div>
+                        <div class="p-off">${off}% off</div>
+                        <button class="btn-add" onclick="add(${p.id})">Add to Cart</button>
+                    </div>`;
             });
-            div.innerHTML += `<div style="text-align:right; margin-top:10px; font-weight:bold;">Total: ₹${total}</div>`;
         }
+        render(products);
 
-        function remItem(index) {
-            cart.splice(index, 1);
-            document.getElementById('cart-count').innerText = cart.length;
-            renderCart();
+        function filter(c) { render(c==='All'?products:products.filter(p=>p.cat===c)); }
+        function searchProd(q) { render(products.filter(p=>p.name.toLowerCase().includes(q.toLowerCase()))); }
+        function add(id) { cart.push(products.find(p=>p.id===id)); document.getElementById('badge').innerText=cart.length; alert("Item Added"); }
+
+        // --- 4. CART & ORDER ---
+        function renderCart() {
+            let d = document.getElementById('cart-content'); d.innerHTML="";
+            if(cart.length===0) d.innerHTML="Your Amazon Cart is empty";
+            let t=0;
+            cart.forEach(i=>{ t+=i.price; d.innerHTML+=`<div style="background:white; padding:10px; margin-bottom:5px;"><b>${i.name}</b><br>₹${i.price}</div>`; });
+            if(t>0) d.innerHTML+=`<h3 style="text-align:right;">Subtotal: ₹${t}</h3>`;
         }
 
         function toggleQR() {
-            let mode = document.getElementById('pay-mode').value;
-            document.getElementById('qr-section').style.display = (mode === 'UPI') ? 'block' : 'none';
+            let m = document.getElementById('pay').value;
+            document.getElementById('qr-area').style.display = (m==='UPI')?'block':'none';
         }
 
-        // MASTER WHATSAPP LINK GENERATOR
-        function sendWhatsAppOrder() {
-            let name = document.getElementById('c-name').value;
-            let phone = document.getElementById('c-phone').value;
-            let addr = document.getElementById('c-addr').value;
-            let pay = document.getElementById('pay-mode').value;
+        function checkout() {
+            let addr = document.getElementById('addr').value;
+            let pay = document.getElementById('pay').value;
+            if(!addr) return alert("Enter Address");
+            if(cart.length===0) return;
 
-            if(!name || !addr) return alert("Please fill Name and Address");
-            if(cart.length === 0) return alert("Cart is empty");
+            let items = cart.map(i=>i.name).join(", ");
+            let total = cart.reduce((a,b)=>a+b.price,0);
 
-            let itemsList = cart.map(i => `${i.name} (Rs${i.price})`).join("%0A");
-            let total = cart.reduce((a, b) => a + parseInt(b.price), 0);
-            
-            let myNumber = "919708797335"; // YOUR NUMBER HERE
-            
-            let msg = `*NEW WEBSITE ORDER* %0A%0A` +
-                      `*Customer:* ${name} (${phone})%0A` +
-                      `*Address:* ${addr}%0A%0A` +
-                      `*Items:* %0A${itemsList}%0A%0A` +
-                      `*Total:* ₹${total}%0A` +
-                      `*Payment:* ${pay}%0A%0A` +
-                      `Please confirm my order.`;
+            // WhatsApp
+            let url = `https://wa.me/919708797335?text=*ORDER REQUEST*%0AUser: ${user.name} (${user.id})%0AAddr: ${addr}%0AItems: ${items}%0APay: ${pay}%0ATotal: ₹${total}`;
+            window.open(url);
 
-            let url = `https://wa.me/${myNumber}?text=${msg}`;
-            window.open(url, '_blank');
+            // Save History
+            let h = JSON.parse(localStorage.getItem('n_hist')) || [];
+            h.unshift({date:new Date().toLocaleDateString(), items, total});
+            localStorage.setItem('n_hist', JSON.stringify(h));
+
+            cart=[]; document.getElementById('badge').innerText=0;
+            openPage('account'); loadOrders();
         }
 
-        function directBuy(id) {
-            let p = products.find(x => x.id === id);
-            let msg = `Hi, I want to buy *${p.name}* Price: ₹${p.price}. Is it available?`;
-            window.open(`https://wa.me/919708797335?text=${msg}`, '_blank');
+        function loadOrders() {
+            let h = JSON.parse(localStorage.getItem('n_hist')) || [];
+            let d = document.getElementById('order-history'); d.innerHTML="";
+            h.forEach(o=>{ d.innerHTML+=`<div style="background:#f9f9f9; padding:10px; margin:5px 0; border:1px solid #ddd;"><div>Arriving: ${o.date}</div><b>${o.items}</b><div>Total: ₹${o.total}</div></div>`; });
         }
 
-        // --- 4. ADMIN PANEL FUNCTIONS ---
-        
-        function unlockAdmin() {
-            let pin = prompt("Enter Admin PIN:");
-            if (pin === "1234") { // SECRET PIN
-                openPage('admin');
-                renderAdminList();
+        // --- 5. SECRET ACCESS (PIN LOGIC) ---
+        function handleSecret() {
+            let pin = prompt("Enter Access PIN:");
+            if(pin === "7482") {
+                openPage('upload'); // Opens Catalog Uploader
+            } else if(pin === "9199") {
+                openPage('admin'); // Opens Customer Handle
+                document.getElementById('visit-count').innerText = v;
+                loadAdminOrders();
             } else {
-                alert("Access Denied");
+                alert("Wrong PIN");
             }
         }
 
+        // 7482 Logic (Upload)
         function addProduct() {
-            let name = document.getElementById('u-name').value;
-            let price = document.getElementById('u-price').value;
-            let mrp = document.getElementById('u-mrp').value;
-            let img = document.getElementById('u-img').value;
-            let cat = document.getElementById('u-cat').value;
-            let desc = document.getElementById('u-desc').value;
-
-            if(!name || !price) return alert("Fill Details");
-
-            let newProd = {
-                id: Date.now(),
-                name, price, mrp, img, cat, desc
-            };
-
-            products.unshift(newProd); // Add to top
-            localStorage.setItem('narayan_products', JSON.stringify(products)); // Save to phone
+            let name=document.getElementById('new-name').value;
+            let price=document.getElementById('new-price').value;
+            let img=document.getElementById('new-img').value;
+            let cat=document.getElementById('new-cat').value;
             
-            alert("Product Uploaded Successfully!");
-            render(products); // Refresh Home
-            renderAdminList(); // Refresh Admin List
+            if(!name || !price) return;
+            let p = {id:Date.now(), name, price:parseInt(price), mrp:parseInt(price)+1000, img, cat};
+            uploaded.unshift(p);
+            localStorage.setItem('my_prods', JSON.stringify(uploaded));
             
-            // Clear inputs
-            document.getElementById('u-name').value = "";
+            products=[...uploaded, ...defaults]; render(products);
+            alert("Uploaded!");
+            document.getElementById('code-out').value = `{id:${p.id}, name:"${name}", cat:"${cat}", price:${price}, mrp:${p.mrp}, img:"${img}"},`;
         }
 
-        function renderAdminList() {
-            let div = document.getElementById('admin-prod-list');
-            div.innerHTML = "";
-            products.forEach((p, index) => {
-                div.innerHTML += `<div style="padding:10px; border-bottom:1px solid #eee; display:flex; justify-content:space-between;">
-                    <span>${p.name}</span>
-                    <button style="background:red; color:white; border:none; padding:5px;" onclick="deleteProd(${index})">Delete</button>
-                </div>`;
-            });
+        // 9199 Logic (Customer Handle)
+        function loadAdminOrders() {
+            let h = JSON.parse(localStorage.getItem('n_hist')) || [];
+            let d = document.getElementById('admin-orders'); d.innerHTML="";
+            if(h.length===0) d.innerHTML="No recent orders on this device.";
+            h.forEach(o=>{ d.innerHTML+=`<div class="order-row">${o.date} - ${o.items} - ₹${o.total}</div>`; });
         }
 
-        function deleteProd(index) {
-            if(confirm("Delete this product?")) {
-                products.splice(index, 1);
-                localStorage.setItem('narayan_products', JSON.stringify(products));
-                render(products);
-                renderAdminList();
-            }
+        // Navigation
+        function openPage(id) {
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+            if(id==='upload') document.getElementById('page-upload').classList.add('active');
+            else if(id==='admin') document.getElementById('page-admin').classList.add('active');
+            else if(id==='home') document.getElementById('page-home').classList.add('active');
+            else if(id==='cart') { document.getElementById('page-cart').classList.add('active'); renderCart(); }
+            else if(id==='account') document.getElementById('page-account').classList.add('active');
+            
+            window.scrollTo(0,0);
         }
 
-        // INITIALIZE
-        render(products);
-
+        // Slider
+        let s=0; setInterval(()=>{ s=(s>2)?0:s+1; document.getElementById('slides').style.transform=`translateX(-${s*100}%)`; }, 3000);
     </script>
 </body>
 </html>
