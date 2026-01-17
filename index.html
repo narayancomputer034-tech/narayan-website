@@ -257,22 +257,36 @@
             document.getElementById('qr-area').style.display = (m==='UPI')?'block':'none';
         }
 
-        function checkout() {
+       function checkout() {
+            // 1. नाम और पता उठाओ
             let name = document.getElementById('chk-name').value;
             let addr = document.getElementById('chk-addr').value;
             let pay = document.getElementById('pay').value;
-            
+
+            // 2. चेक करो कि खाली तो नहीं है
             if(!name || !addr) return alert("Please enter Name and Address");
             if(cart.length===0) return alert("Cart is empty");
 
-            let items = cart.map(i=>i.name).join(", ");
-            let total = cart.reduce((a,b)=>a+b.price,0);
+            // 3. आर्डर की लिस्ट बनाओ
+            let items = cart.map(i=> i.name + " (" + i.price + ")").join(", ");
+            let total = cart.reduce((a,b)=>a+b.price, 0);
 
-            // WhatsApp Message
-            let url = `https://wa.me/919708797335?text=*NEW ORDER*%0AUser: ${name}%0AAddress: ${addr}%0AItems: ${items}%0APay: ${pay}%0ATotal: ₹${total}`;
-            window.open(url);
+            // 4. व्हाट्सएप मैसेज तैयार करो
+            // 👇 (नीचे 9197... की जगह अपना नंबर लिखें)
+            let phone = "919708797335"; 
+            
+            let msg = `*New Order!* %0A%0A*Name:* ${name}%0A*Address:* ${addr}%0A*Payment:* ${pay}%0A*Items:* ${items}%0A*Total:* Rs. ${total}`;
+            
+            // 5. व्हाट्सएप पर भेजो
+            let url = "https://wa.me/" + phone + "?text=" + msg;
+            window.open(url, '_blank');
 
-            // Save Order locally
+            // 6. कार्ट खाली कर दो
+            cart = [];
+            localStorage.setItem('my_cart_v2', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = 0;
+            openPage('home');
+        }
             let h = JSON.parse(localStorage.getItem('n_orders_local')) || [];
             h.unshift({date:new Date().toLocaleDateString(), items, total});
             localStorage.setItem('n_orders_local', JSON.stringify(h));
