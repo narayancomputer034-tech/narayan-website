@@ -3,301 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narayan Plus - Premium Store</title>
+    <title>Narayan Plus Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- AMAZON/FLIPKART STYLE THEME --- */
+        /* --- AMAZON THEME --- */
         :root {
-            --primary: #232f3e; /* Amazon Dark Blue */
+            --primary: #232f3e; /* Amazon Dark */
             --secondary: #febd69; /* Amazon Yellow */
-            --action: #f0c14b; /* Buy Button Gold */
             --bg: #eaeded;
             --white: #ffffff;
-            --blue-link: #007185;
+            --blue: #007185;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background-color: var(--bg); padding-bottom: 70px; -webkit-tap-highlight-color: transparent; }
 
-        /* --- LOGIN OVERLAY --- */
-        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-        .login-card { width: 100%; max-width: 350px; text-align: center; border: 1px solid #ddd; padding: 20px; border-radius: 5px; background: white; }
-        .inp-field { width: 100%; padding: 12px; border: 1px solid #aaa; border-radius: 3px; margin: 10px 0; font-size: 14px; outline: none; }
-        .inp-field:focus { border-color: #e77600; box-shadow: 0 0 3px 2px rgba(228,121,17,0.5); }
-        .btn-login { width: 100%; padding: 12px; background: #f0c14b; border: 1px solid #a88734; border-radius: 3px; cursor: pointer; font-size: 14px; }
-        
         /* --- HEADER --- */
         header { background: var(--primary); padding: 10px 15px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; }
-        .logo { color: white; font-size: 20px; font-weight: bold; font-style: italic; letter-spacing: -1px; }
+        .logo { color: white; font-size: 20px; font-weight: bold; font-style: italic; }
         .logo span { color: var(--secondary); }
-        .header-icons { display: flex; gap: 15px; color: white; align-items: center; }
-        .cart-icon { position: relative; font-size: 24px; cursor: pointer; }
+        .header-icons { display: flex; align-items: center; color: white; gap: 15px; }
+        .cart-icon { position: relative; font-size: 24px; }
         .badge { position: absolute; top: -8px; right: -8px; background: var(--secondary); color: black; font-size: 11px; padding: 1px 5px; border-radius: 10px; font-weight: bold; }
 
-        /* --- SEARCH & NAV --- */
-        .search-bar { background: var(--primary); padding: 0 10px 10px 10px; display: flex; }
+        /* --- SEARCH --- */
+        .search-bar { background: var(--primary); padding: 0 10px 10px; }
         .search-box { width: 100%; padding: 10px; border-radius: 5px; border: none; outline: none; }
-        
-        .cat-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 10px; background: white; scrollbar-width: none; border-bottom: 1px solid #ddd; }
-        .cat-item { min-width: 60px; text-align: center; font-size: 11px; color: #333; cursor: pointer; }
-        .cat-img { width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px; object-fit: cover; }
 
         /* --- SLIDER --- */
-        .slider { width: 100%; height: 180px; overflow: hidden; position: relative; background: #ddd; margin-bottom: 5px; }
+        .slider { width: 100%; height: 180px; overflow: hidden; background: #ddd; }
         .slides { display: flex; height: 100%; transition: 0.5s; }
         .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; background-size: cover; background-position: center; }
 
+        /* --- CATEGORIES --- */
+        .cat-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 10px; background: white; margin-bottom: 5px; scrollbar-width: none; }
+        .cat-item { min-width: 60px; text-align: center; font-size: 11px; cursor: pointer; }
+        .cat-img { width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px; object-fit: cover; }
+
         /* --- PRODUCTS --- */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; }
-        .card { background: white; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .card { background: white; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; }
         .card img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 5px; }
-        .p-name { font-size: 13px; color: #333; height: 38px; overflow: hidden; line-height: 1.3; margin-bottom: 2px; }
-        .rating-stars { color: #ffa41c; font-size: 12px; margin-bottom: 5px; cursor: pointer; }
-        .p-price { font-size: 17px; font-weight: 500; color: #000; }
-        .p-mrp { font-size: 12px; text-decoration: line-through; color: #565959; margin-left: 5px; }
+        .p-name { font-size: 13px; color: #333; height: 38px; overflow: hidden; line-height: 1.3; }
+        .rating { color: #ffa41c; font-size: 12px; margin-bottom: 5px; cursor: pointer; }
+        .p-price { font-size: 17px; font-weight: 500; }
+        .p-mrp { font-size: 12px; text-decoration: line-through; color: #555; margin-left: 5px; }
         .p-off { font-size: 12px; color: #CC0C39; font-weight: bold; }
         .btn-add { background: #ffd814; border: 1px solid #fcd200; padding: 8px; width: 100%; border-radius: 15px; margin-top: 5px; cursor: pointer; font-size: 12px; }
+
+        /* --- FOOTER & ADMIN --- */
+        .footer { background: #232f3e; color: white; padding: 20px; text-align: center; font-size: 13px; margin-top: 20px; padding-bottom: 80px; }
+        .biz-btn { background: #4CAF50; color: white; padding: 10px 20px; border-radius: 4px; display: inline-block; margin-top: 10px; font-weight: bold; text-decoration: none; }
+        
+        /* SECRET LOCK BUTTON (ADMIN) */
+        .secret-lock { position: fixed; bottom: 80px; left: 20px; background: #333; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
 
         /* --- PAGES --- */
         .page { display: none; padding-bottom: 20px; }
         .page.active { display: block; }
         .page-header { background: #f0f2f2; padding: 15px; border-bottom: 1px solid #ddd; font-weight: bold; display: flex; align-items: center; }
 
-        /* --- FOOTER --- */
-        .footer { background: #232f3e; color: white; padding: 20px; text-align: center; font-size: 13px; margin-top: 20px; padding-bottom: 80px; }
-        .footer a { color: #ddd; text-decoration: none; display: block; margin: 8px 0; }
-        .biz-btn { background: #4CAF50; color: white; padding: 10px 20px; border-radius: 4px; display: inline-block; margin-top: 10px; font-weight: bold; }
+        /* --- FORMS --- */
+        .inp-field { width: 100%; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 4px; }
+        .admin-box { background: white; padding: 15px; margin: 15px; border: 2px dashed var(--secondary); }
 
-        /* --- SECRET BUTTON --- */
-        .secret-lock { position: fixed; bottom: 80px; left: 20px; background: #333; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-
-        /* --- ADMIN PANELS --- */
-        .admin-panel { padding: 15px; background: white; margin: 10px; border-radius: 8px; border: 1px solid #ddd; }
-        .stat-box { background: #e3f2fd; padding: 15px; margin-bottom: 10px; border-radius: 5px; text-align: center; border: 1px solid #90caf9; }
-        .order-row { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 12px; }
-
-        /* --- NAV BAR --- */
+        /* --- NAV --- */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1500; }
         .nav-item { text-align: center; color: #555; font-size: 10px; cursor: pointer; flex: 1; }
         .nav-item i { font-size: 20px; display: block; margin-bottom: 3px; }
-        .nav-item.active { color: #007185; }
+        .nav-item.active { color: var(--blue); }
     </style>
 </head>
 <body>
 
-    <div id="login-overlay">
-        <div class="login-card">
-            <h2 style="font-style:italic;">Narayan<span style="color:#f90;">Plus</span></h2>
-            <h3 style="margin-bottom:10px;">Sign-In</h3>
-            <input type="text" id="login-id" class="inp-field" placeholder="Email or Mobile Phone Number">
-            <input type="text" id="login-name" class="inp-field" placeholder="Your Name">
-            <button class="btn-login" onclick="doLogin()">Continue</button>
-            <p style="font-size:11px; margin-top:15px; color:#555;">By continuing, you agree to Narayan Plus Conditions of Use and Privacy Notice.</p>
+    <header>
+        <div class="logo">Narayan<span>Plus</span></div>
+        <div class="header-icons">
+            <span>IN</span>
+            <div class="cart-icon" onclick="openPage('cart')">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge" id="badge">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" class="search-box" placeholder="Search Amazon.in" onkeyup="searchProd(this.value)">
+    </div>
+
+    <div class="secret-lock" onclick="handleSecret()"><i class="fas fa-user-lock"></i></div>
+
+    <div id="page-home" class="page active">
+        <div class="cat-scroll">
+            <div class="cat-item" onclick="filter('All')"><img src="https://cdn-icons-png.flaticon.com/512/706/706997.png" class="cat-img"><br>All</div>
+            <div class="cat-item" onclick="filter('Printer')"><img src="https://cdn-icons-png.flaticon.com/512/3616/3616890.png" class="cat-img"><br>Printers</div>
+            <div class="cat-item" onclick="filter('Mobile')"><img src="https://cdn-icons-png.flaticon.com/512/15/15777.png" class="cat-img"><br>Mobiles</div>
+            <div class="cat-item" onclick="filter('Laptop')"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-img"><br>Laptops</div>
+        </div>
+
+        <div class="slider">
+            <div class="slides" id="slides">
+                <div class="slide" style="background:#232f3e;">GREAT INDIAN FESTIVAL</div>
+                <div class="slide" style="background:#007185;">UP TO 60% OFF</div>
+                <div class="slide" style="background:#37475a;">ELECTRONICS SALE</div>
+            </div>
+        </div>
+
+        <h3 style="padding:10px; font-size:16px;">Latest Products</h3>
+        <div class="grid" id="prod-list"></div>
+
+        <div class="footer">
+            <a href="#top">Back to Top</a>
+            <br>
+            <h3>Make Money with Us</h3>
+            <a href="https://wa.me/919708797335?text=Hello+Narayan+Plus,+I+want+to+do+business" class="biz-btn">
+                <i class="fab fa-whatsapp"></i> Business with Us
+            </a>
+            <br><br>
+            <h3>Let Us Help You</h3>
+            <a href="#" onclick="openPage('cart')">Your Cart</a>
+            <a href="#">Returns Centre</a>
+            <a href="#">Help</a>
+            <br>
+            <p>&copy; 2026 Narayan Services, Inc.</p>
+            <p style="font-size:10px; color:#999;">Runnisaidpur, Bihar</p>
         </div>
     </div>
 
-    <div id="app" style="display:none;">
+    <div id="page-cart" class="page">
+        <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Shopping Cart</div>
+        <div id="cart-content" style="padding:10px;"></div>
         
-        <header>
-            <div class="logo">Narayan<span>Plus</span></div>
-            <div class="header-icons">
-                <span style="font-size:12px;">IN</span>
-                <div class="cart-icon" onclick="openPage('cart')">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge" id="badge">0</span>
-                </div>
-            </div>
-        </header>
-
-        <div class="search-bar">
-            <input type="text" class="search-box" placeholder="Search Amazon.in" onkeyup="searchProd(this.value)">
-        </div>
-
-        <div class="secret-lock" onclick="handleSecret()"><i class="fas fa-user-lock"></i></div>
-
-        <div id="page-home" class="page active">
+        <div style="padding:15px; background:white; margin-top:10px; border-top:1px solid #ddd;">
+            <h4>Checkout Details</h4>
+            <input id="chk-name" class="inp-field" placeholder="Full Name (Required)">
+            <input id="chk-addr" class="inp-field" placeholder="Full Address with Pincode">
             
-            <div class="cat-scroll">
-                <div class="cat-item" onclick="filter('All')"><img src="https://cdn-icons-png.flaticon.com/512/706/706997.png" class="cat-img"><br>All</div>
-                <div class="cat-item" onclick="filter('Mobile')"><img src="https://cdn-icons-png.flaticon.com/512/15/15777.png" class="cat-img"><br>Mobiles</div>
-                <div class="cat-item" onclick="filter('Laptop')"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-img"><br>Laptops</div>
-                <div class="cat-item" onclick="filter('TV')"><img src="https://cdn-icons-png.flaticon.com/512/716/716429.png" class="cat-img"><br>TVs</div>
-                <div class="cat-item" onclick="filter('Audio')"><img src="https://cdn-icons-png.flaticon.com/512/27/27104.png" class="cat-img"><br>Audio</div>
+            <h4>Payment Method</h4>
+            <select id="pay" class="inp-field" onchange="toggleQR()">
+                <option value="COD">Cash on Delivery</option>
+                <option value="UPI">UPI / QR Code</option>
+            </select>
+
+            <div id="qr-area" style="display:none; text-align:center; padding:10px; border:1px dashed #333;">
+                <p><b>Scan & Pay</b></p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9708797335@paytm&pn=NarayanServices" style="width:150px;">
+                <p style="font-size:11px; color:red;">Narayan Services (9708797335)</p>
             </div>
 
-            <div class="slider">
-                <div class="slides" id="slides">
-                    <div class="slide" style="background:#232f3e;">GREAT INDIAN FESTIVAL</div>
-                    <div class="slide" style="background:#007185;">UP TO 60% OFF</div>
-                    <div class="slide" style="background:#37475a;">ELECTRONICS SALE</div>
-                </div>
-            </div>
-
-            <h3 style="padding:10px; font-size:16px;">Results for "Electronics"</h3>
-            <div class="grid" id="prod-list"></div>
-
-            <div class="footer">
-                <a href="#top">Back to Top</a>
-                <br>
-                <h3>Make Money with Us</h3>
-                <a href="https://wa.me/919708797335?text=Hello+Narayan+Plus,+I+want+to+do+business+with+you" class="biz-btn">
-                    <i class="fab fa-whatsapp"></i> Business with Us
-                </a>
-                <br><br>
-                <h3>Let Us Help You</h3>
-                <a href="#" onclick="openPage('account')">Your Account</a>
-                <a href="#">Returns Centre</a>
-                <a href="#">Help</a>
-                <br>
-                <p>&copy; 2026 Narayan Services, Inc.</p>
-                <p style="font-size:10px; color:#999;">DAV School, Runnisaidpur, Bihar</p>
-            </div>
+            <button class="btn-add" style="background:#f0c14b; font-size:16px; padding:12px;" onclick="checkout()">Place Order on WhatsApp</button>
         </div>
+    </div>
 
-        <div id="page-cart" class="page">
-            <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Cart</div>
-            <div id="cart-content" style="padding:10px;"></div>
-            
-            <div style="padding:15px; background:white; margin-top:10px; border-top:1px solid #ddd;">
-                <h4>Delivery Address</h4>
-                <input id="addr" class="inp-field" placeholder="Full Address with Pincode">
-                
-                <h4>Payment Method</h4>
-                <select id="pay" class="inp-field" onchange="toggleQR()">
-                    <option value="COD">Cash on Delivery</option>
-                    <option value="UPI">UPI / QR Code</option>
-                </select>
-
-                <div id="qr-area" style="display:none; text-align:center; padding:10px; border:1px dashed #333;">
-                    <p><b>Scan & Pay</b></p>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9708797335@paytm&pn=NarayanServices" style="width:150px;">
-                </div>
-
-                <button class="btn-login" style="margin-top:15px;" onclick="checkout()">Proceed to Buy</button>
-            </div>
+    <div id="page-upload" class="page">
+        <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Catalog Uploader</div>
+        <div class="admin-box">
+            <h3>Add Product (Local)</h3>
+            <input id="new-img" class="inp-field" placeholder="Image Link (or filename like 2241.jpg)">
+            <input id="new-name" class="inp-field" placeholder="Product Name">
+            <input id="new-price" class="inp-field" type="number" placeholder="Price">
+            <select id="new-cat" class="inp-field">
+                <option>Printer</option><option>Mobile</option><option>Laptop</option><option>Audio</option>
+            </select>
+            <button class="btn-add" onclick="addProduct()">Upload Now</button>
         </div>
-
-        <div id="page-account" class="page">
-            <div class="page-header">My Account</div>
-            <div style="padding:20px; background:white; border-bottom:1px solid #ddd;">
-                <h2 id="u-name-disp">User</h2>
-                <p id="u-id-disp" style="color:#555;">ID: ...</p>
-            </div>
-            
-            <div style="padding:15px;">
-                <h3>Your Orders</h3>
-                <div id="order-history"></div>
-            </div>
-            
-            <button onclick="logout()" style="width:90%; margin:20px 5%; padding:10px; border:1px solid #ddd; background:white; color:red;">Sign Out</button>
+        <div class="admin-box">
+            <h4>Code for GitHub</h4>
+            <textarea id="code-out" style="width:100%; height:60px; font-size:10px;"></textarea>
         </div>
+    </div>
 
-        <div id="page-upload" class="page">
-            <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Catalog Uploader</div>
-            <div class="admin-panel">
-                <h3>Add Product</h3>
-                <p style="font-size:11px; color:green;">*Live instantly on your device</p>
-                <input id="new-img" class="inp-field" placeholder="Image Link">
-                <input id="new-name" class="inp-field" placeholder="Product Name">
-                <input id="new-price" class="inp-field" type="number" placeholder="Price">
-                <select id="new-cat" class="inp-field">
-                    <option>Mobile</option><option>Laptop</option><option>TV</option><option>Audio</option>
-                </select>
-                <button class="btn-login" onclick="addProduct()">Upload</button>
+    <div id="page-admin" class="page">
+        <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Customer Handle</div>
+        <div style="padding:15px;">
+            <div style="background:#e3f2fd; padding:15px; text-align:center; border:1px solid #90caf9;">
+                <h3>Total Visitors</h3>
+                <h1 id="visit-count" style="color:#007185;">0</h1>
             </div>
-            
-            <div class="admin-panel">
-                <h4>Code for Permanent Add (GitHub)</h4>
-                <textarea id="code-out" style="width:100%; height:60px; font-size:10px;"></textarea>
-            </div>
+            <h3 style="margin-top:20px;">Recent Orders</h3>
+            <div id="admin-orders"></div>
         </div>
-
-        <div id="page-admin" class="page">
-            <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Customer Handling</div>
-            
-            <div style="padding:15px;">
-                <div class="stat-box">
-                    <h3>Total Visitors</h3>
-                    <h1 id="visit-count" style="color:var(--primary);">0</h1>
-                    <p style="font-size:10px;">(Simulated Tracker)</p>
-                </div>
-
-                <h3>Recent Local Orders</h3>
-                <div id="admin-orders" style="background:white; padding:10px; border-radius:5px;"></div>
-            </div>
-        </div>
-
     </div>
 
     <div class="nav-bar">
         <div class="nav-item active" onclick="openPage('home')"><i class="fas fa-home"></i>Home</div>
-        <div class="nav-item" onclick="openPage('account')"><i class="fas fa-user"></i>You</div>
         <div class="nav-item" onclick="openPage('cart')"><i class="fas fa-shopping-cart"></i>Cart</div>
+        <div class="nav-item" onclick="openPage('home')"><i class="fas fa-user"></i>Account</div>
         <div class="nav-item" onclick="openPage('home')"><i class="fas fa-bars"></i>Menu</div>
     </div>
 
     <script>
-        // --- 1. DATA & SETUP ---
-        // Pre-loaded Electronics (Large Menu)
-        //---1.DATA& SETUP---
-        // Pre-loadedElectronics (Large Menu)
-        const defaults
+        // --- DATA & PRODUCTS ---
+        // मैंने आपके Canon Printers यहाँ जोड़ दिए हैं
+        const defaults = [
+            // YOUR PRINTERS
+            { id:101, name:"Canon Pixma G3000 Wi-Fi", cat:"Printer", price:13999, mrp:16500, img:"2241.jpg" },
+            { id:102, name:"Canon G3020 All-in-One", cat:"Printer", price:14599, mrp:18999, img:"2244.jpg" },
+            { id:103, name:"Canon G2012 Ink Tank", cat:"Printer", price:10999, mrp:13500, img:"2246.jpg" },
+            { id:104, name:"Canon Pixma Wireless", cat:"Printer", price:11499, mrp:15000, img:"2231.jpg" },
+            
+            // OTHER ITEMS
             { id:1, name:"Apple iPhone 14", cat:"Mobile", price:56999, mrp:69900, img:"https://m.media-amazon.com/images/I/61bK6PM73YL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id:2, name:"Samsung Galaxy M14", cat:"Mobile", price:12490, mrp:18990, img:"https://m.media-amazon.com/images/I/817WWpaQqbL._AC_UY327_FMwebp_QL65_.jpg" },
             { id:3, name:"HP 15s Ryzen Laptop", cat:"Laptop", price:35990, mrp:45000, img:"https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id:4, name:"Sony Bravia 43 inch TV", cat:"TV", price:42990, mrp:59900, img:"https://m.media-amazon.com/images/I/81kxV492yEL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id:5, name:"boAt Airdopes 141", cat:"Audio", price:1299, mrp:4490, img:"https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg" },
-            { id:6, name:"Dell Wireless Mouse", cat:"Laptop", price:599, mrp:999, img:"https://m.media-amazon.com/images/I/51kdFkdrVXL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id:7, name:"OnePlus Nord CE 3", cat:"Mobile", price:24999, mrp:28999, img:"https://m.media-amazon.com/images/I/6116+s7HByL._AC_UY327_FMwebp_QL65_.jpg" },
-            { id:8, name:"JBL Flip 6 Speaker", cat:"Audio", price:9999, mrp:14999, img:"https://m.media-amazon.com/images/I/71yC0d3p1XL._AC_UY327_FMwebp_QL65_.jpg" }
+            { id:5, name:"boAt Airdopes 141", cat:"Audio", price:1299, mrp:4490, img:"https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg" }
         ];
 
-        let uploaded = JSON.parse(localStorage.getItem('my_prods')) || [];
+        let uploaded = JSON.parse(localStorage.getItem('my_prods_v2')) || [];
         let products = [...uploaded, ...defaults];
         let cart = [];
-        let user = JSON.parse(localStorage.getItem('narayan_user_perm'));
         
         // Visitor Counter
-        let v = localStorage.getItem('visits') || 150;
+        let v = localStorage.getItem('visits') || 200;
         v++; localStorage.setItem('visits', v);
 
-        // --- 2. LOGIN LOGIC ---
-        if(user) {
-            document.getElementById('login-overlay').style.display='none';
-            document.getElementById('app').style.display='block';
-            updateUI();
-        }
-
-        function doLogin() {
-            let id = document.getElementById('login-id').value;
-            let name = document.getElementById('login-name').value;
-            if(!id || !name) return alert("Enter details");
-            
-            user = { id, name };
-            localStorage.setItem('narayan_user_perm', JSON.stringify(user));
-            location.reload();
-        }
-
-        function logout() {
-            localStorage.removeItem('narayan_user_perm');
-            location.reload();
-        }
-
-        function updateUI() {
-            document.getElementById('u-name-disp').innerText = user.name;
-            document.getElementById('u-id-disp').innerText = user.id;
-            loadOrders();
-        }
-
-        // --- 3. CORE APP ---
+        // --- CORE FUNCTIONS ---
         function render(list) {
             let d = document.getElementById('prod-list'); d.innerHTML="";
             list.forEach(p=>{
-                let off = Math.round(((p.mrp-p.price)/p.mrp)*100);
+                let off = Math.round(((p.mrp-p.price)/p.mrp)*100) || 10;
                 d.innerHTML += `
                     <div class="card">
-                        <img src="${p.img}">
+                        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
                         <div class="p-name">${p.name}</div>
-                        <div class="rating-stars" onclick="alert('Thanks for rating!')">★★★★☆ (120)</div>
+                        <div class="rating" onclick="alert('Rating Submitted: 5 Stars')">★★★★☆ (85)</div>
                         <div><span class="p-price">₹${p.price}</span> <span class="p-mrp">₹${p.mrp}</span></div>
                         <div class="p-off">${off}% off</div>
                         <button class="btn-add" onclick="add(${p.id})">Add to Cart</button>
@@ -308,13 +235,22 @@
 
         function filter(c) { render(c==='All'?products:products.filter(p=>p.cat===c)); }
         function searchProd(q) { render(products.filter(p=>p.name.toLowerCase().includes(q.toLowerCase()))); }
-        function add(id) { cart.push(products.find(p=>p.id===id)); document.getElementById('badge').innerText=cart.length; alert("Item Added"); }
+        function add(id) { cart.push(products.find(p=>p.id===id)); document.getElementById('badge').innerText=cart.length; alert("Added to Cart"); }
 
-        // --- 4. CART & ORDER ---
+        // --- CART & CHECKOUT ---
+        function openPage(id) {
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+            if(id==='cart') { document.getElementById('page-cart').classList.add('active'); renderCart(); }
+            else if(id==='upload') document.getElementById('page-upload').classList.add('active');
+            else if(id==='admin') document.getElementById('page-admin').classList.add('active');
+            else document.getElementById('page-home').classList.add('active');
+            window.scrollTo(0,0);
+        }
+
         function renderCart() {
             let d = document.getElementById('cart-content'); d.innerHTML="";
-            if(cart.length===0) d.innerHTML="Your Amazon Cart is empty";
             let t=0;
+            if(cart.length===0) d.innerHTML="Cart is Empty";
             cart.forEach(i=>{ t+=i.price; d.innerHTML+=`<div style="background:white; padding:10px; margin-bottom:5px;"><b>${i.name}</b><br>₹${i.price}</div>`; });
             if(t>0) d.innerHTML+=`<h3 style="text-align:right;">Subtotal: ₹${t}</h3>`;
         }
@@ -325,86 +261,80 @@
         }
 
         function checkout() {
-            let addr = document.getElementById('addr').value;
+            let name = document.getElementById('chk-name').value;
+            let addr = document.getElementById('chk-addr').value;
             let pay = document.getElementById('pay').value;
-            if(!addr) return alert("Enter Address");
-            if(cart.length===0) return;
+            
+            if(!name || !addr) return alert("Please enter Name and Address");
+            if(cart.length===0) return alert("Cart is empty");
 
             let items = cart.map(i=>i.name).join(", ");
             let total = cart.reduce((a,b)=>a+b.price,0);
 
-            // WhatsApp
-            let url = `https://wa.me/919708797335?text=*ORDER REQUEST*%0AUser: ${user.name} (${user.id})%0AAddr: ${addr}%0AItems: ${items}%0APay: ${pay}%0ATotal: ₹${total}`;
+            // WhatsApp Message
+            let url = `https://wa.me/919708797335?text=*NEW ORDER*%0AUser: ${name}%0AAddress: ${addr}%0AItems: ${items}%0APay: ${pay}%0ATotal: ₹${total}`;
             window.open(url);
 
-            // Save History
-            let h = JSON.parse(localStorage.getItem('n_hist')) || [];
+            // Save Order locally
+            let h = JSON.parse(localStorage.getItem('n_orders_local')) || [];
             h.unshift({date:new Date().toLocaleDateString(), items, total});
-            localStorage.setItem('n_hist', JSON.stringify(h));
+            localStorage.setItem('n_orders_local', JSON.stringify(h));
 
             cart=[]; document.getElementById('badge').innerText=0;
-            openPage('account'); loadOrders();
+            openPage('home');
         }
 
-        function loadOrders() {
-            let h = JSON.parse(localStorage.getItem('n_hist')) || [];
-            let d = document.getElementById('order-history'); d.innerHTML="";
-            h.forEach(o=>{ d.innerHTML+=`<div style="background:#f9f9f9; padding:10px; margin:5px 0; border:1px solid #ddd;"><div>Arriving: ${o.date}</div><b>${o.items}</b><div>Total: ₹${o.total}</div></div>`; });
-        }
-
-        // --- 5. SECRET ACCESS (PIN LOGIC) ---
+        // --- SECRET ADMIN ---
         function handleSecret() {
-            let pin = prompt("Enter Access PIN:");
-            if(pin === "7482") {
-                openPage('upload'); // Opens Catalog Uploader
-            } else if(pin === "9199") {
-                openPage('admin'); // Opens Customer Handle
+            let pin = prompt("Enter PIN:");
+            if(pin === "7482") openPage('upload');
+            else if(pin === "9199") { 
+                openPage('admin'); 
                 document.getElementById('visit-count').innerText = v;
                 loadAdminOrders();
-            } else {
-                alert("Wrong PIN");
             }
+            else alert("Wrong PIN");
         }
 
-        // 7482 Logic (Upload)
         function addProduct() {
             let name=document.getElementById('new-name').value;
             let price=document.getElementById('new-price').value;
             let img=document.getElementById('new-img').value;
             let cat=document.getElementById('new-cat').value;
+            if(!name) return;
             
-            if(!name || !price) return;
             let p = {id:Date.now(), name, price:parseInt(price), mrp:parseInt(price)+1000, img, cat};
             uploaded.unshift(p);
-            localStorage.setItem('my_prods', JSON.stringify(uploaded));
+            localStorage.setItem('my_prods_v2', JSON.stringify(uploaded));
             
             products=[...uploaded, ...defaults]; render(products);
             alert("Uploaded!");
             document.getElementById('code-out').value = `{id:${p.id}, name:"${name}", cat:"${cat}", price:${price}, mrp:${p.mrp}, img:"${img}"},`;
         }
 
-        // 9199 Logic (Customer Handle)
         function loadAdminOrders() {
-            let h = JSON.parse(localStorage.getItem('n_hist')) || [];
+            let h = JSON.parse(localStorage.getItem('n_orders_local')) || [];
             let d = document.getElementById('admin-orders'); d.innerHTML="";
-            if(h.length===0) d.innerHTML="No recent orders on this device.";
-            h.forEach(o=>{ d.innerHTML+=`<div class="order-row">${o.date} - ${o.items} - ₹${o.total}</div>`; });
+            if(h.length===0) d.innerHTML="No orders on this device yet.";
+            h.forEach(o=>{ d.innerHTML+=`<div style="background:white; padding:10px; margin-bottom:5px;">${o.date}<br>${o.items} - <b>₹${o.total}</b></div>`; });
         }
 
-        // Navigation
-        function openPage(id) {
-            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-            if(id==='upload') document.getElementById('page-upload').classList.add('active');
-            else if(id==='admin') document.getElementById('page-admin').classList.add('active');
-            else if(id==='home') document.getElementById('page-home').classList.add('active');
-            else if(id==='cart') { document.getElementById('page-cart').classList.add('active'); renderCart(); }
-            else if(id==='account') document.getElementById('page-account').classList.add('active');
-            
-            window.scrollTo(0,0);
-        }
-
-        // Slider
+        // Auto Slider
         let s=0; setInterval(()=>{ s=(s>2)?0:s+1; document.getElementById('slides').style.transform=`translateX(-${s*100}%)`; }, 3000);
     </script>
 </body>
-</html>
+</html>// --- DATA & PRODUCTS ---
+        const defaults = [
+            // --- NEW ITEMS (Mantra & Canon) ---
+            { id:201, name:"Mantra MFS110 Biometric", cat:"Electronics", price:2499, mrp:4500, img:"2228.jpg" },
+            { id:202, name:"Canon Pixma Photo Printer", cat:"Printer", price:12999, mrp:16000, img:"2234.jpg" },
+
+            // --- OLD PRINTERS (Previous) ---
+            { id:101, name:"Canon Pixma G3000 Wi-Fi", cat:"Printer", price:13999, mrp:16500, img:"2241.jpg" },
+            { id:102, name:"Canon G3020 All-in-One", cat:"Printer", price:14599, mrp:18999, img:"2244.jpg" },
+            { id:103, name:"Canon G2012 Ink Tank", cat:"Printer", price:10999, mrp:13500, img:"2246.jpg" },
+            { id:104, name:"Canon Pixma Wireless", cat:"Printer", price:11499, mrp:15000, img:"2231.jpg" },
+            
+            // --- OTHER ELECTRONICS ---
+            { id:1, name:"Apple iPhone 14", cat:"Mobile", price:56999, mrp:69900, img:"https://m.media-amazon.com/images/I/61bK6PM73YL._AC_UY327_FMwebp_QL65_.jpg" }
+        ];
