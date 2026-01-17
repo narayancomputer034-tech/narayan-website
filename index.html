@@ -3,82 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narayancomputer services
+    <title>Narayan Computer Services</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        header { background-color: #333; color: white; padding: 1rem; text-align: center; }
-        nav { background-color: #444; padding: 0.5rem; }
-        nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; }
-        nav li { margin: 0 1rem; }
-        nav a { color: white; text-decoration: none; }
-        section { padding: 2rem; max-width: 1200px; margin: auto; }
-        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-        .product { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; }
-        .product img { max-width: 100%; height: 150px; object-fit: cover; }
-        footer { background-color: #333; color: white; text-align: center; padding: 1rem; }
-        @media (max-width: 768px) { nav ul { flex-direction: column; } }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; background-color: #f4f4f4; }
+        header { background: #222; color: #fff; padding: 1.5rem; text-align: center; }
+        nav { background: #333; padding: 0.5rem; text-align: center; }
+        nav a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        nav a:hover { color: #ffeb3b; }
+        
+        section { padding: 2rem; max-width: 900px; margin: auto; background: white; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 5px; }
+        
+        h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .service-card { border: 1px solid #ddd; padding: 1rem; text-align: center; background: #fafafa; border-radius: 5px; }
+        
+        footer { background: #222; color: #fff; text-align: center; padding: 1rem; margin-top: 2rem; }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>Narayan Computer services
-        <p>Your one-stop shop for gadgets and electronics!</p>
+        <h1>Narayan Computer Services</h1>
+        <p>Your Trusted Partner for Computer Sales & Repair</p>
     </header>
+
     <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
     </nav>
+
     <section id="home">
-        <h2>Home</h2>
-        <p>Discover the latest in electronics. From smartphones to smart homes, we've got it all.</p>
+        <h2>Welcome</h2>
+        <p>Welcome to <strong>Narayan Computer Services</strong>. We provide high-quality repair services for laptops, desktops, and printers. We also sell the latest computer accessories at the best prices.</p>
     </section>
-    <section id="products">
-        <h2>Featured Products</h2>
-        <div class="products">
-            <div class="product">
-                <img src="https://via.placeholder.com/250x150?text=Smartphone" alt="Smartphone">
-                <h3>Latest Smartphone</h3>
-                <p>$499</p>
-                <button>Add to Cart</button>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Laptop Repair</h3>
+                <p>Screen replacement, battery issues, keyboard repair, and software installation.</p>
             </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/250x150?text=Laptop" alt="Laptop">
-                <h3>Gaming Laptop</h3>
-                <p>$999</p>
-                <button>Add to Cart</button>
+            <div class="service-card">
+                <h3>PC Assembly</h3>
+                <p>Custom gaming PC building and office computer setup.</p>
             </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/250x150?text=Headphones" alt="Headphones">
-                <h3>Wireless Headphones</h3>
-                <p>$199</p>
-                <button>Add to Cart</button>
+            <div class="service-card">
+                <h3>Accessories</h3>
+                <p>We sell keyboards, mouse, headphones, and computer parts.</p>
             </div>
-            <!-- Add more products here -->
         </div>
     </section>
+
     <section id="about">
         <h2>About Us</h2>
-        <p>We are passionate about electronics and committed to providing quality products at great prices.</p>
+        <p>Narayan Computer Services is a leading computer shop committed to providing fast and reliable IT solutions. With a team of expert technicians, we ensure your devices run smoothly. Customer satisfaction is our top priority.</p>
     </section>
+
     <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: info@myelectronicshop.com | Phone: (123) 456-7890</p>
+        <h2>Contact & Location</h2>
+        <p><strong>Address:</strong> Main Market, Muzaffarpur, Bihar - 842001</p>
+        <p><strong>Phone:</strong> +9708797335</p>
+        <p><strong>Email:</strong> support@narayancomputers.com</p>
+        <p><strong>Opening Hours:</strong> 10:00 AM - 08:00 PM (Monday to Saturday)</p>
     </section>
+
     <footer>
-        <p>&copy; 2023 My Electronic Shop. All rights reserved.</p>
+        <p>&copy; 2026 Narayan Computer Services. All rights reserved.</p>
     </footer>
-    <script>
-        // Simple cart functionality (basic example)
-        let cart = [];
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('Added to cart! (This is a demo - integrate with real e-commerce backend)');
-            });
-        });
-    </script>
+
 </body>
 </html>
