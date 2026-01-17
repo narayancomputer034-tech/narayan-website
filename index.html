@@ -1,349 +1,385 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narayan Plus</title>
+    <title>Narayan Plus Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- THEME --- */
+        /* --- MASTER THEME --- */
         :root {
-            --primary: #2874f0;
-            --secondary: #fb641b;
-            --bg: #f1f2f4;
+            --primary: #2874f0; /* Flipkart Blue */
+            --dark-blue: #172337; /* Footer Color */
+            --secondary: #fb641b; /* Orange */
+            --bg: #f2f2f2;
+            --white: #ffffff;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; }
         body { background-color: var(--bg); padding-bottom: 60px; -webkit-tap-highlight-color: transparent; }
 
-        /* --- LOGIN SCREEN (OVERLAY) --- */
-        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; transition: 0.3s; }
-        .login-box { background: white; width: 90%; max-width: 400px; padding: 25px; border-radius: 8px; color: #333; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .login-input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; outline: none; }
-        .login-btn { width: 100%; padding: 12px; background: var(--secondary); color: white; border: none; font-weight: bold; font-size: 16px; border-radius: 2px; cursor: pointer; }
+        /* --- LOGIN OVERLAY (सबसे ऊपर) --- */
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; transition: 0.3s; }
+        .login-card { width: 100%; max-width: 350px; text-align: center; }
+        .login-img { width: 100px; margin-bottom: 20px; }
+        .inp-field { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; margin: 10px 0; font-size: 16px; outline: none; }
+        .btn-full { width: 100%; padding: 14px; background: var(--secondary); color: white; border: none; font-weight: bold; font-size: 16px; border-radius: 2px; cursor: pointer; margin-top: 10px; }
         .hidden { display: none !important; }
 
-        /* --- MAIN APP DESIGN --- */
-        header { background: var(--primary); padding: 10px 15px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .logo { color: white; font-size: 18px; font-weight: bold; font-style: italic; flex-grow: 1; }
-        .cart-wrap { position: relative; color: white; font-size: 20px; }
-        .badge { position: absolute; top: -5px; right: -8px; background: #ff6161; color: white; font-size: 10px; padding: 2px 5px; border-radius: 10px; border: 1px solid white; }
+        /* --- APP HEADER --- */
+        header { background: var(--primary); padding: 12px 15px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .logo { color: white; font-size: 19px; font-weight: bold; font-style: italic; flex-grow: 1; }
+        .cart-icon { position: relative; color: white; font-size: 22px; cursor: pointer; }
+        .badge { position: absolute; top: -6px; right: -8px; background: #ff6161; color: white; font-size: 11px; padding: 2px 5px; border-radius: 10px; border: 1px solid white; }
 
-        /* SEARCH & SLIDER */
-        .search-bar { background: white; margin: 10px; padding: 10px; display: flex; align-items: center; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .search-bar input { border: none; width: 100%; margin-left: 10px; outline: none; }
-        .slider-box { height: 160px; overflow: hidden; background: #ddd; width: 100%; }
-        .slides { display: flex; height: 100%; transition: 0.5s; }
-        .slide { min-width: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; background: linear-gradient(45deg, #11998e, #38ef7d); }
-
-        /* PRODUCTS */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 5px; }
-        .card { background: white; padding: 10px; border-radius: 2px; position: relative; }
-        .card img { width: 100%; height: 130px; object-fit: contain; }
-        .p-name { font-size: 13px; height: 36px; overflow: hidden; margin: 5px 0; color: #212121; }
-        .p-price { font-weight: bold; font-size: 16px; }
-
-        /* MODALS & PAGES */
-        .full-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 2000; display: none; overflow-y: auto; }
-        .full-page.active { display: block; animation: slideUp 0.3s; }
-        @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+        /* --- SEARCH & SLIDER --- */
+        .search-area { background: white; padding: 8px; margin: 8px; border-radius: 2px; display: flex; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .search-area input { border: none; flex: 1; outline: none; margin-left: 10px; font-size: 14px; }
         
-        .header-back { padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; font-weight: bold; background: white; position: sticky; top: 0; }
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1500; }
-        .nav-item { text-align: center; font-size: 10px; color: #666; }
+        .slider { width: 100%; height: 170px; overflow: hidden; position: relative; background: #ddd; }
+        .slides-container { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); background-size: cover; background-position: center; }
+
+        /* --- CATEGORIES --- */
+        .cat-row { display: flex; overflow-x: auto; padding: 10px; background: white; gap: 15px; scrollbar-width: none; margin-bottom: 5px; }
+        .cat-box { min-width: 70px; text-align: center; cursor: pointer; }
+        .cat-circle { width: 55px; height: 55px; background: #e0f7fa; border-radius: 50%; margin: 0 auto 5px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--primary); border: 2px solid transparent; }
+        .cat-box.active .cat-circle { border-color: var(--secondary); background: white; }
+
+        /* --- PRODUCT GRID --- */
+        .section-title { padding: 15px; background: white; font-weight: bold; font-size: 16px; margin-top: 10px; border-bottom: 1px solid #eee; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; }
+        .card { background: white; padding: 10px; position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+        .card img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 10px; }
+        .p-title { font-size: 13px; color: #333; height: 38px; overflow: hidden; margin-bottom: 5px; }
+        .p-price { font-size: 16px; font-weight: 600; color: #212121; }
+        .p-off { font-size: 12px; color: green; font-weight: bold; margin-left: 5px; }
+        .btn-add { width: 100%; padding: 8px; border: 1px solid #ddd; background: white; color: var(--primary); font-weight: bold; margin-top: 8px; border-radius: 2px; cursor: pointer; }
+
+        /* --- FOOTER (AMAZON STYLE) --- */
+        .footer { background: var(--dark-blue); color: white; padding: 20px 15px; margin-top: 20px; font-size: 13px; line-height: 2; }
+        .footer h3 { color: #ddd; margin-bottom: 5px; font-size: 15px; border-bottom: 1px solid #444; padding-bottom: 5px; margin-top: 15px; }
+        .footer a { color: white; text-decoration: none; display: block; }
+        .footer a:hover { text-decoration: underline; }
+        .seller-btn { display: inline-block; background: var(--secondary); color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 3px; margin-top: 10px; }
+
+        /* --- FULL PAGE VIEWS --- */
+        .page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f2f2f2; z-index: 2000; overflow-y: auto; display: none; padding-bottom: 60px; }
+        .page.active { display: block; animation: slideIn 0.3s; }
+        @keyframes slideIn { from{transform:translateX(100%)} to{transform:translateX(0)} }
+        
+        .page-header { background: white; padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #ddd; font-weight: bold; font-size: 16px; position: sticky; top: 0; z-index: 10; }
+        
+        /* --- NAV BAR --- */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 8px 0; z-index: 1500; }
+        .nav-item { text-align: center; color: #555; font-size: 10px; flex: 1; cursor: pointer; }
         .nav-item i { font-size: 20px; display: block; margin-bottom: 3px; }
         .nav-item.active { color: var(--primary); }
-
-        /* ACCOUNT & FOOTER */
-        .footer { background: #172337; color: white; padding: 20px; margin-top: 20px; font-size: 12px; }
-        .earn-btn { display: block; background: var(--secondary); color: white; text-align: center; padding: 10px; margin-top: 10px; text-decoration: none; font-weight: bold; border-radius: 4px; }
 
     </style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div class="logo" style="font-size: 30px; margin-bottom: 20px;">Narayan<span style="color:#ffe500">Plus</span></div>
-        
-        <div id="step-1" class="login-box">
-            <h3>Login to Continue</h3>
-            <p style="font-size:12px; color:#666; margin-top:5px;">Enter your mobile number</p>
-            <input type="tel" id="login-phone" class="login-input" placeholder="+91 Mobile Number">
-            <button class="login-btn" onclick="sendOtp()">Request OTP</button>
-        </div>
+    <div id="login-overlay">
+        <div class="login-card">
+            <h2 style="color:var(--primary); font-size:28px; font-style:italic;">Narayan<span style="color:#ffe500">Plus</span></h2>
+            <p style="color:#666; margin-bottom:20px;">Login for Best Experience</p>
 
-        <div id="step-2" class="login-box hidden">
-            <h3>Verify OTP</h3>
-            <p style="font-size:12px; color:#666; margin-top:5px;">OTP sent to your mobile</p>
-            <input type="number" id="login-otp" class="login-input" placeholder="Enter OTP (Try: 1234)">
-            <button class="login-btn" onclick="verifyOtp()">Verify</button>
-        </div>
+            <div id="step-1">
+                <input type="tel" id="u-phone" class="inp-field" placeholder="Mobile Number (+91)">
+                <button class="btn-full" onclick="getOTP()">Continue</button>
+            </div>
 
-        <div id="step-3" class="login-box hidden">
-            <h3>Welcome!</h3>
-            <p style="font-size:12px; color:#666; margin-top:5px;">Enter your full name</p>
-            <input type="text" id="login-name" class="login-input" placeholder="Your Name">
-            <button class="login-btn" onclick="completeLogin()">Start Shopping</button>
+            <div id="step-2" class="hidden">
+                <input type="number" id="u-otp" class="inp-field" placeholder="Enter OTP (Use 1234)">
+                <button class="btn-full" onclick="verifyOTP()">Verify OTP</button>
+            </div>
+
+            <div id="step-3" class="hidden">
+                <input type="text" id="u-name" class="inp-field" placeholder="Enter Your Full Name">
+                <button class="btn-full" onclick="finishLogin()">Start Shopping</button>
+            </div>
         </div>
     </div>
 
-    <div id="app-content">
+    <div id="app-container">
         
-        <div id="home-view" class="page">
+        <div id="view-home" style="display:block;">
             <header>
                 <div class="logo">Narayan<span style="color:#ffe500">Plus</span></div>
-                <div class="cart-wrap" onclick="openCart()">
+                <div class="cart-icon" onclick="openPage('view-cart')">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="badge" id="badge">0</span>
+                    <span class="badge" id="cart-badge">0</span>
                 </div>
             </header>
 
-            <div class="search-bar">
-                <i class="fas fa-search" style="color:#888;"></i>
-                <input type="text" placeholder="Search for Products..." onkeyup="searchProd(this.value)">
+            <div class="search-area">
+                <i class="fas fa-search" style="color:#888; padding:5px;"></i>
+                <input type="text" placeholder="Search for Laptops, Mobiles..." onkeyup="searchProduct(this.value)">
             </div>
 
-            <div class="slider-box">
-                <div class="slides" id="slider">
-                    <div class="slide" style="background:#2874f0;">SALE IS LIVE</div>
-                    <div class="slide" style="background:#fb641b;">NEW ARRIVALS</div>
-                    <div class="slide" style="background:#388e3c;">BEST PRICES</div>
+            <div class="slider">
+                <div class="slides-container" id="slider-track">
+                    <div class="slide" style="background: linear-gradient(45deg, #FF512F, #DD2476);">BIG SAVING DAYS</div>
+                    <div class="slide" style="background: linear-gradient(45deg, #11998e, #38ef7d);">UP TO 50% OFF</div>
+                    <div class="slide" style="background: linear-gradient(45deg, #2193b0, #6dd5ed);">NEW ARRIVALS</div>
                 </div>
             </div>
 
-            <div style="padding:10px; font-weight:bold; background:white; margin-top:10px;">Latest Products</div>
-            <div class="grid" id="product-grid"></div>
+            <div class="cat-row">
+                <div class="cat-box active" onclick="filterCat('All', this)"><div class="cat-circle"><i class="fas fa-th-large"></i></div>All</div>
+                <div class="cat-box" onclick="filterCat('Laptop', this)"><div class="cat-circle"><i class="fas fa-laptop"></i></div>Laptops</div>
+                <div class="cat-box" onclick="filterCat('Mobile', this)"><div class="cat-circle"><i class="fas fa-mobile-alt"></i></div>Mobiles</div>
+                <div class="cat-box" onclick="filterCat('Audio', this)"><div class="cat-circle"><i class="fas fa-headphones"></i></div>Audio</div>
+            </div>
+
+            <div class="section-title">Recommended for You</div>
+            <div class="grid" id="product-list"></div>
 
             <div class="footer">
-                <h3>Become a Seller</h3>
-                <p>Sell products on Narayan Plus and earn money.</p>
-                <a href="https://wa.me/919708797335?text=I%20want%20to%20be%20a%20seller" class="earn-btn">
-                    <i class="fab fa-whatsapp"></i> Join as Seller
-                </a>
-                <p style="text-align:center; margin-top:20px;">&copy; 2026 Narayan Services</p>
-            </div>
-        </div>
-
-        <div id="detail-view" class="full-page">
-            <div class="header-back">
-                <i class="fas fa-arrow-left" onclick="closeDetail()" style="margin-right:10px;"></i> Details
-            </div>
-            <img id="d-img" style="width:100%; height:250px; object-fit:contain; margin-top:20px;">
-            <div style="padding:15px;">
-                <h2 id="d-name"></h2>
-                <h1 id="d-price" style="margin:10px 0;"></h1>
-                <p id="d-desc" style="color:#666; line-height:1.5; font-size:14px;"></p>
-            </div>
-            <div style="position:fixed; bottom:0; width:100%; display:flex;">
-                <button onclick="addToCart()" style="flex:1; padding:15px; background:white; border:1px solid #ddd; font-weight:bold;">ADD TO CART</button>
-                <button onclick="buyNow()" style="flex:1; padding:15px; background:var(--secondary); color:white; border:none; font-weight:bold;">BUY NOW</button>
-            </div>
-        </div>
-
-        <div id="cart-view" class="full-page">
-            <div class="header-back">
-                <i class="fas fa-arrow-left" onclick="closeCart()" style="margin-right:10px;"></i> My Cart
-            </div>
-            <div id="cart-items" style="padding:15px;"></div>
-            <div style="padding:15px; border-top:5px solid #eee;">
-                <h3>Checkout</h3>
+                <div style="text-align:center; font-weight:bold; font-size:16px; margin-bottom:10px;">Visit Us</div>
+                <p><i class="fas fa-map-marker-alt"></i> Near DAV School, Runnisaidpur,<br>Sitamarhi, Bihar - 843328</p>
+                
+                <h3>Make Money with Us</h3>
+                <a href="#">Sell on Narayan Plus</a>
+                <a href="#">Become an Affiliate</a>
+                <a href="#">Advertise Your Products</a>
                 <br>
-                <input id="addr" class="login-input" placeholder="Full Address (Village, Road, PIN)">
-                <p style="margin:10px 0; font-weight:bold;">Payment:</p>
-                <label style="display:block; padding:10px; border:1px solid #ddd; border-radius:4px;">
-                    <input type="radio" name="pay" value="COD" checked> Cash on Delivery
-                </label>
-                <label style="display:block; padding:10px; border:1px solid #ddd; border-radius:4px; margin-top:5px;">
-                    <input type="radio" name="pay" value="UPI"> UPI / Online
-                </label>
-                <button onclick="placeOrder()" class="login-btn" style="margin-top:20px;">CONFIRM ORDER</button>
-            </div>
-        </div>
+                <a href="https://wa.me/919708797335?text=I%20want%20to%20become%20a%20seller" class="seller-btn">
+                    <i class="fab fa-whatsapp"></i> Become a Seller
+                </a>
 
-        <div id="account-view" class="full-page">
-            <div class="header-back">My Account</div>
-            <div style="padding:20px; background:white; display:flex; align-items:center; gap:15px;">
-                <div style="width:50px; height:50px; background:#eee; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;"><i class="fas fa-user"></i></div>
-                <div>
-                    <h3 id="acc-name">User</h3>
-                    <p id="acc-phone" style="color:gray; font-size:13px;">+91...</p>
+                <h3>Let Us Help You</h3>
+                <a href="#" onclick="openPage('view-account')">Your Account</a>
+                <a href="#">Returns Centre</a>
+                <a href="#">Help</a>
+                
+                <div style="border-top:1px solid #444; margin-top:20px; padding-top:10px; text-align:center;">
+                    &copy; 2026 Narayan Services
                 </div>
             </div>
-            <div style="padding:15px; font-weight:bold; color:#555;">MY ORDERS</div>
-            <div id="order-list" style="padding-bottom:20px;"></div>
-            <button onclick="logout()" style="width:100%; padding:15px; background:white; border:1px solid #ddd; color:red; margin-top:20px;">LOGOUT</button>
         </div>
 
-        <div class="nav-bar">
-            <div class="nav-item active" onclick="showTab('home')"><i class="fas fa-home"></i> Home</div>
-            <div class="nav-item" onclick="openCart()"><i class="fas fa-shopping-cart"></i> Cart</div>
-            <div class="nav-item" onclick="showTab('account')"><i class="fas fa-user"></i> Account</div>
+        <div id="view-cart" class="page">
+            <div class="page-header"><i class="fas fa-arrow-left" onclick="closePage('view-cart')" style="margin-right:15px;"></i> My Cart</div>
+            <div id="cart-content" style="padding:15px;"></div>
+            
+            <div style="padding:15px; background:white; margin-top:10px;">
+                <h3>Checkout Details</h3>
+                <input id="chk-addr" class="inp-field" placeholder="Enter Full Delivery Address">
+                
+                <p style="margin:10px 0; font-weight:bold;">Select Payment:</p>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-add" onclick="payMode='COD'; alert('COD Selected')">Cash On Delivery</button>
+                    <button class="btn-add" onclick="payMode='UPI'; alert('UPI Selected')">UPI / Online</button>
+                </div>
+                
+                <button class="btn-full" onclick="placeOrder()">CONFIRM ORDER</button>
+            </div>
+        </div>
+
+        <div id="view-account" class="page">
+            <div class="page-header">My Account</div>
+            <div style="background:var(--primary); color:white; padding:30px; display:flex; align-items:center; gap:15px;">
+                <div style="width:60px; height:60px; background:white; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--primary); font-size:24px;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h2 id="acc-name-display">Guest</h2>
+                    <p id="acc-phone-display">+91 XXXXX XXXXX</p>
+                </div>
+            </div>
+
+            <div class="section-title">Order History</div>
+            <div id="order-history" style="padding-bottom:50px;"></div>
+
+            <button onclick="logout()" style="width:90%; margin:20px 5%; padding:15px; background:white; border:1px solid red; color:red; font-weight:bold;">LOGOUT</button>
         </div>
 
     </div>
 
-    <script>
-        // --- DATA & STATE ---
-        const products = [
-            {id:1, name:"HP 15s Laptop", price:35990, img:"https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg", desc:"Ryzen 3, 8GB RAM, 512GB SSD"},
-            {id:2, name:"Samsung M14 5G", price:12490, img:"https://m.media-amazon.com/images/I/817WWpaQqbL._AC_UY327_FMwebp_QL65_.jpg", desc:"50MP Camera, 6000mAh Battery"},
-            {id:3, name:"boAt Airdopes", price:1299, img:"https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg", desc:"Wireless Earbuds, 42H Playtime"},
-            {id:4, name:"Wireless Mouse", price:499, img:"https://m.media-amazon.com/images/I/51kdFkdrVXL._AC_UY327_FMwebp_QL65_.jpg", desc:"Dell Optical Mouse"}
-        ];
-        let cart = [];
-        let currentItem = null;
-        let user = JSON.parse(localStorage.getItem('narayan_user'));
+    <div class="nav-bar">
+        <div class="nav-item active" onclick="closePage('all')"><i class="fas fa-home"></i>Home</div>
+        <div class="nav-item" onclick="document.querySelector('.cat-row').scrollIntoView({behavior:'smooth'})"><i class="fas fa-th-large"></i>Category</div>
+        <div class="nav-item" onclick="openPage('view-cart')"><i class="fas fa-shopping-cart"></i>Cart</div>
+        <div class="nav-item" onclick="openPage('view-account')"><i class="fas fa-user"></i>Account</div>
+    </div>
 
-        // --- INIT ---
-        if(user) {
-            document.getElementById('login-screen').classList.add('hidden');
-            updateAccountUI();
-        } else {
-            // Show Login screen
-        }
-        renderProducts(products);
-        loadOrders();
+    <script>
+        // --- DATA ---
+        const products = [
+            { id:1, name:"HP 15s Ryzen 3 Laptop", cat:"Laptop", price:35990, mrp:45000, img:"https://m.media-amazon.com/images/I/71ItMeqpnzL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:2, name:"Samsung Galaxy M14 5G", cat:"Mobile", price:12490, mrp:18990, img:"https://m.media-amazon.com/images/I/817WWpaQqbL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:3, name:"boAt Airdopes 141", cat:"Audio", price:1299, mrp:4490, img:"https://m.media-amazon.com/images/I/61KNJav3v9L._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:4, name:"Canon Pixma Printer", cat:"Laptop", price:5999, mrp:7500, img:"https://m.media-amazon.com/images/I/51+u0a+JpQL._AC_UY327_FMwebp_QL65_.jpg" },
+            { id:5, name:"Dell Wireless Mouse", cat:"Laptop", price:499, mrp:999, img:"https://m.media-amazon.com/images/I/51kdFkdrVXL._AC_UY327_FMwebp_QL65_.jpg" }
+        ];
+
+        let cart = [];
+        let payMode = "COD";
+        let user = JSON.parse(localStorage.getItem('narayan_user_v2'));
 
         // --- LOGIN LOGIC ---
-        function sendOtp() {
-            let ph = document.getElementById('login-phone').value;
-            if(ph.length < 10) return alert("Enter valid 10-digit number");
+        if(user) {
+            document.getElementById('login-overlay').classList.add('hidden');
+            loadAccount();
+        }
+
+        function getOTP() {
+            let ph = document.getElementById('u-phone').value;
+            if(ph.length < 10) return alert("Enter valid number");
             document.getElementById('step-1').classList.add('hidden');
             document.getElementById('step-2').classList.remove('hidden');
-            alert("Your OTP is 1234"); // Fake OTP
+            alert("OTP Sent: 1234");
         }
-        function verifyOtp() {
-            let otp = document.getElementById('login-otp').value;
-            if(otp === "1234") {
+
+        function verifyOTP() {
+            if(document.getElementById('u-otp').value == "1234") {
                 document.getElementById('step-2').classList.add('hidden');
                 document.getElementById('step-3').classList.remove('hidden');
-            } else {
-                alert("Wrong OTP");
-            }
+            } else alert("Wrong OTP");
         }
-        function completeLogin() {
-            let name = document.getElementById('login-name').value;
-            let phone = document.getElementById('login-phone').value;
+
+        function finishLogin() {
+            let name = document.getElementById('u-name').value;
+            let phone = document.getElementById('u-phone').value;
             if(!name) return alert("Enter Name");
             
-            user = { name: name, phone: phone };
-            localStorage.setItem('narayan_user', JSON.stringify(user));
-            updateAccountUI();
-            document.getElementById('login-screen').classList.add('hidden');
+            user = { name, phone };
+            localStorage.setItem('narayan_user_v2', JSON.stringify(user));
+            document.getElementById('login-overlay').classList.add('hidden');
+            loadAccount();
         }
+
         function logout() {
-            localStorage.removeItem('narayan_user');
+            localStorage.removeItem('narayan_user_v2');
             location.reload();
         }
-        function updateAccountUI() {
+
+        function loadAccount() {
             if(user) {
-                document.getElementById('acc-name').innerText = user.name;
-                document.getElementById('acc-phone').innerText = user.phone;
-            }
-        }
-
-        // --- APP LOGIC ---
-        function renderProducts(list) {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = "";
-            list.forEach(p => {
-                grid.innerHTML += `
-                    <div class="card" onclick="openDetail(${p.id})">
-                        <img src="${p.img}">
-                        <div class="p-name">${p.name}</div>
-                        <div class="p-price">₹${p.price}</div>
-                    </div>
-                `;
-            });
-        }
-        function searchProd(q) {
-            let term = q.toLowerCase();
-            renderProducts(products.filter(p => p.name.toLowerCase().includes(term)));
-        }
-
-        // Slider
-        let sIdx = 0;
-        setInterval(() => {
-            sIdx = (sIdx > 2) ? 0 : sIdx + 1;
-            document.getElementById('slider').style.transform = `translateX(-${sIdx * 100}%)`;
-        }, 3000);
-
-        // Details
-        function openDetail(id) {
-            currentItem = products.find(p => p.id === id);
-            document.getElementById('d-img').src = currentItem.img;
-            document.getElementById('d-name').innerText = currentItem.name;
-            document.getElementById('d-price').innerText = "₹" + currentItem.price;
-            document.getElementById('d-desc').innerText = currentItem.desc;
-            document.getElementById('detail-view').classList.add('active');
-        }
-        function closeDetail() { document.getElementById('detail-view').classList.remove('active'); }
-
-        // Cart
-        function addToCart() { cart.push(currentItem); updateBadge(); alert("Added"); closeDetail(); }
-        function buyNow() { cart.push(currentItem); updateBadge(); closeDetail(); openCart(); }
-        function openCart() { document.getElementById('cart-view').classList.add('active'); renderCart(); }
-        function closeCart() { document.getElementById('cart-view').classList.remove('active'); }
-        function updateBadge() { document.getElementById('badge').innerText = cart.length; }
-        
-        function renderCart() {
-            let div = document.getElementById('cart-items');
-            div.innerHTML = "";
-            if(cart.length===0) div.innerHTML = "Cart Empty";
-            cart.forEach(i => {
-                div.innerHTML += `<div style="border-bottom:1px solid #eee; padding:5px;">${i.name} - <b>₹${i.price}</b></div>`;
-            });
-        }
-
-        // Checkout
-        function placeOrder() {
-            let addr = document.getElementById('addr').value;
-            let pay = document.querySelector('input[name="pay"]:checked').value;
-            if(!addr) return alert("Enter Address");
-            if(cart.length===0) return;
-
-            let total = cart.reduce((a,b)=>a+b.price, 0);
-            let items = cart.map(i=>i.name).join(", ");
-            
-            // Save
-            let order = { id: Date.now(), date: new Date().toLocaleDateString(), items, total, status: "Placed" };
-            let hist = JSON.parse(localStorage.getItem('n_orders')) || [];
-            hist.unshift(order);
-            localStorage.setItem('n_orders', JSON.stringify(hist));
-
-            // WhatsApp
-            let msg = `*ORDER* %0AName: ${user.name}%0APhone: ${user.phone}%0AAddress: ${addr}%0AItems: ${items}%0APayment: ${pay}%0ATotal: ₹${total}`;
-            window.open(`https://wa.me/919708797335?text=${msg}`);
-
-            cart = [];
-            updateBadge();
-            closeCart();
-            showTab('account');
-            loadOrders();
-        }
-
-        // Nav & Pages
-        function showTab(tab) {
-            document.getElementById('account-view').classList.remove('active');
-            if(tab==='account') {
-                document.getElementById('account-view').classList.add('active');
+                document.getElementById('acc-name-display').innerText = user.name;
+                document.getElementById('acc-phone-display').innerText = user.phone;
                 loadOrders();
             }
         }
 
-        function loadOrders() {
-            let hist = JSON.parse(localStorage.getItem('n_orders')) || [];
-            let div = document.getElementById('order-list');
+        // --- APP LOGIC ---
+        function renderGrid(list) {
+            const div = document.getElementById('product-list');
             div.innerHTML = "";
-            hist.forEach(o => {
+            list.forEach(p => {
+                let off = Math.round(((p.mrp - p.price)/p.mrp)*100);
                 div.innerHTML += `
-                    <div style="background:#f9f9f9; padding:10px; margin:10px 0; border-left:3px solid green;">
-                        <div style="font-size:12px; color:#555;">${o.date}</div>
-                        <div><b>${o.items}</b></div>
-                        <div>₹${o.total}</div>
+                    <div class="card">
+                        <img src="${p.img}">
+                        <div class="p-title">${p.name}</div>
+                        <div>
+                            <span class="p-price">₹${p.price.toLocaleString()}</span>
+                            <span class="p-off">${off}% OFF</span>
+                        </div>
+                        <button class="btn-add" onclick="addToCart(${p.id})">ADD TO CART</button>
                     </div>
                 `;
             });
         }
+        renderGrid(products);
+
+        // Filters
+        function filterCat(cat, el) {
+            document.querySelectorAll('.cat-box').forEach(c=>c.classList.remove('active'));
+            if(el) el.classList.add('active');
+            
+            if(cat === 'All') renderGrid(products);
+            else renderGrid(products.filter(p => p.cat === cat));
+        }
+
+        function searchProduct(q) {
+            let term = q.toLowerCase();
+            renderGrid(products.filter(p => p.name.toLowerCase().includes(term)));
+        }
+
+        // Cart
+        function addToCart(id) {
+            let item = products.find(p => p.id === id);
+            cart.push(item);
+            document.getElementById('cart-badge').innerText = cart.length;
+            alert("Added to Cart");
+        }
+
+        function openPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            if(id !== 'all') {
+                document.getElementById(id).classList.add('active');
+                if(id === 'view-cart') renderCartItems();
+            }
+        }
+        function closePage(id) {
+            if(id === 'all') document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            else document.getElementById(id).classList.remove('active');
+        }
+
+        function renderCartItems() {
+            const div = document.getElementById('cart-content');
+            div.innerHTML = "";
+            let total = 0;
+            if(cart.length===0) div.innerHTML = "Cart is Empty";
+            cart.forEach(i => {
+                total += i.price;
+                div.innerHTML += `<div style="border-bottom:1px solid #eee; padding:10px 0; display:flex; justify-content:space-between;"><span>${i.name}</span><b>₹${i.price}</b></div>`;
+            });
+            div.innerHTML += `<h3 style="text-align:right; margin-top:10px;">Total: ₹${total}</h3>`;
+        }
+
+        function placeOrder() {
+            let addr = document.getElementById('chk-addr').value;
+            if(!addr) return alert("Enter Address");
+            if(cart.length===0) return alert("Cart Empty");
+
+            let items = cart.map(i => i.name).join(", ");
+            let total = cart.reduce((a,b)=>a+b.price,0);
+
+            // WhatsApp
+            let msg = `*NEW ORDER* %0AName: ${user.name}%0APhone: ${user.phone}%0AAddress: ${addr}%0AItems: ${items}%0APay Mode: ${payMode}%0ATotal: ₹${total}`;
+            window.open(`https://wa.me/919708797335?text=${msg}`);
+
+            // Save History
+            let hist = JSON.parse(localStorage.getItem('n_orders_v2')) || [];
+            hist.unshift({ date: new Date().toLocaleDateString(), items, total, status: "Placed" });
+            localStorage.setItem('n_orders_v2', JSON.stringify(hist));
+
+            cart = [];
+            document.getElementById('cart-badge').innerText = 0;
+            closePage('view-cart');
+            openPage('view-account');
+            loadOrders();
+        }
+
+        function loadOrders() {
+            let hist = JSON.parse(localStorage.getItem('n_orders_v2')) || [];
+            let div = document.getElementById('order-history');
+            div.innerHTML = "";
+            if(hist.length===0) div.innerHTML = "<p style='text-align:center; padding:20px; color:#777;'>No orders yet.</p>";
+            hist.forEach(o => {
+                div.innerHTML += `
+                    <div style="background:#f9f9f9; padding:10px; margin:10px; border-left:4px solid green;">
+                        <div style="font-size:12px; color:#555;">${o.date}</div>
+                        <div><b>${o.items}</b></div>
+                        <div style="display:flex; justify-content:space-between; margin-top:5px;">
+                            <span>₹${o.total}</span>
+                            <span style="color:orange;">${o.status}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Slider Auto-Play
+        let sIdx = 0;
+        setInterval(() => {
+            sIdx = (sIdx > 2) ? 0 : sIdx + 1;
+            document.getElementById('slider-track').style.transform = `translateX(-${sIdx * 100}%)`;
+        }, 3000);
+
     </script>
 </body>
 </html>
