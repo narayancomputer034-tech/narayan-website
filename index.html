@@ -1,133 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Narayan Computer Services</title>
     <style>
         :root { --primary: #2874f0; --secondary: #fb641b; --bg: #f1f3f6; }
-        body { font-family: Arial, sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 70px; }
-        header { background: var(--primary); padding: 10px 15px; position: sticky; top: 0; z-index: 100; color: white; display: flex; justify-content: space-between; align-items: center; }
-        .search-bar { background: white; padding: 8px; border-radius: 4px; margin: 10px; display: flex; }
-        .search-bar input { border: none; width: 100%; outline: none; }
-        .product-card { background: white; margin: 10px; padding: 10px; display: flex; gap: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .product-card img { width: 100px; height: 100px; object-fit: contain; }
-        .price { font-weight: bold; font-size: 18px; }
-        .mrp { text-decoration: line-through; color: #878787; font-size: 14px; }
-        .btn { background: var(--secondary); color: white; border: none; padding: 8px 15px; border-radius: 2px; cursor: pointer; }
-        .nav-bottom { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding-bottom: 60px; }
+        
+        /* Header & Search */
+        header { background: var(--primary); color: white; padding: 10px 15px; position: sticky; top: 0; z-index: 1000; }
+        .nav-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .search-box { background: white; display: flex; padding: 8px; border-radius: 4px; }
+        .search-box input { border: none; width: 100%; outline: none; font-size: 14px; }
+
+        /* Categories Bar */
+        .cat-bar { background: white; display: flex; overflow-x: auto; padding: 10px; gap: 15px; border-bottom: 1px solid #ddd; position: sticky; top: 85px; z-index: 999; }
+        .cat-item { background: #eee; padding: 6px 15px; border-radius: 20px; font-size: 13px; white-space: nowrap; cursor: pointer; border: 1px solid #ccc; }
+        .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Product Grid */
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; }
+        .product-card { background: white; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; padding: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 140px; object-fit: contain; }
+        .p-name { font-size: 14px; margin: 8px 0; height: 35px; overflow: hidden; }
+        .p-price { font-weight: bold; font-size: 16px; color: #212121; }
+        .p-mrp { text-decoration: line-through; color: #878787; font-size: 12px; margin-left: 5px; }
+
+        /* Admin & Footer */
+        .footer { background: #333; color: white; padding: 20px; margin-top: 20px; font-size: 14px; line-height: 1.6; }
+        .admin-section { padding: 20px; background: white; margin: 10px; border-radius: 8px; border: 2px dashed #ccc; }
+        input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-buy { background: var(--secondary); color: white; border: none; padding: 10px; border-radius: 4px; width: 100%; font-weight: bold; cursor: pointer; }
+        
         #cart-page, #admin-page { display: none; padding: 15px; background: white; min-height: 100vh; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Narayan Computer</div>
-    <div onclick="openPage('cart')">🛒 Cart (<span id="cart-count">0</span>)</div>
+    <div class="nav-top">
+        <b style="font-size: 18px;">Narayan Computer</b>
+        <div onclick="openPage('cart')" style="cursor: pointer;">🛒 Cart (<span id="cart-count">0</span>)</div>
+    </div>
+    <div class="search-box">
+        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search Laptop, Mobile, etc...">
+    </div>
 </header>
 
 <div id="home-page">
-    <div class="search-bar"><input type="text" placeholder="Search products..."></div>
-    <div id="product-list"></div>
+    <div class="cat-bar">
+        <div class="cat-item active" onclick="setCat('All', this)">All</div>
+        <div class="cat-item" onclick="setCat('Laptop', this)">Laptop</div>
+        <div class="cat-item" onclick="setCat('Mobile', this)">Mobile</div>
+        <div class="cat-item" onclick="setCat('Printer', this)">Printer</div>
+        <div class="cat-item" onclick="setCat('TV', this)">TV</div>
+        <div class="cat-item" onclick="setCat('Electronics', this)">Electronics</div>
+    </div>
+
+    <div id="product-list" class="product-grid"></div>
+
+    <div class="footer">
+        <b>Narayan Computer Services</b><br>
+        📍 Address: Your Shop Address, Near Main Road<br>
+        📞 Phone: +91 9708797335<br>
+        📧 Email: contact@narayan.com<br><br>
+        <button onclick="checkAdmin()" style="background:none; border:none; color:#777; font-size:10px;">Admin Login</button>
+    </div>
 </div>
 
 <div id="cart-page">
     <h2>Your Cart</h2>
     <div id="cart-items"></div>
     <hr>
-    <h3>Checkout</h3>
-    <input type="text" id="chk-name" placeholder="Full Name" style="width:90%; padding:10px; margin:5px;"><br>
-    <input type="text" id="chk-addr" placeholder="Full Address" style="width:90%; padding:10px; margin:5px;"><br>
-    <select id="pay" style="width:95%; padding:10px; margin:5px;">
+    <h3>Order Details</h3>
+    <input type="text" id="custName" placeholder="आपका नाम">
+    <input type="text" id="custAddr" placeholder="पूरा पता (Address)">
+    <select id="payMethod">
         <option value="Cash on Delivery">Cash on Delivery</option>
         <option value="UPI / Online">UPI / Online</option>
-    </select><br><br>
-    <button class="btn" onclick="checkout()" style="width:100%">Place Order on WhatsApp</button>
+    </select>
+    <button class="btn-buy" onclick="sendToWhatsApp()">Order on WhatsApp</button>
+    <br><br>
     <button onclick="openPage('home')">Back to Shop</button>
 </div>
 
+<div id="admin-page">
+    <h2>Add New Product</h2>
+    <input type="text" id="p_name" placeholder="Product Name">
+    <input type="number" id="p_price" placeholder="Selling Price">
+    <input type="number" id="p_mrp" placeholder="MRP">
+    <input type="text" id="p_img" placeholder="Photo Name (e.g. printer.jpg)">
+    <select id="p_cat">
+        <option value="Laptop">Laptop</option>
+        <option value="Mobile">Mobile</option>
+        <option value="Printer">Printer</option>
+        <option value="TV">TV</option>
+        <option value="Electronics">Electronics</option>
+    </select>
+    <button class="btn-buy" onclick="saveProduct()">Live Product</button>
+    <br><br>
+    <button onclick="openPage('home')">Close Admin</button>
+</div>
+
 <script>
-    // --- DATA & PRODUCTS ---
-    const defaults = [
-        { id:201, name:"Mantra MFS110 Biometric", cat:"Electronics", price:2499, mrp:4500, img:"nn.jpeg" },
-        { id:202, name:"Canon Pixma Photo Printer", cat:"Printer", price:12999, mrp:16000, img:"canon1.jpg.jpeg" },
-        { id:1, name:"Apple iPhone 14", cat:"Mobile", price:56999, mrp:69900, img:"https://m.media-amazon.com/images/I/61bK6PM73YL._AC_UY327_FMwebp_QL65_.jpg" }
+    // --- Data Storage ---
+    // कल वाले प्रोडक्ट्स इसमें फिक्स कर दिए हैं
+    const defaultData = [
+        { id:1, name:"Mantra MFS110 Biometric", cat:"Electronics", price:2499, mrp:4500, img:"nn.jpeg" },
+        { id:2, name:"Canon Pixma Photo Printer", cat:"Printer", price:12999, mrp:16000, img:"canon1.jpg.jpeg" },
+        { id:3, name:"Apple iPhone 14", cat:"Mobile", price:56999, mrp:69900, img:"https://m.media-amazon.com/images/I/61bK6PM73YL._AC_UY327_FMwebp_QL65_.jpg" }
     ];
 
-    let cart = JSON.parse(localStorage.getItem('my_cart_v2')) || [];
-    
-    function render(data) {
-        let h = '';
-        data.forEach(p => {
-            h += `
+    let products = JSON.parse(localStorage.getItem('my_prods')) || defaultData;
+    let cart = [];
+    let currentCat = 'All';
+
+    // --- Core Functions ---
+    function render() {
+        let list = document.getElementById('product-list');
+        let filtered = currentCat === 'All' ? products : products.filter(p => p.cat === currentCat);
+        
+        list.innerHTML = filtered.map(p => `
             <div class="product-card">
-                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/100'">
-                <div>
-                    <div style="font-size:16px">${p.name}</div>
-                    <div class="price">₹${p.price} <span class="mrp">₹${p.mrp}</span></div>
-                    <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
-                </div>
-            </div>`;
-        });
-        document.getElementById('product-list').innerHTML = h;
-        document.getElementById('cart-count').innerText = cart.length;
+                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
+                <div class="p-name">${p.name}</div>
+                <div class="p-price">₹${p.price} <span class="p-mrp">₹${p.mrp}</span></div>
+                <button class="btn-buy" onclick="addToCart(${p.id})" style="margin-top:10px; font-size:12px;">Add to Cart</button>
+            </div>
+        `).join('');
+    }
+
+    function setCat(cat, el) {
+        currentCat = cat;
+        document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        render();
     }
 
     function addToCart(id) {
-        let p = defaults.find(x => x.id == id);
+        let p = products.find(x => x.id == id);
         cart.push(p);
-        localStorage.setItem('my_cart_v2', JSON.stringify(cart));
         document.getElementById('cart-count').innerText = cart.length;
-        alert("Added to cart!");
+        alert("Cart में जुड़ गया!");
     }
 
-    function openPage(page) {
-        document.getElementById('home-page').style.display = (page=='home'?'block':'none');
-        document.getElementById('cart-page').style.display = (page=='cart'?'block':'none');
-        if(page=='cart') renderCart();
+    function openPage(pg) {
+        document.getElementById('home-page').style.display = (pg=='home'?'block':'none');
+        document.getElementById('cart-page').style.display = (pg=='cart'?'block':'none');
+        document.getElementById('admin-page').style.display = (pg=='admin'?'block':'none');
+        if(pg=='cart') showCart();
     }
 
-    function renderCart() {
-        let h = '';
-        let total = 0;
-        cart.forEach((item, index) => {
-            total += item.price;
-            h += `<p>${item.name} - ₹${item.price} <button onclick="removeItem(${index})">❌</button></p>`;
-        });
-        h += `<h3>Total: ₹${total}</h3>`;
-        document.getElementById('cart-items').innerHTML = h || 'Cart is Empty';
+    function showCart() {
+        let h = cart.map((i, idx) => `<div style="display:flex; justify-content:space-between; padding:5px; border-bottom:1px solid #eee;"><span>${i.name}</span> <b>₹${i.price}</b></div>`).join('');
+        let total = cart.reduce((a,b)=> a + b.price, 0);
+        document.getElementById('cart-items').innerHTML = h + `<h3>Total: ₹${total}</h3>`;
     }
 
-    function removeItem(index) {
-        cart.splice(index, 1);
-        localStorage.setItem('my_cart_v2', JSON.stringify(cart));
-        renderCart();
-        document.getElementById('cart-count').innerText = cart.length;
+    // --- Admin Password & Save ---
+    function checkAdmin() {
+        let pass = prompt("Enter Admin Password:");
+        if(pass === "7482") {
+            openPage('admin');
+        } else {
+            alert("Wrong Password!");
+        }
     }
 
-    function checkout() {
-        let name = document.getElementById('chk-name').value;
-        let addr = document.getElementById('chk-addr').value;
-        let pay = document.getElementById('pay').value;
+    function saveProduct() {
+        let name = document.getElementById('p_name').value;
+        let price = parseInt(document.getElementById('p_price').value);
+        let mrp = parseInt(document.getElementById('p_mrp').value);
+        let img = document.getElementById('p_img').value;
+        let cat = document.getElementById('p_cat').value;
 
-        if(!name || !addr) return alert("Please enter Name and Address");
-        if(cart.length===0) return alert("Cart is empty");
+        if(!name || !price || !img) return alert("सारी जानकारी भरें!");
 
-        let items = cart.map(i=> i.name + " (₹" + i.price + ")").join(", ");
-        let total = cart.reduce((a,b)=>a+b.price, 0);
-
-        let phone = "919708797335"; 
-        let msg = `*New Order from Website*%0A%0A*Name:* ${name}%0A*Address:* ${addr}%0A*Payment:* ${pay}%0A*Items:* ${items}%0A*Total:* ₹${total}`;
-        
-        window.open("https://wa.me/" + phone + "?text=" + msg, '_blank');
-        
-        cart = [];
-        localStorage.setItem('my_cart_v2', JSON.stringify(cart));
+        let newProd = { id: Date.now(), name, price, mrp, img, cat };
+        products.unshift(newProd);
+        localStorage.setItem('my_prods', JSON.stringify(products));
+        alert("Product Live हो गया!");
         location.reload();
     }
 
-    render(defaults);
-</script>
+    // --- WhatsApp Sending ---
+    function sendToWhatsApp() {
+        let n = document.getElementById('custName').value;
+        let a = document.getElementById('custAddr').value;
+        let p = document.getElementById('payMethod').value;
+        if(!n || !a) return alert("नाम और पता भरें!");
 
+        let items = cart.map(i => i.name).join(", ");
+        let total = cart.reduce((a,b)=> a+b.price, 0);
+        let phone = "919708797335";
+        
+        let msg = `*New Order!*%0A*Name:* ${n}%0A*Address:* ${a}%0A*Payment:* ${p}%0A*Items:* ${items}%0A*Total:* ₹${total}`;
+        window.open(`https://wa.me/${phone}?text=${msg}`);
+    }
+
+    render();
+</script>
 </body>
 </html>
