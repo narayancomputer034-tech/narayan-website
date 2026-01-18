@@ -1,337 +1,133 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narayan Plus Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Narayan Computer Services</title>
     <style>
-        /* --- AMAZON THEME --- */
-        :root {
-            --primary: #232f3e; /* Amazon Dark */
-            --secondary: #febd69; /* Amazon Yellow */
-            --bg: #eaeded;
-            --white: #ffffff;
-            --blue: #007185;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: var(--bg); padding-bottom: 70px; -webkit-tap-highlight-color: transparent; }
-
-        /* --- HEADER --- */
-        header { background: var(--primary); padding: 10px 15px; position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; }
-        .logo { color: white; font-size: 20px; font-weight: bold; font-style: italic; }
-        .logo span { color: var(--secondary); }
-        .header-icons { display: flex; align-items: center; color: white; gap: 15px; }
-        .cart-icon { position: relative; font-size: 24px; }
-        .badge { position: absolute; top: -8px; right: -8px; background: var(--secondary); color: black; font-size: 11px; padding: 1px 5px; border-radius: 10px; font-weight: bold; }
-
-        /* --- SEARCH --- */
-        .search-bar { background: var(--primary); padding: 0 10px 10px; }
-        .search-box { width: 100%; padding: 10px; border-radius: 5px; border: none; outline: none; }
-
-        /* --- SLIDER --- */
-        .slider { width: 100%; height: 180px; overflow: hidden; background: #ddd; }
-        .slides { display: flex; height: 100%; transition: 0.5s; }
-        .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; background-size: cover; background-position: center; }
-
-        /* --- CATEGORIES --- */
-        .cat-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 10px; background: white; margin-bottom: 5px; scrollbar-width: none; }
-        .cat-item { min-width: 60px; text-align: center; font-size: 11px; cursor: pointer; }
-        .cat-img { width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px; object-fit: cover; }
-
-        /* --- PRODUCTS --- */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; }
-        .card { background: white; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; }
-        .card img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 5px; }
-        .p-name { font-size: 13px; color: #333; height: 38px; overflow: hidden; line-height: 1.3; }
-        .rating { color: #ffa41c; font-size: 12px; margin-bottom: 5px; cursor: pointer; }
-        .p-price { font-size: 17px; font-weight: 500; }
-        .p-mrp { font-size: 12px; text-decoration: line-through; color: #555; margin-left: 5px; }
-        .p-off { font-size: 12px; color: #CC0C39; font-weight: bold; }
-        .btn-add { background: #ffd814; border: 1px solid #fcd200; padding: 8px; width: 100%; border-radius: 15px; margin-top: 5px; cursor: pointer; font-size: 12px; }
-
-        /* --- FOOTER & ADMIN --- */
-        .footer { background: #232f3e; color: white; padding: 20px; text-align: center; font-size: 13px; margin-top: 20px; padding-bottom: 80px; }
-        .biz-btn { background: #4CAF50; color: white; padding: 10px 20px; border-radius: 4px; display: inline-block; margin-top: 10px; font-weight: bold; text-decoration: none; }
-        
-        /* SECRET LOCK BUTTON (ADMIN) */
-        .secret-lock { position: fixed; bottom: 80px; left: 20px; background: #333; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; border: 2px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-
-        /* --- PAGES --- */
-        .page { display: none; padding-bottom: 20px; }
-        .page.active { display: block; }
-        .page-header { background: #f0f2f2; padding: 15px; border-bottom: 1px solid #ddd; font-weight: bold; display: flex; align-items: center; }
-
-        /* --- FORMS --- */
-        .inp-field { width: 100%; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 4px; }
-        .admin-box { background: white; padding: 15px; margin: 15px; border: 2px dashed var(--secondary); }
-
-        /* --- NAV --- */
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #ddd; display: flex; justify-content: space-around; padding: 10px 0; z-index: 1500; }
-        .nav-item { text-align: center; color: #555; font-size: 10px; cursor: pointer; flex: 1; }
-        .nav-item i { font-size: 20px; display: block; margin-bottom: 3px; }
-        .nav-item.active { color: var(--blue); }
+        :root { --primary: #2874f0; --secondary: #fb641b; --bg: #f1f3f6; }
+        body { font-family: Arial, sans-serif; background-color: var(--bg); margin: 0; padding-bottom: 70px; }
+        header { background: var(--primary); padding: 10px 15px; position: sticky; top: 0; z-index: 100; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .search-bar { background: white; padding: 8px; border-radius: 4px; margin: 10px; display: flex; }
+        .search-bar input { border: none; width: 100%; outline: none; }
+        .product-card { background: white; margin: 10px; padding: 10px; display: flex; gap: 15px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .product-card img { width: 100px; height: 100px; object-fit: contain; }
+        .price { font-weight: bold; font-size: 18px; }
+        .mrp { text-decoration: line-through; color: #878787; font-size: 14px; }
+        .btn { background: var(--secondary); color: white; border: none; padding: 8px 15px; border-radius: 2px; cursor: pointer; }
+        .nav-bottom { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; }
+        #cart-page, #admin-page { display: none; padding: 15px; background: white; min-height: 100vh; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">Narayan<span>Plus</span></div>
-        <div class="header-icons">
-            <span>IN</span>
-            <div class="cart-icon" onclick="openPage('cart')">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="badge" id="badge">0</span>
-            </div>
-        </div>
-    </header>
+<header>
+    <div class="logo">Narayan Computer</div>
+    <div onclick="openPage('cart')">🛒 Cart (<span id="cart-count">0</span>)</div>
+</header>
 
-    <div class="search-bar">
-        <input type="text" class="search-box" placeholder="Search Amazon.in" onkeyup="searchProd(this.value)">
-    </div>
+<div id="home-page">
+    <div class="search-bar"><input type="text" placeholder="Search products..."></div>
+    <div id="product-list"></div>
+</div>
 
-    <div class="secret-lock" onclick="handleSecret()"><i class="fas fa-user-lock"></i></div>
+<div id="cart-page">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <hr>
+    <h3>Checkout</h3>
+    <input type="text" id="chk-name" placeholder="Full Name" style="width:90%; padding:10px; margin:5px;"><br>
+    <input type="text" id="chk-addr" placeholder="Full Address" style="width:90%; padding:10px; margin:5px;"><br>
+    <select id="pay" style="width:95%; padding:10px; margin:5px;">
+        <option value="Cash on Delivery">Cash on Delivery</option>
+        <option value="UPI / Online">UPI / Online</option>
+    </select><br><br>
+    <button class="btn" onclick="checkout()" style="width:100%">Place Order on WhatsApp</button>
+    <button onclick="openPage('home')">Back to Shop</button>
+</div>
 
-    <div id="page-home" class="page active">
-        <div class="cat-scroll">
-            <div class="cat-item" onclick="filter('All')"><img src="https://cdn-icons-png.flaticon.com/512/706/706997.png" class="cat-img"><br>All</div>
-            <div class="cat-item" onclick="filter('Printer')"><img src="https://cdn-icons-png.flaticon.com/512/3616/3616890.png" class="cat-img"><br>Printers</div>
-            <div class="cat-item" onclick="filter('Mobile')"><img src="https://cdn-icons-png.flaticon.com/512/15/15777.png" class="cat-img"><br>Mobiles</div>
-            <div class="cat-item" onclick="filter('Laptop')"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-img"><br>Laptops</div>
-        </div>
+<script>
+    // --- DATA & PRODUCTS ---
+    const defaults = [
+        { id:201, name:"Mantra MFS110 Biometric", cat:"Electronics", price:2499, mrp:4500, img:"nn.jpeg" },
+        { id:202, name:"Canon Pixma Photo Printer", cat:"Printer", price:12999, mrp:16000, img:"canon1.jpg.jpeg" },
+        { id:1, name:"Apple iPhone 14", cat:"Mobile", price:56999, mrp:69900, img:"https://m.media-amazon.com/images/I/61bK6PM73YL._AC_UY327_FMwebp_QL65_.jpg" }
+    ];
 
-        <div class="slider">
-            <div class="slides" id="slides">
-                <div class="slide" style="background:#232f3e;">GREAT INDIAN FESTIVAL</div>
-                <div class="slide" style="background:#007185;">UP TO 60% OFF</div>
-                <div class="slide" style="background:#37475a;">ELECTRONICS SALE</div>
-            </div>
-        </div>
+    let cart = JSON.parse(localStorage.getItem('my_cart_v2')) || [];
+    
+    function render(data) {
+        let h = '';
+        data.forEach(p => {
+            h += `
+            <div class="product-card">
+                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/100'">
+                <div>
+                    <div style="font-size:16px">${p.name}</div>
+                    <div class="price">₹${p.price} <span class="mrp">₹${p.mrp}</span></div>
+                    <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                </div>
+            </div>`;
+        });
+        document.getElementById('product-list').innerHTML = h;
+        document.getElementById('cart-count').innerText = cart.length;
+    }
 
-        <h3 style="padding:10px; font-size:16px;">Latest Products</h3>
-        <div class="grid" id="prod-list"></div>
+    function addToCart(id) {
+        let p = defaults.find(x => x.id == id);
+        cart.push(p);
+        localStorage.setItem('my_cart_v2', JSON.stringify(cart));
+        document.getElementById('cart-count').innerText = cart.length;
+        alert("Added to cart!");
+    }
 
-        <div class="footer">
-            <a href="#top">Back to Top</a>
-            <br>
-            <h3>Make Money with Us</h3>
-            <a href="https://wa.me/919708797335?text=Hello+Narayan+Plus,+I+want+to+do+business" class="biz-btn">
-                <i class="fab fa-whatsapp"></i> Business with Us
-            </a>
-            <br><br>
-            <h3>Let Us Help You</h3>
-            <a href="#" onclick="openPage('cart')">Your Cart</a>
-            <a href="#">Returns Centre</a>
-            <a href="#">Help</a>
-            <br>
-            <p>&copy; 2026 Narayan Services, Inc.</p>
-            <p style="font-size:10px; color:#999;">Runnisaidpur, Bihar</p>
-        </div>
-    </div>
+    function openPage(page) {
+        document.getElementById('home-page').style.display = (page=='home'?'block':'none');
+        document.getElementById('cart-page').style.display = (page=='cart'?'block':'none');
+        if(page=='cart') renderCart();
+    }
 
-    <div id="page-cart" class="page">
-        <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Shopping Cart</div>
-        <div id="cart-content" style="padding:10px;"></div>
+    function renderCart() {
+        let h = '';
+        let total = 0;
+        cart.forEach((item, index) => {
+            total += item.price;
+            h += `<p>${item.name} - ₹${item.price} <button onclick="removeItem(${index})">❌</button></p>`;
+        });
+        h += `<h3>Total: ₹${total}</h3>`;
+        document.getElementById('cart-items').innerHTML = h || 'Cart is Empty';
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        localStorage.setItem('my_cart_v2', JSON.stringify(cart));
+        renderCart();
+        document.getElementById('cart-count').innerText = cart.length;
+    }
+
+    function checkout() {
+        let name = document.getElementById('chk-name').value;
+        let addr = document.getElementById('chk-addr').value;
+        let pay = document.getElementById('pay').value;
+
+        if(!name || !addr) return alert("Please enter Name and Address");
+        if(cart.length===0) return alert("Cart is empty");
+
+        let items = cart.map(i=> i.name + " (₹" + i.price + ")").join(", ");
+        let total = cart.reduce((a,b)=>a+b.price, 0);
+
+        let phone = "919708797335"; 
+        let msg = `*New Order from Website*%0A%0A*Name:* ${name}%0A*Address:* ${addr}%0A*Payment:* ${pay}%0A*Items:* ${items}%0A*Total:* ₹${total}`;
         
-        <div style="padding:15px; background:white; margin-top:10px; border-top:1px solid #ddd;">
-            <h4>Checkout Details</h4>
-            <input id="chk-name" class="inp-field" placeholder="Full Name (Required)">
-            <input id="chk-addr" class="inp-field" placeholder="Full Address with Pincode">
-            
-            <h4>Payment Method</h4>
-            <select id="pay" class="inp-field" onchange="toggleQR()">
-                <option value="COD">Cash on Delivery</option>
-                <option value="UPI">UPI / QR Code</option>
-            </select>
-
-            <div id="qr-area" style="display:none; text-align:center; padding:10px; border:1px dashed #333;">
-                <p><b>Scan & Pay</b></p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9708797335@paytm&pn=NarayanServices" style="width:150px;">
-                <p style="font-size:11px; color:red;">Narayan Services (9708797335)</p>
-            </div>
-
-            <button class="btn-add" style="background:#f0c14b; font-size:16px; padding:12px;" onclick="checkout()">Place Order on WhatsApp</button>
-        </div>
-    </div>
-
-    <div id="page-upload" class="page">
-        <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Catalog Uploader</div>
-        <div class="admin-box">
-            <h3>Add Product (Local)</h3>
-            <input id="new-img" class="inp-field" placeholder="Image Link (or filename like 2241.jpg)">
-            <input id="new-name" class="inp-field" placeholder="Product Name">
-            <input id="new-price" class="inp-field" type="number" placeholder="Price">
-            <select id="new-cat" class="inp-field">
-                <option>Printer</option><option>Mobile</option><option>Laptop</option><option>Audio</option>
-            </select>
-            <button class="btn-add" onclick="addProduct()">Upload Now</button>
-        </div>
-        <div class="admin-box">
-            <h4>Code for GitHub</h4>
-            <textarea id="code-out" style="width:100%; height:60px; font-size:10px;"></textarea>
-        </div>
-    </div>
-
-    <div id="page-admin" class="page">
-        <div class="page-header"><i class="fas fa-arrow-left" onclick="openPage('home')" style="margin-right:10px;"></i> Customer Handle</div>
-        <div style="padding:15px;">
-            <div style="background:#e3f2fd; padding:15px; text-align:center; border:1px solid #90caf9;">
-                <h3>Total Visitors</h3>
-                <h1 id="visit-count" style="color:#007185;">0</h1>
-            </div>
-            <h3 style="margin-top:20px;">Recent Orders</h3>
-            <div id="admin-orders"></div>
-        </div>
-    </div>
-
-    <div class="nav-bar">
-        <div class="nav-item active" onclick="openPage('home')"><i class="fas fa-home"></i>Home</div>
-        <div class="nav-item" onclick="openPage('cart')"><i class="fas fa-shopping-cart"></i>Cart</div>
-        <div class="nav-item" onclick="openPage('home')"><i class="fas fa-user"></i>Account</div>
-        <div class="nav-item" onclick="openPage('home')"><i class="fas fa-bars"></i>Menu</div>
-    </div>
-
-    <script>
-        // --- DATA & PRODUCTS ---
-        // मैंने आपके Canon Printers यहाँ जोड़ दिए हैं
-       // --- DATA & PRODUCTS ---
-        const defaults = [
-            // --- NEW ITEMS ---
-            { id:201, name:"Mantra MFS110 Biometric", cat:"Electronics", price:2499, mrp:1500, img:"nn.jpeg" },
-            { id:202, name:"Canon Pixma Photo Printer", cat:"Printer", price:12999, mrp:1500, img:"canon1.jpg.jpeg" },
-
-            // --- OLD ITEMS ---
-            { id:1, name:"Apple iPhone 14", cat:"Mobile", price:56999, mrp:69900, img:"https://m.media-amazon.com/images/I/61bK6PM73YL._AC_UY327_FMwebp_QL65_.jpg" }
-        ];
-
-        let uploaded = JSON.parse(localStorage.getItem('my_prods_v2')) || [];
-        let products = [...uploaded, ...defaults];
-        let cart = [];
+        window.open("https://wa.me/" + phone + "?text=" + msg, '_blank');
         
-        // Visitor Counter
-        let v = localStorage.getItem('visits') || 200;
-        v++; localStorage.setItem('visits', v);
+        cart = [];
+        localStorage.setItem('my_cart_v2', JSON.stringify(cart));
+        location.reload();
+    }
 
-        // --- CORE FUNCTIONS ---
-        function render(list) {
-            let d = document.getElementById('prod-list'); d.innerHTML="";
-            list.forEach(p=>{
-                let off = Math.round(((p.mrp-p.price)/p.mrp)*100) || 10;
-                d.innerHTML += `
-                    <div class="card">
-                        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
-                        <div class="p-name">${p.name}</div>
-                        <div class="rating" onclick="alert('Rating Submitted: 5 Stars')">★★★★☆ (85)</div>
-                        <div><span class="p-price">₹${p.price}</span> <span class="p-mrp">₹${p.mrp}</span></div>
-                        <div class="p-off">${off}% off</div>
-                        <button class="btn-add" onclick="add(${p.id})">Add to Cart</button>
-                    </div>`;
-            });
-        }
-        render(products);
+    render(defaults);
+</script>
 
-        function filter(c) { render(c==='All'?products:products.filter(p=>p.cat===c)); }
-        function searchProd(q) { render(products.filter(p=>p.name.toLowerCase().includes(q.toLowerCase()))); }
-        function add(id) { cart.push(products.find(p=>p.id===id)); document.getElementById('badge').innerText=cart.length; alert("Added to Cart"); }
-
-        // --- CART & CHECKOUT ---
-        function openPage(id) {
-            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-            if(id==='cart') { document.getElementById('page-cart').classList.add('active'); renderCart(); }
-            else if(id==='upload') document.getElementById('page-upload').classList.add('active');
-            else if(id==='admin') document.getElementById('page-admin').classList.add('active');
-            else document.getElementById('page-home').classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        function renderCart() {
-            let d = document.getElementById('cart-content'); d.innerHTML="";
-            let t=0;
-            if(cart.length===0) d.innerHTML="Cart is Empty";
-            cart.forEach(i=>{ t+=i.price; d.innerHTML+=`<div style="background:white; padding:10px; margin-bottom:5px;"><b>${i.name}</b><br>₹${i.price}</div>`; });
-            if(t>0) d.innerHTML+=`<h3 style="text-align:right;">Subtotal: ₹${t}</h3>`;
-        }
-
-        function toggleQR() {
-            let m = document.getElementById('pay').value;
-            document.getElementById('qr-area').style.display = (m==='UPI')?'block':'none';
-        }
-
-       function checkout() {
-            // 1. नाम और पता उठाओ
-            let name = document.getElementById('chk-name').value;
-            let addr = document.getElementById('chk-addr').value;
-            let pay = document.getElementById('pay').value;
-
-            // 2. चेक करो कि खाली तो नहीं है
-            if(!name || !addr) return alert("Please enter Name and Address");
-            if(cart.length===0) return alert("Cart is empty");
-
-            // 3. आर्डर की लिस्ट बनाओ
-            let items = cart.map(i=> i.name + " (" + i.price + ")").join(", ");
-            let total = cart.reduce((a,b)=>a+b.price, 0);
-
-            // 4. व्हाट्सएप मैसेज तैयार करो
-            // 👇 (नीचे 9197... की जगह अपना नंबर लिखें)
-            let phone = "919708797335"; 
-            
-            let msg = `*New Order!* %0A%0A*Name:* ${name}%0A*Address:* ${addr}%0A*Payment:* ${pay}%0A*Items:* ${items}%0A*Total:* Rs. ${total}`;
-            
-            // 5. व्हाट्सएप पर भेजो
-            let url = "https://wa.me/" + phone + "?text=" + msg;
-            window.open(url, '_blank');
-
-            // 6. कार्ट खाली कर दो
-            cart = [];
-            localStorage.setItem('my_cart_v2', JSON.stringify(cart));
-            document.getElementById('cart-count').innerText = 0;
-            openPage('home');
-        }
-            let h = JSON.parse(localStorage.getItem('n_orders_local')) || [];
-            h.unshift({date:new Date().toLocaleDateString(), items, total});
-            localStorage.setItem('n_orders_local', JSON.stringify(h));
-
-            cart=[]; document.getElementById('badge').innerText=0;
-            openPage('home');
-        }
-
-        // --- SECRET ADMIN ---
-        function handleSecret() {
-            let pin = prompt("Enter PIN:");
-            if(pin === "7482") openPage('upload');
-            else if(pin === "9199") { 
-                openPage('admin'); 
-                document.getElementById('visit-count').innerText = v;
-                loadAdminOrders();
-            }
-            else alert("Wrong PIN");
-        }
-
-        function addProduct() {
-            let name=document.getElementById('new-name').value;
-            let price=document.getElementById('new-price').value;
-            let img=document.getElementById('new-img').value;
-            let cat=document.getElementById('new-cat').value;
-            if(!name) return;
-            
-            let p = {id:Date.now(), name, price:parseInt(price), mrp:parseInt(price)+1000, img, cat};
-            uploaded.unshift(p);
-            localStorage.setItem('my_prods_v2', JSON.stringify(uploaded));
-            
-            products=[...uploaded, ...defaults]; render(products);
-            alert("Uploaded!");
-            document.getElementById('code-out').value = `{id:${p.id}, name:"${name}", cat:"${cat}", price:${price}, mrp:${p.mrp}, img:"${img}"},`;
-        }
-
-        function loadAdminOrders() {
-            let h = JSON.parse(localStorage.getItem('n_orders_local')) || [];
-            let d = document.getElementById('admin-orders'); d.innerHTML="";
-            if(h.length===0) d.innerHTML="No orders on this device yet.";
-            h.forEach(o=>{ d.innerHTML+=`<div style="background:white; padding:10px; margin-bottom:5px;">${o.date}<br>${o.items} - <b>₹${o.total}</b></div>`; });
-        }
-
-        // Auto Slider
-        let s=0; setInterval(()=>{ s=(s>2)?0:s+1; document.getElementById('slides').style.transform=`translateX(-${s*100}%)`; }, 3000);
-    </script>
 </body>
 </html>
