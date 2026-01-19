@@ -225,6 +225,38 @@ function checkAdmin() {
     if(prompt("Admin Password:") === "7482") openPage('admin');
 }
     render();
-</script>
+// आपकी सर्विस और दुकान की फोटो दिखाने वाला नया हिस्सा
+document.getElementById('home-page').insertAdjacentHTML('beforeend', `
+    <div style="background: white; padding: 20px; margin-top: 20px; border-top: 2px solid #2874f0;">
+        <h3 style="text-align: center; color: #2874f0; margin-bottom: 15px;">हमारी सेवाएँ (Our Services)</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div style="text-align: center;">
+                <img src="2168.png" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
+                <p style="font-size: 12px; margin-top: 5px;">लैपटॉप रिपेयरिंग</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="2169.jpg" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
+                <p style="font-size: 12px; margin-top: 5px;">प्रिंटर रिपेयरिंग</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="2165.jpg" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
+                <p style="font-size: 12px; margin-top: 5px;">CCTV कैमरा लगाना</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="2124.jpg" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
+                <p style="font-size: 12px; margin-top: 5px;">हमारी दुकान</p>
+            </div>
+        </div>
+
+        <div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-top: 15px;">
+            <ul style="font-size: 13px; line-height: 1.8; color: #333;">
+                <li>✅ कंप्यूटर, लैपटॉप और प्रिंटर रिपेयरिंग</li>
+                <li>✅ CCTV कैमरा इंस्टॉलेशन और सर्विस</li>
+                <li>✅ सॉफ्टवेयर इंस्टॉलेशन और एंटीवायरस</li>
+            </ul>
+        </div>
+    </div>
+`);</script>
 </body>
 </html>
