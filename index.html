@@ -11,12 +11,24 @@
         .cat-bar { background: #37475a; display: flex; overflow-x: auto; padding: 10px; gap: 10px; scrollbar-width: none; }
         .cat-item { color: white; font-size: 14px; white-space: nowrap; cursor: pointer; padding: 6px 12px; border-radius: 4px; border: 1px solid transparent; }
         .cat-item.active { border-color: white; background: rgba(255,255,255,0.1); }
+        
+        /* ग्रिड स्टाइल */
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
         .product-card { background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); cursor: pointer; }
         .card-img { width: 100%; height: 140px; object-fit: contain; }
-        #detail-page, #checkout-page, #admin-page { display: none; background: white; min-height: 100vh; padding: 15px; }
-        .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; margin: 15px 0; }
-        .footer { background: var(--amazon-blue); color: white; padding: 30px 20px; text-align: left; }
+        
+        /* डिटेल पेज स्टाइल */
+        #detail-page { display: none; background: white; min-height: 100vh; padding: 15px; }
+        .detail-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin-bottom: 15px; }
+        .detail-slider img { width: 100%; height: 300px; object-fit: contain; flex-shrink: 0; scroll-snap-align: start; }
+        .p-title-big { font-size: 18px; font-weight: 500; margin: 10px 0; }
+        .price-big { color: #B12704; font-size: 24px; font-weight: bold; }
+        .mrp-small { text-decoration: line-through; color: #565959; font-size: 14px; }
+        
+        .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; font-size: 15px; margin: 15px 0; }
+        .footer { background: var(--amazon-blue); color: white; padding: 30px 20px; text-align: left; line-height: 1.6; }
+        .step-page { display: none; padding: 20px; background: white; min-height: 100vh; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #888; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -26,69 +38,57 @@
     <div onclick="goHome()" style="cursor: pointer;">🏠 होम</div>
 </header>
 
-<div style="background: white; padding: 10px 0; border-bottom: 2px solid #febd69; overflow: hidden;">
-    <marquee behavior="scroll" direction="left" scrollamount="6">
-        <div style="display: flex; gap: 30px; align-items: center; padding-left: 20px;">
-            <div style="text-align: center; min-width: 80px;">
-                <img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" style="height: 40px;">
-                <p style="font-size: 10px; margin: 5px 0 0 0; font-weight: bold;">लैपटॉप</p>
-            </div>
-            <div style="text-align: center; min-width: 80px;">
-                <img src="https://cdn-icons-png.flaticon.com/512/3004/3004613.png" style="height: 40px;">
-                <p style="font-size: 10px; margin: 5px 0 0 0; font-weight: bold;">प्रिंटर</p>
-            </div>
-            <div style="text-align: center; min-width: 80px;">
-                <img src="https://cdn-icons-png.flaticon.com/512/2888/2888631.png" style="height: 40px;">
-                <p style="font-size: 10px; margin: 5px 0 0 0; font-weight: bold;">CCTV</p>
-            </div>
-            <div style="text-align: center; min-width: 80px;">
-                <img src="https://cdn-icons-png.flaticon.com/512/2586/2586149.png" style="height: 40px;">
-                <p style="font-size: 10px; margin: 5px 0 0 0; font-weight: bold;">मोबाइल</p>
-            </div>
-        </div>
-    </marquee>
-</div>
-
 <div id="home-view">
     <div class="cat-bar">
         <div class="cat-item active" onclick="setCat('All', this)">All</div>
         <div class="cat-item" onclick="setCat('Laptop', this)">लैपटॉप</div>
         <div class="cat-item" onclick="setCat('Mobile', this)">मोबाइल</div>
         <div class="cat-item" onclick="setCat('Printer', this)">प्रिंटर</div>
+        <div class="cat-item" onclick="setCat('Services', this)">सर्विस</div>
     </div>
     <div id="product-list" class="product-grid"></div>
+    
+    <div style="background: white; margin: 10px; padding: 15px; border-top: 4px solid var(--amazon-orange);">
+        <h3>🛠️ सर्विस बुकिंग</h3>
+        <p>लैपटॉप/सीसीटीवी सर्विस के लिए व्हाट्सएप करें।</p>
+        <button onclick="window.open('https://wa.me/919708797335')" style="background:var(--amazon-orange); border:none; padding:10px; width:100%; border-radius:4px; font-weight:bold;">WhatsApp करें</button>
+    </div>
+
     <div class="footer">
         <b>नारायण कंप्यूटर सर्विसेज</b><br>
         📍 डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी<br>
         📞 +91 9708797335<br>
-        ✉️ narayancomputer034@gmail.com<br>
         <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; margin-top:20px;">🔐 एडमिन</button></center>
     </div>
 </div>
 
 <div id="detail-page">
-    <button onclick="goHome()">← पीछे जाएँ</button>
+    <button onclick="goHome()" style="background:none; border:none; color:#007185; cursor:pointer; padding:10px 0;">← पीछे जाएँ</button>
     <div id="detail-content"></div>
+    <hr>
+    <h3 style="padding: 10px 0;">इससे मिलते-जुलते सामान (Related Items)</h3>
+    <div id="related-list" class="product-grid"></div>
 </div>
 
-<div id="checkout-page">
+<div id="checkout-page" class="step-page">
     <h2>ऑर्डर विवरण</h2>
     <input type="text" id="cName" placeholder="आपका नाम">
     <input type="number" id="cPhone" placeholder="मोबाइल नंबर">
     <textarea id="cAddr" placeholder="पूरा पता"></textarea>
-    <button class="btn-amazon" onclick="finalizeOrder()">ऑर्डर भेजें</button>
+    <button class="btn-amazon" onclick="finalizeOrder()">ऑर्डर कन्फर्म करें</button>
 </div>
 
-<div id="admin-page">
+<div id="admin-page" class="step-page">
     <h2>नया सामान लाइव करें</h2>
     <input type="text" id="p_name" placeholder="नाम">
-    <textarea id="p_desc" placeholder="विवरण"></textarea>
+    <textarea id="p_desc" placeholder="विवरण (Description)"></textarea>
     <input type="number" id="p_mrp" placeholder="MRP">
     <input type="number" id="p_sale" placeholder="सेल प्राइस">
     <select id="p_cat_val">
         <option value="Laptop">Laptop</option>
         <option value="Mobile">Mobile</option>
         <option value="Printer">Printer</option>
+        <option value="Services">Services</option>
     </select>
     <input type="file" id="p_files" multiple accept="image/*">
     <button class="btn-amazon" onclick="liveProduct()">🚀 लाइव करें</button>
@@ -104,7 +104,7 @@
         let filtered = (currentCat === 'All') ? products : products.filter(p => p.cat === currentCat);
         document.getElementById('product-list').innerHTML = filtered.map(p => `
             <div class="product-card" onclick="showDetail(${p.id})">
-                <img src="${p.imgs[0]}" class="card-img">
+                <img src="${p.imgs[0]}" class="card-img" onerror="this.src='https://via.placeholder.com/150'">
                 <div style="font-size:14px; margin:8px 0; height:34px; overflow:hidden;">${p.name}</div>
                 <div style="color:#B12704; font-weight:bold;">₹${p.sale}</div>
             </div>
@@ -114,15 +114,34 @@
     function showDetail(id) {
         let p = products.find(x => x.id === id);
         selectedProd = p;
+        window.scrollTo(0,0);
         document.getElementById('home-view').style.display = 'none';
         document.getElementById('detail-page').style.display = 'block';
+        
         document.getElementById('detail-content').innerHTML = `
-            <img src="${p.imgs[0]}" style="width:100%; height:250px; object-fit:contain;">
-            <h3>${p.name}</h3>
-            <div style="color:#B12704; font-size:20px; font-weight:bold;">₹${p.sale}</div>
-            <p>${p.desc}</p>
-            <button class="btn-amazon" onclick="startOrder()">अभी खरीदें</button>
+            <div class="detail-slider">
+                ${p.imgs.map(img => `<img src="${img}">`).join('')}
+            </div>
+            <p style="font-size:12px; color:#565959; text-align:center;">Swipe ↔ फोटो देखें</p>
+            <div class="p-title-big">${p.name}</div>
+            <div class="price-big">₹${p.sale}</div>
+            <div class="mrp-small">M.R.P.: ₹${p.mrp}</div>
+            <p style="color:#007600; font-weight:bold;">In Stock</p>
+            <div style="background:#f6f6f6; padding:10px; border-radius:4px; margin:15px 0;">
+                <b>Description:</b><br>${p.desc}
+            </div>
+            <button class="btn-amazon" onclick="startOrder()">अभी खरीदें (Buy Now)</button>
         `;
+
+        // Related Products (उसी कैटेगरी के)
+        let related = products.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 4);
+        document.getElementById('related-list').innerHTML = related.map(r => `
+            <div class="product-card" onclick="showDetail(${r.id})">
+                <img src="${r.imgs[0]}" class="card-img">
+                <div style="font-size:12px; margin:5px 0;">${r.name}</div>
+                <div style="color:#B12704; font-weight:bold;">₹${r.sale}</div>
+            </div>
+        `).join('');
     }
 
     function goHome() {
@@ -135,7 +154,7 @@
         currentCat = cat;
         document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
-        render();
+        goHome();
     }
 
     function startOrder() {
@@ -145,12 +164,14 @@
 
     function finalizeOrder() {
         const n = document.getElementById('cName').value, p = document.getElementById('cPhone').value, a = document.getElementById('cAddr').value;
-        const msg = `*नया आर्डर!*\nसामान: ${selectedProd.name}\nनाम: ${n}\nफोन: ${p}\nपता: ${a}`;
-        window.open(`https://wa.me/919708797335?text=${encodeURIComponent(msg)}`, '_blank');
+        if(!n || !p || !a) return alert("विवरण भरें!");
+        const msg = `*नया आर्डर!*%0Aसामान: ${selectedProd.name}%0Aनाम: ${n}%0Aफोन: ${p}%0Aपता: ${a}`;
+        window.open(`https://wa.me/919708797335?text=${msg}`, '_blank');
     }
 
     function liveProduct() {
         const name = document.getElementById('p_name').value, desc = document.getElementById('p_desc').value, mrp = document.getElementById('p_mrp').value, sale = document.getElementById('p_sale').value, cat = document.getElementById('p_cat_val').value, files = document.getElementById('p_files').files;
+        if(!name || files.length === 0) return alert("नाम और फोटो भरें!");
         let imgUrls = [], loaded = 0;
         for(let i=0; i<files.length; i++) {
             let r = new FileReader();
