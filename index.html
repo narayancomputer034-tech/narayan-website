@@ -7,32 +7,24 @@
     <style>
         :root { --primary: #2874f0; --secondary: #fb641b; --bg: #f1f3f6; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding-bottom: 60px; }
-        
-        /* Header & Search */
         header { background: var(--primary); color: white; padding: 10px 15px; position: sticky; top: 0; z-index: 1000; }
         .nav-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .search-box { background: white; display: flex; padding: 8px; border-radius: 4px; }
         .search-box input { border: none; width: 100%; outline: none; font-size: 14px; }
-
-        /* Categories Bar */
         .cat-bar { background: white; display: flex; overflow-x: auto; padding: 10px; gap: 15px; border-bottom: 1px solid #ddd; position: sticky; top: 85px; z-index: 999; }
         .cat-item { background: #eee; padding: 6px 15px; border-radius: 20px; font-size: 13px; white-space: nowrap; cursor: pointer; border: 1px solid #ccc; }
         .cat-item.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-        /* Product Grid */
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px; }
         .product-card { background: white; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; padding: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .product-card img { width: 100%; height: 140px; object-fit: contain; }
-        .p-name { font-size: 14px; margin: 8px 0; height: 35px; overflow: hidden; }
+        .p-name { font-size: 14px; margin: 8px 0; height: 35px; overflow: hidden; font-weight: 500; }
         .p-price { font-weight: bold; font-size: 16px; color: #212121; }
         .p-mrp { text-decoration: line-through; color: #878787; font-size: 12px; margin-left: 5px; }
-
-        /* Admin & Footer */
-        .footer { background: #333; color: white; padding: 20px; margin-top: 20px; font-size: 14px; line-height: 1.6; }
-        .admin-section { padding: 20px; background: white; margin: 10px; border-radius: 8px; border: 2px dashed #ccc; }
-        input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .btn-buy { background: var(--secondary); color: white; border: none; padding: 10px; border-radius: 4px; width: 100%; font-weight: bold; cursor: pointer; }
-        
+        .qty-input { width: 50px; padding: 5px; margin-top: 10px; border: 1px solid #ccc; border-radius: 4px; text-align: center; }
+        .footer { background: #333; color: white; padding: 25px; margin-top: 20px; font-size: 14px; line-height: 1.8; }
+        .footer b { font-size: 16px; color: var(--secondary); }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-buy { background: var(--secondary); color: white; border: none; padding: 12px; border-radius: 4px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 5px; }
         #cart-page, #admin-page { display: none; padding: 15px; background: white; min-height: 100vh; }
     </style>
 </head>
@@ -44,7 +36,7 @@
         <div onclick="openPage('cart')" style="cursor: pointer;">🛒 Cart (<span id="cart-count">0</span>)</div>
     </div>
     <div class="search-box">
-        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search Laptop, Mobile, etc...">
+        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Laptop, Mobile, Printer सर्च करें...">
     </div>
 </header>
 
@@ -62,35 +54,35 @@
 
     <div class="footer">
         <b>Narayan Computer Services</b><br>
-        📍 Address: near DAV school,runnisaidpur,sitmamarhi<br><br>
-        📞 Phone: +91 9708797335<br>
-        📧 Email: narayancomputer034@gmail.com<br><br>
-        <button onclick="checkAdmin()" style="background:none; border:none; color:#777; font-size:10px;">Admin Login</button>
+        🏠 पता: डीएवी स्कूल, रुन्नीसैदपुर, सीतामढ़ी, बिहार - 843328<br>
+        📞 फ़ोन: +91 9708797335<br>
+        ✉️ ईमेल: narayancomputer034@gmail.com<br><br>
+        <button onclick="checkAdmin()" style="background:none; border:none; color:#999; font-size:11px; padding:0; cursor:pointer;">🔐 Admin Login (7482)</button>
     </div>
 </div>
 
 <div id="cart-page">
-    <h2>Your Cart</h2>
+    <h2>आपका कार्ट</h2>
     <div id="cart-items"></div>
     <hr>
-    <h3>Order Details</h3>
+    <h3>ऑर्डर की जानकारी</h3>
     <input type="text" id="custName" placeholder="आपका नाम">
-    <input type="text" id="custAddr" placeholder="पूरा पता (Address)">
+    <input type="text" id="custAddr" placeholder="पूरा पता लिखें">
     <select id="payMethod">
         <option value="Cash on Delivery">Cash on Delivery</option>
         <option value="UPI / Online">UPI / Online</option>
     </select>
-    <button class="btn-buy" onclick="sendToWhatsApp()">Order on WhatsApp</button>
+    <button class="btn-buy" onclick="sendToWhatsApp()">WhatsApp पर ऑर्डर भेजें</button>
     <br><br>
-    <button onclick="openPage('home')">Back to Shop</button>
+    <button onclick="openPage('home')">वापस जाएँ</button>
 </div>
 
 <div id="admin-page">
-    <h2>Add New Product</h2>
-    <input type="text" id="p_name" placeholder="Product Name">
-    <input type="number" id="p_price" placeholder="Selling Price">
-    <input type="number" id="p_mrp" placeholder="MRP">
-    <input type="text" id="p_img" placeholder="Photo Name (e.g. printer.jpg)">
+    <h2>नया प्रोडक्ट जोड़ें</h2>
+    <input type="text" id="p_name" placeholder="प्रोडक्ट का नाम">
+    <input type="number" id="p_price" placeholder="बेचने का दाम (Price)">
+    <input type="number" id="p_mrp" placeholder="असली दाम (MRP)">
+    <input type="text" id="p_img" placeholder="फोटो का नाम (जैसे canon1.jpg)">
     <select id="p_cat">
         <option value="Laptop">Laptop</option>
         <option value="Mobile">Mobile</option>
@@ -98,14 +90,12 @@
         <option value="TV">TV</option>
         <option value="Electronics">Electronics</option>
     </select>
-    <button class="btn-buy" onclick="saveProduct()">Live Product</button>
+    <button class="btn-buy" onclick="saveProduct()">Live Product करें</button>
     <br><br>
-    <button onclick="openPage('home')">Close Admin</button>
+    <button onclick="openPage('home')">पैनल बंद करें</button>
 </div>
 
 <script>
-    // --- Data Storage ---
-    // कल वाले प्रोडक्ट्स इसमें फिक्स कर दिए हैं
     const defaultData = [
         { id:1, name:"Mantra MFS110 Biometric", cat:"Electronics", price:2499, mrp:4500, img:"nn.jpeg" },
         { id:2, name:"Canon Pixma Photo Printer", cat:"Printer", price:12999, mrp:16000, img:"canon1.jpg.jpeg" },
@@ -116,19 +106,58 @@
     let cart = [];
     let currentCat = 'All';
 
-    // --- Core Functions ---
-    function render() {
+    function render(data = products) {
         let list = document.getElementById('product-list');
-        let filtered = currentCat === 'All' ? products : products.filter(p => p.cat === currentCat);
-        
+        let filtered = currentCat === 'All' ? data : data.filter(p => p.cat === currentCat);
         list.innerHTML = filtered.map(p => `
             <div class="product-card">
                 <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
                 <div class="p-name">${p.name}</div>
                 <div class="p-price">₹${p.price} <span class="p-mrp">₹${p.mrp}</span></div>
-                <button class="btn-buy" onclick="addToCart(${p.id})" style="margin-top:10px; font-size:12px;">Add to Cart</button>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    Qty: <input type="number" id="qty-${p.id}" value="1" min="1" class="qty-input">
+                </div>
+                <button class="btn-buy" onclick="addToCart(${p.id})">Add to Cart</button>
             </div>
         `).join('');
+    }
+
+    function addToCart(id) {
+        let p = products.find(x => x.id == id);
+        let q = document.getElementById('qty-'+id).value;
+        cart.push({...p, quantity: q});
+        document.getElementById('cart-count').innerText = cart.length;
+        alert(q + " पीस कार्ट में जुड़ गया!");
+    }
+
+    function showCart() {
+        let h = cart.map((i, idx) => `<div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;"><span>${i.name} (x${i.quantity})</span> <b>₹${i.price * i.quantity}</b> <button onclick="removeFromCart(${idx})">❌</button></div>`).join('');
+        let total = cart.reduce((a,b)=> a + (b.price * b.quantity), 0);
+        document.getElementById('cart-items').innerHTML = h || 'कार्ट खाली है';
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        document.getElementById('cart-count').innerText = cart.length;
+        showCart();
+    }
+
+    function sendToWhatsApp() {
+        let n = document.getElementById('custName').value;
+        let a = document.getElementById('custAddr').value;
+        let p = document.getElementById('payMethod').value;
+        if(!n || !a) return alert("नाम और पता भरें!");
+
+        let items = cart.map(i => `${i.name} - संख्या: ${i.quantity}, दाम: ₹${i.price * i.quantity}`).join("%0A");
+        let total = cart.reduce((a,b)=> a + (b.price * b.quantity), 0);
+        let phone = "919708797335";
+        
+        let msg = `*नया ऑर्डर आया है!*%0A%0A*ग्राहक का नाम:* ${n}%0A*पता:* ${a}%0A*पेमेंट:* ${p}%0A%0A*ऑर्डर लिस्ट:*%0A${items}%0A%0A*कुल बिल:* ₹${total}`;
+        window.open(`https://wa.me/${phone}?text=${msg}`);
+        
+        cart = [];
+        document.getElementById('cart-count').innerText = 0;
+        location.reload();
     }
 
     function setCat(cat, el) {
@@ -138,11 +167,10 @@
         render();
     }
 
-    function addToCart(id) {
-        let p = products.find(x => x.id == id);
-        cart.push(p);
-        document.getElementById('cart-count').innerText = cart.length;
-        alert("Cart में जुड़ गया!");
+    function filterProducts() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let filtered = products.filter(p => p.name.toLowerCase().includes(input));
+        render(filtered);
     }
 
     function openPage(pg) {
@@ -152,20 +180,10 @@
         if(pg=='cart') showCart();
     }
 
-    function showCart() {
-        let h = cart.map((i, idx) => `<div style="display:flex; justify-content:space-between; padding:5px; border-bottom:1px solid #eee;"><span>${i.name}</span> <b>₹${i.price}</b></div>`).join('');
-        let total = cart.reduce((a,b)=> a + b.price, 0);
-        document.getElementById('cart-items').innerHTML = h + `<h3>Total: ₹${total}</h3>`;
-    }
-
-    // --- Admin Password & Save ---
     function checkAdmin() {
-        let pass = prompt("Enter Admin Password:");
-        if(pass === "7482") {
-            openPage('admin');
-        } else {
-            alert("Wrong Password!");
-        }
+        let pass = prompt("एडमिन पासवर्ड डालें:");
+        if(pass === "7482") openPage('admin');
+        else alert("गलत पासवर्ड!");
     }
 
     function saveProduct() {
@@ -174,29 +192,12 @@
         let mrp = parseInt(document.getElementById('p_mrp').value);
         let img = document.getElementById('p_img').value;
         let cat = document.getElementById('p_cat').value;
-
-        if(!name || !price || !img) return alert("सारी जानकारी भरें!");
-
+        if(!name || !price || !img) return alert("सब भरें!");
         let newProd = { id: Date.now(), name, price, mrp, img, cat };
         products.unshift(newProd);
         localStorage.setItem('my_prods', JSON.stringify(products));
-        alert("Product Live हो गया!");
+        alert("प्रोडक्ट लाइव हो गया!");
         location.reload();
-    }
-
-    // --- WhatsApp Sending ---
-    function sendToWhatsApp() {
-        let n = document.getElementById('custName').value;
-        let a = document.getElementById('custAddr').value;
-        let p = document.getElementById('payMethod').value;
-        if(!n || !a) return alert("नाम और पता भरें!");
-
-        let items = cart.map(i => i.name).join(", ");
-        let total = cart.reduce((a,b)=> a+b.price, 0);
-        let phone = "919708797335";
-        
-        let msg = `*New Order!*%0A*Name:* ${n}%0A*Address:* ${a}%0A*Payment:* ${p}%0A*Items:* ${items}%0A*Total:* ₹${total}`;
-        window.open(`https://wa.me/${phone}?text=${msg}`);
     }
 
     render();
