@@ -144,9 +144,14 @@
         localStorage.setItem('my_orders_list', JSON.stringify(myOrders));
 
         // WhatsApp Detail (Quietly)
-        let itemsStr = cart.map(i => `${i.name} (Qty: ${i.qty})`).join(", ");
+        // व्हाट्सएप मैसेज में फोटो लिंक के साथ
+        let itemsStr = cart.map(i => `${i.name} (Qty: ${i.qty}) %0Aफोटो देखें: ${window.location.origin + '/' + i.img}`).join("%0A%0A");
         let total = cart.reduce((a,b)=> a + (b.price * b.qty), 0);
-        let waMsg = `*New Order!*%0AName: ${name}%0APhone: ${phoneNum}%0AAddr: ${addr}%0APayment: ${pay}%0AItems: ${itemsStr}%0ATotal: ₹${total}`;
+        let phone = "919708797335";
+        
+        let msg = `*नया ऑर्डर आया है!*%0A%0A*ग्राहक:* ${name}%0A*फ़ोन:* ${phoneNum}%0A*पता:* ${addr}%0A%0A*सामान की लिस्ट:*%0A${itemsStr}%0A%0A*कुल बिल:* ₹${total}`;
+        
+        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
         window.open(`https://wa.me/919708797335?text=${waMsg}`, '_blank');
 
         openPage('success');
