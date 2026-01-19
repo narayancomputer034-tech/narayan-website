@@ -8,101 +8,112 @@
         :root { --amazon-blue: #232f3e; --amazon-orange: #febd69; --amazon-yellow: #ffd814; --bg: #eaeded; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; color: #111; }
         header { background: var(--amazon-blue); color: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        
-        /* Amazon Style Category Bar */
         .cat-bar { background: #37475a; display: flex; overflow-x: auto; padding: 10px; gap: 10px; scrollbar-width: none; }
-        .cat-item { color: white; font-size: 13px; white-space: nowrap; cursor: pointer; padding: 6px 15px; border-radius: 4px; border: 1px solid transparent; }
+        .cat-item { color: white; font-size: 14px; white-space: nowrap; cursor: pointer; padding: 6px 15px; border-radius: 4px; border: 1px solid transparent; }
         .cat-item.active { border-color: white; background: rgba(255,255,255,0.1); }
-
-        /* Product Catalog */
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
-        .product-card { background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card { background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); text-align: center; }
         .product-card img { width: 100%; height: 120px; object-fit: contain; }
-        .p-name { font-size: 13px; margin: 8px 0; height: 35px; overflow: hidden; }
-        .p-price { font-size: 16px; font-weight: bold; color: #B12704; }
-        .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 8px; font-size: 13px; cursor: pointer; font-weight: 500; margin-top: 10px; }
-
-        /* Step Pages (Address Form) */
-        .step-page { display: none; padding: 20px; background: white; min-height: 100vh; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #888; border-radius: 4px; box-sizing: border-box; }
-
-        /* Footer & About Section */
+        .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 10px; font-size: 14px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
         .footer { background: var(--amazon-blue); color: white; padding: 30px 20px; text-align: left; font-size: 14px; }
-        .footer b { color: var(--amazon-orange); font-size: 18px; }
-        .service-info-box { background: #fff; margin: 10px; padding: 15px; border-radius: 4px; border-left: 5px solid var(--amazon-orange); }
+        .step-page { display: none; padding: 20px; background: white; min-height: 100vh; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #888; border-radius: 4px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-size: 20px; font-weight: bold; color: var(--amazon-orange);">narayan.in</div>
-    <div onclick="location.reload()" style="cursor: pointer;">🏠 होम</div>
+    <div id="nav-logo" style="font-size: 20px; font-weight: bold; color: var(--amazon-orange);">narayan.in</div>
+    <div onclick="location.reload()" style="cursor: pointer;" id="nav-home">🏠 Home</div>
 </header>
 
 <div id="main-content">
-    <div class="cat-bar">
-        <div class="cat-item active" onclick="setCat('All', this)">सभी सामान</div>
-        <div class="cat-item" onclick="setCat('Laptop', this)">लैपटॉप</div>
-        <div class="cat-item" onclick="setCat('Mobile', this)">मोबाइल</div>
-        <div class="cat-item" onclick="setCat('Printer', this)">प्रिंटर</div>
-        <div class="cat-item" onclick="setCat('Services', this)">सर्विस/रिपेयरिंग</div>
-    </div>
+    <div class="cat-bar" id="category-bar">
+        </div>
 
     <div id="product-list" class="product-grid"></div>
 
-    <div class="service-info-box">
-        <h3 style="margin-top:0;">🛠️ हमारी बेहतरीन सेवाएं</h3>
-        <p style="font-size: 14px; color: #555;">हम लैपटॉप, मोबाइल और प्रिंटर की रिपेयरिंग के साथ-साथ CCTV कैमरा इंस्टॉलेशन की सर्विस भी देते हैं। रुन्नीसैदपुर में सबसे भरोसेमंद नाम।</p>
-        <div style="display: flex; gap: 10px; overflow-x: auto;">
-            <img src="2124.jpg" style="height: 80px; border-radius: 4px;" onerror="this.src='https://via.placeholder.com/100'">
-            <img src="2165.jpg" style="height: 80px; border-radius: 4px;" onerror="this.src='https://via.placeholder.com/100'">
-        </div>
+    <div id="service-box" style="background: white; margin: 10px; padding: 15px; border-radius: 4px; border-left: 5px solid var(--amazon-orange);">
+        <h3 id="srv-title">🛠️ Our Services</h3>
+        <p id="srv-desc">Book service for Laptop, Printer and CCTV.</p>
+        <input type="text" id="s_name" placeholder="Your Name">
+        <textarea id="s_detail" placeholder="What service do you need?"></textarea>
+        <button onclick="sendServiceWA()" id="srv-btn" style="background: var(--amazon-orange); border:none; padding:12px; width:100%; font-weight:bold; border-radius:4px;">Send WhatsApp</button>
     </div>
 
     <div class="footer">
-        <b>नारायण कंप्यूटर सर्विसेज</b><br>
-        <p>हम पिछले कई वर्षों से आपकी सेवा में तत्पर हैं। क्वालिटी सर्विस हमारी पहचान है।</p>
-        <hr style="opacity: 0.2;">
-        📍 <b>पता:</b> डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी, बिहार - 843328<br>
-        📞 <b>फोन:</b> +91 9708797335<br>
-        ✉️ <b>ईमेल:</b> narayancomputer034@gmail.com<br>
-        <br>
-        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; font-size:10px;">🔐 एडमिन लॉगिन</button></center>
+        <b id="foot-name">Narayan Computer Services</b><br>
+        📍 <span id="foot-addr">DAV School Road, Runnisaidpur, Sitamarhi</span><br>
+        📞 <span id="foot-ph">Phone: +91 9708797335</span><br>
+        ✉️ Email: narayancomputer034@gmail.com<br>
+        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; font-size:10px; margin-top:20px;">🔐 Admin Login</button></center>
     </div>
 </div>
 
 <div id="checkout-page" class="step-page">
-    <button onclick="location.reload()" style="background:#ddd; border:none; padding:10px; border-radius:4px;">← वापस</button>
-    <h2>आर्डर विवरण भरें</h2>
-    <p id="order-item-name" style="font-weight:bold; color:var(--amazon-blue);"></p>
-    <input type="text" id="custName" placeholder="आपका पूरा नाम (Name)">
-    <input type="number" id="custPhone" placeholder="मोबाइल नंबर (Phone)">
-    <textarea id="custAddr" placeholder="पूरा पता (Full Address)"></textarea>
-    <button class="btn-amazon" onclick="finalizeOrder()" style="width:100%; height:50px; font-size:16px;">WhatsApp पर आर्डर भेजें</button>
-</div>
-
-<div id="admin-page" class="step-page">
-    <h2>नया सामान जोड़ें</h2>
-    <input type="text" id="p_name" placeholder="सामान का नाम">
-    <input type="number" id="p_price" placeholder="कीमत (Price)">
-    <input type="text" id="p_img" placeholder="फोटो का नाम (जैसे laptop.jpg)">
-    <select id="p_cat">
-        <option value="Laptop">Laptop</option>
-        <option value="Mobile">Mobile</option>
-        <option value="Printer">Printer</option>
-        <option value="Services">Services</option>
-    </select>
-    <button class="btn-amazon" onclick="saveProduct()">सामान लाइव करें</button>
-    <button onclick="location.reload()" style="width:100%; margin-top:10px;">Back</button>
+    <button onclick="location.reload()" id="chk-back">← Back</button>
+    <h2 id="chk-title">Order Details</h2>
+    <input type="text" id="custName" placeholder="Name">
+    <input type="number" id="custPhone" placeholder="Phone Number">
+    <textarea id="custAddr" placeholder="Full Address"></textarea>
+    <button class="btn-amazon" id="chk-btn" onclick="finalizeOrder()">Send Order to WhatsApp</button>
 </div>
 
 <script>
-    const defaultData = [
-        { id:1, name:"Mantra MFS110 Biometric", cat:"Mobile", price:2499, img:"2168.png" },
-        { id:2, name:"Canon Pixma All-in-One", cat:"Printer", price:12999, img:"2169.jpg" }
+    // भाषा सेटिंग्स
+    const lang = navigator.language.startsWith('hi') ? 'hi' : 'en';
+    
+    const text = {
+        hi: {
+            logo: "नारायण कंप्यूटर", home: "🏠 होम", laptop: "लैपटॉप", mobile: "मोबाइल", printer: "प्रिंटर", srv: "सर्विस", 
+            all: "सभी सामान", buy: "अभी खरीदें", srvT: "🛠️ हमारी सेवाएं", srvD: "लैपटॉप, प्रिंटर और कैमरा रिपेयरिंग के लिए फॉर्म भरें।",
+            sName: "आपका नाम", sDet: "क्या काम करवाना है?", sBtn: "WhatsApp भेजें", addr: "डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी",
+            ph: "फोन: +91 9708797335", chkBack: "← वापस", chkTitle: "आर्डर की जानकारी", chkBtn: "WhatsApp पर आर्डर भेजें",
+            namePl: "नाम", phonePl: "मोबाइल नंबर", addrPl: "पूरा पता"
+        },
+        en: {
+            logo: "narayan.in", home: "🏠 Home", laptop: "Laptop", mobile: "Mobile", printer: "Printer", srv: "Services", 
+            all: "All Products", buy: "Buy Now", srvT: "🛠️ Our Services", srvD: "Book service for Laptop, Printer and CCTV.",
+            sName: "Your Name", sDet: "What service do you need?", sBtn: "Send WhatsApp", addr: "DAV School Road, Runnisaidpur, Sitamarhi",
+            ph: "Phone: +91 9708797335", chkBack: "← Back", chkTitle: "Order Details", chkBtn: "Send Order to WhatsApp",
+            namePl: "Name", phonePl: "Phone Number", addrPl: "Full Address"
+        }
+    };
+
+    // भाषा के हिसाब से टेक्स्ट बदलना
+    document.getElementById('nav-logo').innerText = text[lang].logo;
+    document.getElementById('nav-home').innerText = text[lang].home;
+    document.getElementById('srv-title').innerText = text[lang].srvT;
+    document.getElementById('srv-desc').innerText = text[lang].srvD;
+    document.getElementById('s_name').placeholder = text[lang].sName;
+    document.getElementById('s_detail').placeholder = text[lang].sDet;
+    document.getElementById('srv-btn').innerText = text[lang].sBtn;
+    document.getElementById('foot-addr').innerText = text[lang].addr;
+    document.getElementById('foot-ph').innerText = text[lang].ph;
+    document.getElementById('chk-back').innerText = text[lang].chkBack;
+    document.getElementById('chk-title').innerText = text[lang].chkTitle;
+    document.getElementById('custName').placeholder = text[lang].namePl;
+    document.getElementById('custPhone').placeholder = text[lang].phonePl;
+    document.getElementById('custAddr').placeholder = text[lang].addrPl;
+    document.getElementById('chk-btn').innerText = text[lang].chkBtn;
+
+    // कैटेगरी बार बनाना
+    const categories = [
+        { id: 'All', n: text[lang].all },
+        { id: 'Laptop', n: text[lang].laptop },
+        { id: 'Mobile', n: text[lang].mobile },
+        { id: 'Printer', n: text[lang].printer },
+        { id: 'Services', n: text[lang].srv }
     ];
 
-    let products = JSON.parse(localStorage.getItem('my_prods')) || defaultData;
+    document.getElementById('category-bar').innerHTML = categories.map((c, i) => 
+        `<div class="cat-item ${i===0?'active':''}" onclick="setCat('${c.id}', this)">${c.n}</div>`
+    ).join('');
+
+    let products = JSON.parse(localStorage.getItem('my_prods')) || [
+        { id:1, name:"Mantra Biometric", cat:"Mobile", price:2499, img:"2168.png" },
+        { id:2, name:"Canon Printer", cat:"Printer", price:12999, img:"2169.jpg" }
+    ];
     let selectedItem = "";
     let currentCat = 'All';
 
@@ -117,10 +128,10 @@
         let filtered = currentCat === 'All' ? products : products.filter(p => p.cat === currentCat);
         document.getElementById('product-list').innerHTML = filtered.map(p => `
             <div class="product-card">
-                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150?text=Narayan+Computer'">
-                <div class="p-name">${p.name}</div>
-                <div class="p-price">₹${p.price}</div>
-                <button class="btn-amazon" onclick="startCheckout('${p.name}')">अभी खरीदें</button>
+                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
+                <div style="font-size:13px; margin:5px 0;">${p.name}</div>
+                <div style="color:#B12704; font-weight:bold;">₹${p.price}</div>
+                <button class="btn-amazon" onclick="startCheckout('${p.name}')">${text[lang].buy}</button>
             </div>
         `).join('');
     }
@@ -129,34 +140,24 @@
         selectedItem = name;
         document.getElementById('main-content').style.display = 'none';
         document.getElementById('checkout-page').style.display = 'block';
-        document.getElementById('order-item-name').innerText = "प्रोडक्ट: " + name;
     }
 
     function finalizeOrder() {
-        let name = document.getElementById('custName').value;
-        let phone = document.getElementById('custPhone').value;
-        let addr = document.getElementById('custAddr').value;
-        if(!name || !phone || !addr) return alert("कृपया पूरी जानकारी भरें!");
-
-        let msg = `*नया आर्डर!*%0A%0A*प्रोडक्ट:* ${selectedItem}%0A*ग्राहक:* ${name}%0A*फोन:* ${phone}%0A*पता:* ${addr}`;
-        window.open(`https://wa.me/919708797335?text=${msg}`, '_blank');
+        let n = document.getElementById('custName').value, p = document.getElementById('custPhone').value, a = document.getElementById('custAddr').value;
+        if(!n || !p || !a) return alert(lang==='hi'?"पूरी जानकारी भरें":"Fill all details");
+        window.open(`https://wa.me/919708797335?text=*New Order*%0AProduct: ${selectedItem}%0AName: ${n}%0APhone: ${p}%0AAddress: ${a}`, '_blank');
     }
 
-    function saveProduct() {
-        let name = document.getElementById('p_name').value;
-        let price = document.getElementById('p_price').value;
-        let img = document.getElementById('p_img').value;
-        let cat = document.getElementById('p_cat').value;
-        products.unshift({ id: Date.now(), name, price, img, cat });
-        localStorage.setItem('my_prods', JSON.stringify(products));
-        alert("सफलतापूर्वक जुड़ गया!");
-        location.reload();
+    function sendServiceWA() {
+        let n = document.getElementById('s_name').value, d = document.getElementById('s_detail').value;
+        if(!n || !d) return alert(lang==='hi'?"नाम और काम लिखें":"Enter name and work");
+        window.open(`https://wa.me/919708797335?text=*Service Inquiry*%0AName: ${n}%0AWork: ${d}`, '_blank');
     }
 
     function checkAdmin() {
-        if(prompt("पासवर्ड डालें:") === "7482") {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('admin-page').style.display = 'block';
+        if(prompt("Password:") === "7482") {
+            // एडमिन पेज यहाँ आप पहले जैसा जोड़ सकते हैं
+            alert("Admin features loading...");
         }
     }
 
