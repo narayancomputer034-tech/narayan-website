@@ -3,58 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>नारायण कंप्यूटर & सिक्योरिटी</title>
+    <title>narayan.in | कंप्यूटर और सिक्योरिटी सॉल्यूशंस</title>
     <style>
-        :root { --amazon-blue: #232f3e; --amazon-orange: #febd69; --amazon-yellow: #ffd814; --bg: #eaeded; }
-        body { font-family: Arial, sans-serif; background: var(--bg); margin: 0; color: #0F1111; }
-        header { background: var(--amazon-blue); color: white; padding: 12px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        :root { --main-blue: #0054a6; --amazon-orange: #febd69; --amazon-yellow: #ffd814; --bg: #eaeded; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; color: #333; }
         
-        /* बड़ा सर्विस बैनर (CP Plus Style) */
-        .service-banner-box { background: white; padding: 10px 0; border-bottom: 2px solid var(--amazon-orange); }
-        .banner-track { display: flex; gap: 15px; padding: 0 10px; }
-        .banner-card { min-width: 280px; height: 160px; position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .banner-card img { width: 100%; height: 100%; object-fit: cover; }
-        .banner-text { position: absolute; bottom: 0; background: rgba(0,0,0,0.6); color: white; width: 100%; padding: 8px; font-size: 14px; font-weight: bold; text-align: center; }
+        /* प्रोफेशनल हेडर */
+        header { background: #232f3e; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 2px solid var(--amazon-orange); }
+        .brand { font-size: 24px; font-weight: bold; color: white; letter-spacing: 1px; }
+        .brand span { color: var(--amazon-orange); }
 
-        /* कैटेगरी बार */
-        .cat-bar { background: #37475a; display: flex; overflow-x: auto; padding: 10px; gap: 10px; scrollbar-width: none; }
-        .cat-item { color: white; font-size: 14px; white-space: nowrap; cursor: pointer; padding: 8px 15px; border-radius: 4px; border: 1px solid transparent; }
-        .cat-item.active { border-color: white; background: rgba(255,255,255,0.1); }
+        /* बड़े सर्विस बैनर (Moving) */
+        .service-section { background: white; padding: 15px 0; border-bottom: 1px solid #ddd; }
+        .banner-container { display: flex; gap: 15px; padding: 0 15px; }
+        .banner-card { min-width: 300px; height: 180px; position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.2); flex-shrink: 0; }
+        .banner-card img { width: 100%; height: 100%; object-fit: cover; }
+        .banner-overlay { position: absolute; bottom: 0; background: rgba(0,84,166,0.8); color: white; width: 100%; padding: 10px; font-size: 14px; font-weight: bold; text-align: center; }
+
+        /* कैटेगरी मेनू */
+        .cat-bar { background: #37475a; display: flex; overflow-x: auto; padding: 12px; gap: 12px; scrollbar-width: none; }
+        .cat-item { color: white; font-size: 14px; white-space: nowrap; cursor: pointer; padding: 8px 18px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); transition: 0.3s; }
+        .cat-item.active { background: var(--amazon-orange); color: #232f3e; border-color: var(--amazon-orange); font-weight: bold; }
 
         /* प्रोडक्ट ग्रिड */
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
-        .product-card { background: white; padding: 12px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
-        .product-card img { width: 100%; height: 130px; object-fit: contain; }
-        .p-name { font-size: 14px; margin: 10px 0; height: 35px; overflow: hidden; font-weight: 500; }
-        .p-price { color: #B12704; font-size: 18px; font-weight: bold; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
+        .product-card { background: white; padding: 12px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #eee; display: flex; flex-direction: column; }
+        .product-card img { width: 100%; height: 140px; object-fit: contain; margin-bottom: 10px; }
+        .p-name { font-size: 14px; height: 38px; overflow: hidden; font-weight: 500; color: #111; line-height: 1.3; }
+        .p-price { color: #B12704; font-size: 18px; font-weight: bold; margin: 5px 0; }
         
-        .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .footer { background: #232f3e; color: white; padding: 30px 20px; line-height: 1.8; }
+        .btn-buy { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 14px; transition: 0.2s; }
+        .btn-buy:active { transform: scale(0.95); }
+
+        /* फुटर (Your Details) */
+        .footer { background: #232f3e; color: #ddd; padding: 30px 20px; font-size: 14px; line-height: 1.8; }
+        .footer b { color: var(--amazon-orange); font-size: 18px; }
+        
+        /* Admin Step Pages */
         .step-page { display: none; padding: 20px; background: white; min-height: 100vh; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #888; border-radius: 4px; box-sizing: border-box; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-size: 20px; font-weight: bold; color: var(--amazon-orange);" onclick="goHome()">NARAYAN SECURITY</div>
-    <div onclick="goHome()" style="cursor: pointer;">🏠 होम</div>
+    <div class="brand" onclick="goHome()">narayan<span>.in</span></div>
+    <div onclick="goHome()" style="cursor: pointer; font-size: 20px;">🏠</div>
 </header>
 
-<div class="service-banner-box">
+<div class="service-section">
     <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
-        <div class="banner-track">
+        <div class="banner-container">
             <div class="banner-card">
-                <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=600" alt="Laptop Repair">
-                <div class="banner-text">लैपटॉप और कंप्यूटर रिपेयरिंग</div>
+                <img src="https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?q=80&w=600" alt="Printer Repair">
+                <div class="banner-overlay">प्रोफेशनल प्रिंटर रिपेयरिंग सर्विस</div>
             </div>
             <div class="banner-card">
-                <img src="https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?q=80&w=600" alt="CCTV Install">
-                <div class="banner-text">CCTV कैमरा इंस्टालेशन</div>
+                <img src="https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?q=80&w=600" alt="CCTV Camera">
+                <div class="banner-overlay">CCTV कैमरा और सुरक्षा सिस्टम</div>
             </div>
             <div class="banner-card">
-                <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?q=80&w=600" alt="Printer Repair">
-                <div class="banner-text">प्रिंटर और टीवी सर्विस</div>
+                <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600" alt="Laptop Service">
+                <div class="banner-overlay">लैपटॉप और टीवी रिपेयरिंग एक्सपर्ट</div>
             </div>
         </div>
     </marquee>
@@ -62,44 +72,43 @@
 
 <div id="home-view">
     <div class="cat-bar">
-        <div class="cat-item active" onclick="setCat('All', this)">सभी सामान (All)</div>
-        <div class="cat-item" onclick="setCat('CCTV', this)">CCTV कैमरा</div>
+        <div class="cat-item active" onclick="setCat('All', this)">सभी (All)</div>
         <div class="cat-item" onclick="setCat('Laptop', this)">लैपटॉप</div>
         <div class="cat-item" onclick="setCat('Printer', this)">प्रिंटर</div>
         <div class="cat-item" onclick="setCat('TV', this)">टीवी (TV)</div>
+        <div class="cat-item" onclick="setCat('CCTV', this)">CCTV कैमरा</div>
     </div>
 
     <div id="product-list" class="product-grid"></div>
 
     <div class="footer">
-        <b style="font-size: 18px; color: var(--amazon-orange);">नारायण कंप्यूटर सर्विसेज</b><br>
+        <b>नारायण कंप्यूटर सर्विसेज</b><br>
         📍 डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी<br>
         📞 फोन: +91 9708797335<br>
-        ✉️ ईमेल: narayancomputer034@gmail.com<br>
-        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; margin-top:20px;">🔐 एडमिन लॉगिन</button></center>
+        ✉️ ईमेल: narayan_computer034@gmail.com<br>
+        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; margin-top:30px; font-size: 11px;">🔐 एडमिन लॉगिन</button></center>
     </div>
 </div>
 
 <div id="admin-page" class="step-page">
-    <h2>नया प्रोडक्ट लाइव करें</h2>
-    <input type="text" id="p_name" placeholder="नाम">
-    <textarea id="p_desc" placeholder="विवरण (Description)"></textarea>
-    <input type="number" id="p_mrp" placeholder="MRP">
-    <input type="number" id="p_sale" placeholder="Offer Price">
+    <h2 style="color: var(--main-blue);">नया सामान जोड़ें</h2>
+    <input type="text" id="p_name" placeholder="सामान का नाम">
+    <textarea id="p_desc" placeholder="जानकारी (जैसे: 1 Year Warranty)"></textarea>
+    <input type="number" id="p_mrp" placeholder="असली दाम (MRP)">
+    <input type="number" id="p_sale" placeholder="बेचने वाला दाम (Sale Price)">
     <select id="p_cat_val">
         <option value="Laptop">Laptop</option>
-        <option value="Mobile">Mobile</option>
         <option value="Printer">Printer</option>
-        <option value="CCTV">CCTV</option>
         <option value="TV">TV</option>
+        <option value="CCTV">CCTV</option>
     </select>
     <input type="file" id="p_files" multiple accept="image/*">
-    <button class="btn-amazon" onclick="liveProduct()">🚀 लाइव करें</button>
-    <button onclick="goHome()" style="width:100%; border:none; background:none; margin-top:10px;">कैंसिल</button>
+    <button class="btn-buy" style="background: var(--main-blue); color: white; border: none;" onclick="liveProduct()">🚀 लाइव (Live) करें</button>
+    <button onclick="goHome()" style="width:100%; border:none; background:none; margin-top:15px; color: #666;">वापस जाएँ</button>
 </div>
 
 <script>
-    let products = JSON.parse(localStorage.getItem('amazon_prods')) || [];
+    let products = JSON.parse(localStorage.getItem('narayan_prods')) || [];
     let currentCat = 'All';
 
     function render() {
@@ -107,7 +116,7 @@
         let filtered = (currentCat === 'All') ? products : products.filter(p => p.cat === currentCat);
         
         if(filtered.length === 0) {
-            list.innerHTML = `<p style="text-align:center; grid-column: 1/3; padding:40px;">अभी इस कैटेगरी में सामान नहीं है।</p>`;
+            list.innerHTML = `<p style="text-align:center; grid-column: 1/3; padding:50px; color:#666;">अभी इस कैटेगरी में कोई सामान नहीं है।</p>`;
             return;
         }
 
@@ -116,7 +125,7 @@
                 <img src="${p.imgs[0]}" onerror="this.src='https://via.placeholder.com/150'">
                 <div class="p-name">${p.name}</div>
                 <div class="p-price">₹${p.sale}</div>
-                <button class="btn-amazon" onclick="startOrder('${p.name}')">Buy Now</button>
+                <button class="btn-buy" onclick="whatsappOrder('${p.name}', '${p.sale}')">अभी खरीदें</button>
             </div>
         `).join('');
     }
@@ -128,8 +137,10 @@
         render();
     }
 
-    function startOrder(name) {
-        window.open(`https://wa.me/919708797335?text=नमस्ते, मुझे यह सामान खरीदना है: ${encodeURIComponent(name)}`, '_blank');
+    function whatsappOrder(name, price) {
+        const phone = "919708797335";
+        const msg = `नमस्ते narayan.in, मुझे यह खरीदना है:\n🛍️ सामान: ${name}\n💰 दाम: ₹${price}\nकृपया डिलीवरी की जानकारी दें।`;
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function goHome() {
@@ -139,7 +150,7 @@
     }
 
     function checkAdmin() {
-        if(prompt("Pass:") === "7482") {
+        if(prompt("Admin Password:") === "7482") {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('admin-page').style.display = 'block';
         }
@@ -147,7 +158,7 @@
 
     function liveProduct() {
         const name = document.getElementById('p_name').value, mrp = document.getElementById('p_mrp').value, sale = document.getElementById('p_sale').value, cat = document.getElementById('p_cat_val').value, files = document.getElementById('p_files').files;
-        if(!name || files.length === 0) return alert("नाम और फोटो भरें!");
+        if(!name || files.length === 0) return alert("पूरी जानकारी भरें!");
         let imgUrls = [], loaded = 0;
         for(let i=0; i<files.length; i++) {
             let r = new FileReader();
@@ -155,7 +166,7 @@
                 imgUrls.push(e.target.result);
                 if(++loaded === files.length) {
                     products.unshift({id:Date.now(), name, mrp, sale, cat, imgs: imgUrls});
-                    localStorage.setItem('amazon_prods', JSON.stringify(products));
+                    localStorage.setItem('narayan_prods', JSON.stringify(products));
                     location.reload();
                 }
             };
