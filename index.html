@@ -46,6 +46,13 @@
 </div>
 
 <div id="address-page" class="step-page">
+    <div class="cat-bar" style="background: white; display: flex; overflow-x: auto; padding: 10px; gap: 10px; border-bottom: 1px solid #ddd;">
+        <div class="cat-item" style="background: #eee; padding: 5px 12px; border-radius: 15px; font-size: 12px; cursor: pointer;" onclick="setCat('All')">All</div>
+        <div class="cat-item" style="background: #eee; padding: 5px 12px; border-radius: 15px; font-size: 12px; cursor: pointer;" onclick="setCat('Laptop')">Laptop</div>
+        <div class="cat-item" style="background: #eee; padding: 5px 12px; border-radius: 15px; font-size: 12px; cursor: pointer;" onclick="setCat('Mobile')">Mobile</div>
+        <div class="cat-item" style="background: #eee; padding: 5px 12px; border-radius: 15px; font-size: 12px; cursor: pointer;" onclick="setCat('Printer')">Printer</div>
+        <div class="cat-item" style="background: #eee; padding: 5px 12px; border-radius: 15px; font-size: 12px; cursor: pointer;" onclick="setCat('TV')">TV</div>
+    </div>
     <h2>Step 1: Shipping Details</h2>
     <input type="text" id="custName" placeholder="आपका पूरा नाम">
     <input type="number" id="custPhone" placeholder="मोबाइल नंबर">
@@ -101,7 +108,12 @@
     let products = JSON.parse(localStorage.getItem('my_prods')) || defaultData;
     let cart = [];
     let myOrders = JSON.parse(localStorage.getItem('my_orders_list')) || [];
-
+let currentCat = 'All';
+    function setCat(cat) {
+        currentCat = cat;
+        let filtered = currentCat === 'All' ? products : products.filter(p => p.cat === currentCat);
+        render(filtered);
+    }
     function render(data = products) {
         document.getElementById('product-list').innerHTML = data.map(p => `
             <div class="product-card">
