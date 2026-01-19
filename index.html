@@ -225,38 +225,51 @@ function checkAdmin() {
     if(prompt("Admin Password:") === "7482") openPage('admin');
 }
     render();
-// आपकी सर्विस और दुकान की फोटो दिखाने वाला नया हिस्सा
+// --- 1. सर्विस और फोटो दिखाने का कोड ---
 document.getElementById('home-page').insertAdjacentHTML('beforeend', `
-    <div style="background: white; padding: 20px; margin-top: 20px; border-top: 2px solid #2874f0;">
-        <h3 style="text-align: center; color: #2874f0; margin-bottom: 15px;">हमारी सेवाएँ (Our Services)</h3>
+    <div style="background: white; padding: 20px; margin-top: 20px; border-top: 3px solid #2874f0;">
+        <h3 style="text-align: center; color: #2874f0;">हमारी सेवाएँ और दुकान</h3>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <div style="text-align: center;">
-                <img src="2168.png" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
-                <p style="font-size: 12px; margin-top: 5px;">लैपटॉप रिपेयरिंग</p>
-            </div>
-            <div style="text-align: center;">
-                <img src="2169.jpg" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
-                <p style="font-size: 12px; margin-top: 5px;">प्रिंटर रिपेयरिंग</p>
-            </div>
-            <div style="text-align: center;">
-                <img src="2165.jpg" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
-                <p style="font-size: 12px; margin-top: 5px;">CCTV कैमरा लगाना</p>
-            </div>
-            <div style="text-align: center;">
-                <img src="2124.jpg" style="width: 100%; border-radius: 5px; height: 100px; object-fit: cover;">
-                <p style="font-size: 12px; margin-top: 5px;">हमारी दुकान</p>
-            </div>
+        <div style="text-align: center; margin-bottom: 15px;">
+            <img src="2124.jpg" style="width: 100%; border-radius: 8px; border: 2px solid #ddd;" onerror="this.src='https://via.placeholder.com/300x200?text=Narayan+Computer+Shop'">
+            <p style="font-weight: bold; margin-top: 5px;">नारायण कंप्यूटर सर्विसेज (रुन्नीसैदपुर)</p>
         </div>
 
-        <div style="background: #f9f9f9; padding: 10px; border-radius: 5px; margin-top: 15px;">
-            <ul style="font-size: 13px; line-height: 1.8; color: #333;">
-                <li>✅ कंप्यूटर, लैपटॉप और प्रिंटर रिपेयरिंग</li>
-                <li>✅ CCTV कैमरा इंस्टॉलेशन और सर्विस</li>
-                <li>✅ सॉफ्टवेयर इंस्टॉलेशन और एंटीवायरस</li>
-            </ul>
+        <div style="background: #f1f3f6; padding: 15px; border-radius: 8px;">
+            <h4 style="margin-top: 0;">🛠️ सर्विस बुक करें</h4>
+            <input type="text" id="s_name" placeholder="आपका नाम" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:4px;">
+            <input type="number" id="s_phone" placeholder="मोबाइल नंबर" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:4px;">
+            <textarea id="s_addr" placeholder="आपका पता" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:4px;"></textarea>
+            <textarea id="s_detail" placeholder="क्या सर्विस चाहिए? (जैसे: लैपटॉप रिपेयरिंग, कैमरा फिटिंग)" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:4px;"></textarea>
+            
+            <button onclick="sendServiceWA()" style="background:#25D366; color:white; border:none; padding:12px; width:100%; font-weight:bold; border-radius:4px; cursor:pointer;">
+                ✅ सर्विस फॉर्म सबमिट करें (WhatsApp)
+            </button>
         </div>
     </div>
+`);
+
+// --- 2. व्हाट्सएप पर सर्विस डिटेल भेजने का फंक्शन ---
+function sendServiceWA() {
+    let name = document.getElementById('s_name').value;
+    let phone = document.getElementById('s_phone').value;
+    let addr = document.getElementById('s_addr').value;
+    let service = document.getElementById('s_detail').value;
+
+    if(!name || !phone || !service) {
+        alert("कृपया नाम, फोन और सर्विस की जानकारी भरें!");
+        return;
+    }
+
+    let msg = `*नया सर्विस इंक्वायरी!*%0A%0A*नाम:* ${name}%0A*फ़ोन:* ${phone}%0A*पता:* ${addr}%0A*सर्विस:* ${service}`;
+    window.open(`https://wa.me/919708797335?text=${msg}`, '_blank');
+}
+
+// --- 3. एड्रेस को सबसे नीचे रखने के लिए ---
+let footer = document.querySelector('.footer');
+if(footer) {
+    document.getElementById('home-page').appendChild(footer);
+}
 `);</script>
 </body>
 </html>
