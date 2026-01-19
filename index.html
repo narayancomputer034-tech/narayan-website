@@ -3,110 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>narayan.in | सिक्योरिटी और कंप्यूटर सर्विसेज</title>
+    <title>narayan.in | Security & Computers</title>
     <style>
-        :root { --cp-blue: #0054a6; --cp-red: #ed1c24; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; overflow-x: hidden; }
-        header { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--cp-blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 22px; font-weight: bold; color: var(--cp-blue); text-transform: uppercase; }
-        .logo span { color: var(--cp-red); }
-        .big-banner-section { background: white; padding: 10px 0; }
-        .banner-track { display: flex; gap: 15px; padding: 0 10px; }
-        .banner-card { min-width: 85vw; height: 280px; position: relative; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        :root { --blue: #0054a6; --red: #ed1c24; --gray: #f4f7f6; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--gray); margin: 0; overflow-x: hidden; }
+        
+        /* प्रोफेशनल हेडर */
+        header { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { font-size: 24px; font-weight: bold; color: var(--blue); text-transform: uppercase; }
+        .logo span { color: var(--red); }
+
+        /* 1. बड़े फोटो बैनर (Big Slider) */
+        .big-banner-section { background: white; padding: 5px 0; }
+        .banner-track { display: flex; gap: 10px; padding: 0 5px; }
+        .banner-card { min-width: 95vw; height: 350px; position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .banner-card img { width: 100%; height: 100%; object-fit: cover; }
-        .banner-label { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: white; width: 100%; padding: 15px; font-size: 14px; font-weight: bold; text-align: center; }
-        .circle-menu { display: flex; overflow-x: auto; padding: 25px 15px; background: white; gap: 25px; scrollbar-width: none; border-bottom: 1px solid #ddd; }
-        .circle-item { text-align: center; min-width: 85px; cursor: pointer; }
-        .circle-img { width: 75px; height: 75px; border-radius: 50%; border: 3px solid var(--cp-blue); padding: 3px; object-fit: cover; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .circle-item.active .circle-img { border-color: var(--cp-red); transform: scale(1.1); }
-        .circle-item p { font-size: 13px; font-weight: bold; margin-top: 10px; color: #333; }
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-        .p-card { background: white; border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #eee; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .banner-label { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: white; width: 100%; padding: 15px; font-size: 16px; font-weight: bold; text-align: center; }
+
+        /* 2. Amazon जैसे गोल केटलॉग */
+        .catalog-scroll { display: flex; overflow-x: auto; padding: 20px 10px; background: white; gap: 20px; scrollbar-width: none; border-bottom: 1px solid #ddd; }
+        .catalog-item { text-align: center; min-width: 90px; cursor: pointer; }
+        .cat-circle { width: 75px; height: 75px; border-radius: 50%; border: 2px solid #ddd; padding: 3px; object-fit: cover; transition: 0.3s; }
+        .catalog-item.active .cat-circle { border-color: var(--blue); transform: scale(1.1); box-shadow: 0 0 10px rgba(0,84,166,0.3); }
+        .catalog-item p { font-size: 13px; font-weight: 600; margin-top: 8px; color: #444; }
+
+        /* प्रोडक्ट ग्रिड */
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
+        .p-card { background: white; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid #eee; }
         .p-card img { width: 100%; height: 140px; object-fit: contain; }
-        .p-price { color: var(--cp-red); font-size: 20px; font-weight: bold; margin: 10px 0; }
-        .buy-btn { background: var(--cp-blue); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .footer { background: #1a1a1a; color: white; padding: 40px 20px; font-size: 14px; line-height: 1.8; }
-        .footer b { color: var(--cp-red); font-size: 20px; }
-        .step-page { display: none; padding: 20px; background: white; min-height: 100vh; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .admin-list-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 12px 0; }
-        .del-btn { background: #ff4d4d; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+        .p-title { font-size: 14px; font-weight: bold; margin: 10px 0; height: 35px; overflow: hidden; }
+        .p-price { color: var(--red); font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .whatsapp-btn { background: #25D366; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; }
+
+        /* फुटर */
+        .footer { background: #232f3e; color: white; padding: 30px 20px; font-size: 14px; text-align: left; }
+        .footer b { color: #febd69; font-size: 18px; }
+        
+        #admin-view { display: none; padding: 20px; background: white; min-height: 100vh; }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Narayan <span>Security</span></div>
+    <div class="logo">Narayan<span>.in</span></div>
     <div onclick="goHome()" style="cursor:pointer; font-size: 22px;">🏠</div>
 </header>
 
-<div class="big-banner-section">
-    <marquee behavior="scroll" direction="left" scrollamount="8" onmouseover="this.stop();" onmouseout="this.start();">
-        <div class="banner-track">
-            <div class="banner-card">
-                <img src="2329.jpg.jpeg" onerror="this.src='https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?w=800'">
-                <div class="banner-label">प्रोफेशनल प्रिंटर रिपेयरिंग (मैकेनिक काम करते हुए)</div>
+<div id="main-view">
+    <div class="big-banner-section">
+        <marquee behavior="scroll" direction="left" scrollamount="8" onmouseover="this.stop();" onmouseout="this.start();">
+            <div class="banner-track">
+                <div class="banner-card">
+                    <img src="2329.jpg.jpeg" onerror="this.src='https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?w=800'">
+                    <div class="banner-label">Printer Repair Service | प्रिंटर रिपेयरिंग</div>
+                </div>
+                <div class="banner-card">
+                    <img src="2334.jpg.jpeg" onerror="this.src='https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=800'">
+                    <div class="banner-label">CCTV Installation | सीसीटीवी कैमरा सर्विस</div>
+                </div>
+                <div class="banner-card">
+                    <img src="778.jpeg" onerror="this.src='https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800'">
+                    <div class="banner-label">Computer & Laptop Repair | कंप्यूटर सर्विस</div>
+                </div>
             </div>
-            <div class="banner-card">
-                <img src="2334.jpg.jpeg" onerror="this.src='https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=800'">
-                <div class="banner-label">CCTV कैमरा इंस्टालेशन और सर्विस</div>
-            </div>
-            <div class="banner-card">
-                <img src="778.jpeg" onerror="this.src='https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800'">
-                <div class="banner-label">कंप्यूटर, लैपटॉप और टीवी रिपेयर एक्सपर्ट</div>
-            </div>
+        </marquee>
+    </div>
+
+    <div class="catalog-scroll">
+        <div class="catalog-item active" onclick="setCat('All', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png" class="cat-circle"><p>All Items</p>
         </div>
-    </marquee>
-</div>
-
-<div id="home-view">
-    <div class="circle-menu">
-        <div class="circle-item active" onclick="setCat('All', this)"><img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png" class="circle-img"><p>All Items</p></div>
-        <div class="circle-item" onclick="setCat('Printer', this)"><img src="2330.jpg" class="circle-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3004/3004613.png'"><p>प्रिंटर</p></div>
-        <div class="circle-item" onclick="setCat('TV', this)"><img src="https://cdn-icons-png.flaticon.com/512/716/716429.png" class="circle-img"><p>टीवी (TV)</p></div>
-        <div class="circle-item" onclick="setCat('CCTV', this)"><img src="2332.jpg" class="circle-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2888/2888631.png'"><p>CCTV</p></div>
-        <div class="circle-item" onclick="setCat('Laptop', this)"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="circle-img"><p>कंप्यूटर</p></div>
+        <div class="catalog-item" onclick="setCat('Printer', this)">
+            <img src="2330.jpg" class="cat-circle" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3004/3004613.png'"><p>Printers</p>
+        </div>
+        <div class="catalog-item" onclick="setCat('CCTV', this)">
+            <img src="2332.jpg" class="cat-circle" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2888/2888631.png'"><p>CCTV</p>
+        </div>
+        <div class="catalog-item" onclick="setCat('Laptop', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-circle"><p>Computers</p>
+        </div>
     </div>
+
     <div id="product-list" class="product-grid"></div>
+
     <div class="footer">
-        <b>नारायण कंप्यूटर सर्विसेज</b><br>📍 डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी<br>📞 फोन: +91 9708797335<br>✉️ narayan_computer034@gmail.com<br>
-        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#555; margin-top:40px; font-size:12px;">🔐 एडमिन पैनल</button></center>
+        <b>Narayan Computer Services</b><br>
+        📍 DAV School Road, Runnisaidpur, Sitamarhi<br>
+        📞 Call: +91 9708797335<br>
+        ✉️ Email: narayan_computer034@gmail.com<br>
+        <center><button onclick="adminLogin()" style="background:none; border:none; color:#777; margin-top:30px;">🔐 Admin Login</button></center>
     </div>
 </div>
 
-<div id="admin-page" class="step-page">
-    <h2>नया सामान लाइव करें</h2>
-    <input type="text" id="p_name" placeholder="नाम"><input type="number" id="p_sale" placeholder="दाम (₹)">
-    <select id="p_cat_val"><option value="Printer">Printer</option><option value="TV">TV</option><option value="CCTV">CCTV</option><option value="Laptop">Computer</option></select>
-    <input type="file" id="p_files" multiple><button class="buy-btn" onclick="liveProduct()">🚀 लाइव करें</button>
-    <hr><h3>Manage Products</h3><div id="delete-list"></div>
-    <button onclick="goHome()" style="width:100%; border:none; background:none; margin-top:20px;">वापस</button>
+<div id="admin-view">
+    <h3>Add New Product | नया सामान जोड़ें</h3>
+    <input type="text" id="p_name" placeholder="Item Name (नाम)">
+    <input type="number" id="p_sale" placeholder="Price (दाम ₹)">
+    <select id="p_cat">
+        <option value="Printer">Printer</option>
+        <option value="CCTV">CCTV Camera</option>
+        <option value="Laptop">Computer/TV</option>
+    </select>
+    <input type="file" id="p_img" multiple>
+    <button class="whatsapp-btn" onclick="saveProduct()" style="background:var(--blue)">🚀 Publish Now</button>
+    <button onclick="goHome()" style="width:100%; background:none; border:none; margin-top:15px;">Cancel</button>
 </div>
 
 <script>
-    let products = JSON.parse(localStorage.getItem('narayan_final_db')) || [];
+    let db = JSON.parse(localStorage.getItem('narayan_v5')) || [];
     let currentCat = 'All';
+
     function render() {
         const list = document.getElementById('product-list');
-        let filtered = (currentCat === 'All') ? products : products.filter(p => p.cat === currentCat);
-        list.innerHTML = filtered.map(p => `<div class="p-card"><img src="${p.imgs[0]}" onerror="this.src='https://via.placeholder.com/150'"><div style="font-size:14px; font-weight:bold; height:35px; overflow:hidden; margin:10px 0;">${p.name}</div><div class="p-price">₹${p.sale}</div><button class="buy-btn" onclick="whatsappOrder('${p.name}', '${p.sale}')">अभी खरीदें</button></div>`).join('');
+        let filtered = (currentCat === 'All') ? db : db.filter(p => p.cat === currentCat);
+        list.innerHTML = filtered.map(p => `
+            <div class="p-card">
+                <img src="${p.imgs[0]}" onerror="this.src='https://via.placeholder.com/150'">
+                <div class="p-title">${p.name}</div>
+                <div class="p-price">₹${p.sale}</div>
+                <button class="whatsapp-btn" onclick="order('${p.name}', '${p.sale}')">🛒 WhatsApp Order</button>
+            </div>
+        `).join('');
     }
-    function setCat(cat, el) { currentCat = cat; document.querySelectorAll('.circle-item').forEach(i => i.classList.remove('active')); el.classList.add('active'); render(); }
-    function whatsappOrder(name, price) { window.open(`https://wa.me/919708797335?text=I want to buy: ${name} at ₹${price}`, '_blank'); }
-    function goHome() { document.getElementById('admin-page').style.display = 'none'; document.getElementById('home-view').style.display = 'block'; render(); }
-    function checkAdmin() { if(prompt("Password:") === "7482") { document.getElementById('home-view').style.display = 'none'; document.getElementById('admin-page').style.display = 'block'; renderDeleteList(); } }
-    function renderDeleteList() { document.getElementById('delete-list').innerHTML = products.map((p, i) => `<div class="admin-list-item"><span>${p.name}</span><button class="del-btn" onclick="deleteProd(${i})">Delete</button></div>`).join(''); }
-    function deleteProd(index) { if(confirm("Delete?")) { products.splice(index, 1); localStorage.setItem('narayan_final_db', JSON.stringify(products)); renderDeleteList(); } }
-    function liveProduct() {
-        const name = document.getElementById('p_name').value, sale = document.getElementById('p_sale').value, cat = document.getElementById('p_cat_val').value, files = document.getElementById('p_files').files;
+
+    function setCat(cat, el) {
+        currentCat = cat;
+        document.querySelectorAll('.catalog-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        render();
+    }
+
+    function order(n, p) {
+        window.open(`https://wa.me/919708797335?text=Hello narayan.in, I want to buy: ${n} (Price: ₹${p})`, '_blank');
+    }
+
+    function adminLogin() { if(prompt("Password:") === "7482") { document.getElementById('main-view').style.display='none'; document.getElementById('admin-view').style.display='block'; } }
+    function goHome() { document.getElementById('admin-view').style.display='none'; document.getElementById('main-view').style.display='block'; render(); }
+
+    function saveProduct() {
+        const name = document.getElementById('p_name').value, sale = document.getElementById('p_sale').value, cat = document.getElementById('p_cat').value, files = document.getElementById('p_img').files;
+        if(!name || files.length === 0) return alert("Fill details!");
         let imgUrls = [], loaded = 0;
         for(let i=0; i<files.length; i++) {
             let r = new FileReader();
             r.onload = function(e) {
                 imgUrls.push(e.target.result);
                 if(++loaded === files.length) {
-                    products.unshift({id:Date.now(), name, sale, cat, imgs: imgUrls});
-                    localStorage.setItem('narayan_final_db', JSON.stringify(products));
+                    db.unshift({name, sale, cat, imgs: imgUrls});
+                    localStorage.setItem('narayan_v5', JSON.stringify(db));
                     location.reload();
                 }
             };
