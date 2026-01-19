@@ -3,187 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>नारायण कंप्यूटर सर्विसेज | अमेज़न स्टाइल</title>
+    <title>नारायण कंप्यूटर सर्विसेज</title>
     <style>
         :root { --amazon-blue: #232f3e; --amazon-orange: #febd69; --amazon-yellow: #ffd814; --bg: #eaeded; }
-        body { font-family: Arial, sans-serif; background: var(--bg); margin: 0; }
+        body { font-family: Arial, sans-serif; background: var(--bg); margin: 0; color: #0F1111; }
         header { background: var(--amazon-blue); color: white; padding: 12px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-        
-        /* कैटेगरी बार अमेज़न स्टाइल */
         .cat-bar { background: #37475a; display: flex; overflow-x: auto; padding: 10px; gap: 10px; scrollbar-width: none; }
-        .cat-item { color: white; font-size: 14px; white-space: nowrap; cursor: pointer; padding: 6px 12px; border: 1px solid transparent; border-radius: 4px; }
-        .cat-item.active { border: 1px solid white; background: rgba(255,255,255,0.1); }
-
-        /* अमेज़न जैसा प्रोडक्ट ग्रिड */
+        .cat-item { color: white; font-size: 14px; white-space: nowrap; cursor: pointer; padding: 6px 12px; border-radius: 4px; border: 1px solid transparent; }
+        .cat-item.active { border-color: white; background: rgba(255,255,255,0.1); }
+        
+        /* ग्रिड स्टाइल */
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
-        .product-card { background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card { background: white; padding: 10px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); cursor: pointer; }
+        .card-img { width: 100%; height: 140px; object-fit: contain; }
         
-        /* स्वाइप फोटो गैलरी */
-        .img-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 5px; scrollbar-width: none; }
-        .img-slider img { width: 100%; height: 150px; object-fit: contain; scroll-snap-align: start; flex-shrink: 0; }
+        /* डिटेल पेज स्टाइल */
+        #detail-page { display: none; background: white; min-height: 100vh; padding: 15px; }
+        .detail-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; margin-bottom: 15px; }
+        .detail-slider img { width: 100%; height: 300px; object-fit: contain; flex-shrink: 0; scroll-snap-align: start; }
+        .p-title-big { font-size: 18px; font-weight: 500; margin: 10px 0; }
+        .price-big { color: #B12704; font-size: 24px; font-weight: bold; }
+        .mrp-small { text-decoration: line-through; color: #565959; font-size: 14px; }
         
-        .p-name { font-size: 14px; margin: 8px 0; height: 38px; overflow: hidden; color: #0F1111; font-weight: 500; }
-        .price-box { margin: 5px 0; }
-        .mrp { text-decoration: line-through; color: #565959; font-size: 12px; }
-        .off-price { color: #B12704; font-size: 18px; font-weight: bold; }
-        
-        .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; margin-top: auto; font-size: 13px; }
-        
-        .service-info { background: white; margin: 10px; padding: 15px; border-radius: 4px; border-top: 4px solid var(--amazon-orange); }
+        .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; font-size: 15px; margin: 15px 0; }
         .footer { background: var(--amazon-blue); color: white; padding: 30px 20px; text-align: left; line-height: 1.6; }
-        
         .step-page { display: none; padding: 20px; background: white; min-height: 100vh; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #888; border-radius: 4px; box-sizing: border-box; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #888; border-radius: 4px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-size: 20px; font-weight: bold; color: var(--amazon-orange);">narayan.in</div>
-    <div onclick="location.reload()" style="cursor: pointer;">🏠 होम</div>
+    <div style="font-size: 20px; font-weight: bold; color: var(--amazon-orange);" onclick="goHome()">narayan.in</div>
+    <div onclick="goHome()" style="cursor: pointer;">🏠 होम</div>
 </header>
 
-<div class="cat-bar" id="cat-menu">
-    <div class="cat-item active" onclick="setCat('All', this)">सभी सामान (All)</div>
-    <div class="cat-item" onclick="setCat('Laptop', this)">लैपटॉप</div>
-    <div class="cat-item" onclick="setCat('Mobile', this)">मोबाइल</div>
-    <div class="cat-item" onclick="setCat('Printer', this)">प्रिंटर</div>
-    <div class="cat-item" onclick="setCat('TV', this)">टीवी</div>
-    <div class="cat-item" onclick="setCat('Services', this)">सर्विस</div>
-</div>
-
-<div id="home-page">
+<div id="home-view">
+    <div class="cat-bar">
+        <div class="cat-item active" onclick="setCat('All', this)">All</div>
+        <div class="cat-item" onclick="setCat('Laptop', this)">लैपटॉप</div>
+        <div class="cat-item" onclick="setCat('Mobile', this)">मोबाइल</div>
+        <div class="cat-item" onclick="setCat('Printer', this)">प्रिंटर</div>
+        <div class="cat-item" onclick="setCat('Services', this)">सर्विस</div>
+    </div>
     <div id="product-list" class="product-grid"></div>
-
-    <div class="service-info">
-        <h3>🛠️ हमारी रिपेयरिंग सेवाएं</h3>
-        <p>लैपटॉप, मोबाइल और सीसीटीवी कैमरा सर्विस के लिए संपर्क करें।</p>
-        <button class="btn-amazon" style="background:var(--amazon-orange); border:none;" onclick="window.open('https://wa.me/919708797335?text=मुझे सर्विस चाहिए')">WhatsApp बुकिंग</button>
+    
+    <div style="background: white; margin: 10px; padding: 15px; border-top: 4px solid var(--amazon-orange);">
+        <h3>🛠️ सर्विस बुकिंग</h3>
+        <p>लैपटॉप/सीसीटीवी सर्विस के लिए व्हाट्सएप करें।</p>
+        <button onclick="window.open('https://wa.me/919708797335')" style="background:var(--amazon-orange); border:none; padding:10px; width:100%; border-radius:4px; font-weight:bold;">WhatsApp करें</button>
     </div>
 
     <div class="footer">
         <b>नारायण कंप्यूटर सर्विसेज</b><br>
         📍 डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी<br>
-        📞 +91 9708797335 | ✉️ narayancomputer034@gmail.com<br>
-        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; font-size:10px; margin-top:20px;">🔐 एडमिन लॉगिन</button></center>
+        📞 +91 9708797335<br>
+        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; margin-top:20px;">🔐 एडमिन</button></center>
     </div>
 </div>
 
+<div id="detail-page">
+    <button onclick="goHome()" style="background:none; border:none; color:#007185; cursor:pointer; padding:10px 0;">← पीछे जाएँ</button>
+    <div id="detail-content"></div>
+    <hr>
+    <h3 style="padding: 10px 0;">इससे मिलते-जुलते सामान (Related Items)</h3>
+    <div id="related-list" class="product-grid"></div>
+</div>
+
 <div id="checkout-page" class="step-page">
-    <h2>आर्डर विवरण</h2>
+    <h2>ऑर्डर विवरण</h2>
     <input type="text" id="cName" placeholder="आपका नाम">
     <input type="number" id="cPhone" placeholder="मोबाइल नंबर">
     <textarea id="cAddr" placeholder="पूरा पता"></textarea>
-    <button class="btn-amazon" onclick="finalizeOrder()">आर्डर पूरा करें</button>
-    <button onclick="location.reload()" style="width:100%; border:none; background:none; margin-top:10px;">पीछे जाएँ</button>
+    <button class="btn-amazon" onclick="finalizeOrder()">ऑर्डर कन्फर्म करें</button>
 </div>
 
 <div id="admin-page" class="step-page">
-    <h2>नया प्रोडक्ट लाइव करें</h2>
-    <input type="text" id="p_name" placeholder="प्रोडक्ट का नाम">
-    <textarea id="p_desc" placeholder="प्रोडक्ट की डिटेल"></textarea>
-    <input type="text" id="p_size" placeholder="साइज़">
+    <h2>नया सामान लाइव करें</h2>
+    <input type="text" id="p_name" placeholder="नाम">
+    <textarea id="p_desc" placeholder="विवरण (Description)"></textarea>
     <input type="number" id="p_mrp" placeholder="MRP">
-    <input type="number" id="p_sale" placeholder="Offer Price">
-    
-    <label>कैटेगरी चुनें:</label>
+    <input type="number" id="p_sale" placeholder="सेल प्राइस">
     <select id="p_cat_val">
-        <option value="Laptop">Laptop (लैपटॉप)</option>
-        <option value="Mobile">Mobile (मोबाइल)</option>
-        <option value="Printer">Printer (प्रिंटर)</option>
-        <option value="TV">TV (टीवी)</option>
-        <option value="Services">Services (सर्विस)</option>
+        <option value="Laptop">Laptop</option>
+        <option value="Mobile">Mobile</option>
+        <option value="Printer">Printer</option>
+        <option value="Services">Services</option>
     </select>
-    
-    <label>गैलरी से फोटो चुनें:</label>
-    <input type="file" id="p_files" accept="image/*" multiple>
-    
+    <input type="file" id="p_files" multiple accept="image/*">
     <button class="btn-amazon" onclick="liveProduct()">🚀 लाइव करें</button>
-    <button onclick="location.reload()" style="width:100%; margin-top:10px;">वापस</button>
+    <button onclick="goHome()">Back</button>
 </div>
 
 <script>
     let products = JSON.parse(localStorage.getItem('amazon_prods')) || [];
-    let selectedProd = null;
     let currentCat = 'All';
+    let selectedProd = null;
+
+    function render() {
+        let filtered = (currentCat === 'All') ? products : products.filter(p => p.cat === currentCat);
+        document.getElementById('product-list').innerHTML = filtered.map(p => `
+            <div class="product-card" onclick="showDetail(${p.id})">
+                <img src="${p.imgs[0]}" class="card-img" onerror="this.src='https://via.placeholder.com/150'">
+                <div style="font-size:14px; margin:8px 0; height:34px; overflow:hidden;">${p.name}</div>
+                <div style="color:#B12704; font-weight:bold;">₹${p.sale}</div>
+            </div>
+        `).join('');
+    }
+
+    function showDetail(id) {
+        let p = products.find(x => x.id === id);
+        selectedProd = p;
+        window.scrollTo(0,0);
+        document.getElementById('home-view').style.display = 'none';
+        document.getElementById('detail-page').style.display = 'block';
+        
+        document.getElementById('detail-content').innerHTML = `
+            <div class="detail-slider">
+                ${p.imgs.map(img => `<img src="${img}">`).join('')}
+            </div>
+            <p style="font-size:12px; color:#565959; text-align:center;">Swipe ↔ फोटो देखें</p>
+            <div class="p-title-big">${p.name}</div>
+            <div class="price-big">₹${p.sale}</div>
+            <div class="mrp-small">M.R.P.: ₹${p.mrp}</div>
+            <p style="color:#007600; font-weight:bold;">In Stock</p>
+            <div style="background:#f6f6f6; padding:10px; border-radius:4px; margin:15px 0;">
+                <b>Description:</b><br>${p.desc}
+            </div>
+            <button class="btn-amazon" onclick="startOrder()">अभी खरीदें (Buy Now)</button>
+        `;
+
+        // Related Products (उसी कैटेगरी के)
+        let related = products.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 4);
+        document.getElementById('related-list').innerHTML = related.map(r => `
+            <div class="product-card" onclick="showDetail(${r.id})">
+                <img src="${r.imgs[0]}" class="card-img">
+                <div style="font-size:12px; margin:5px 0;">${r.name}</div>
+                <div style="color:#B12704; font-weight:bold;">₹${r.sale}</div>
+            </div>
+        `).join('');
+    }
+
+    function goHome() {
+        document.querySelectorAll('#detail-page, #checkout-page, #admin-page').forEach(e => e.style.display = 'none');
+        document.getElementById('home-view').style.display = 'block';
+        render();
+    }
 
     function setCat(cat, el) {
         currentCat = cat;
         document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
-        render();
+        goHome();
     }
 
-    function render() {
-        const list = document.getElementById('product-list');
-        // यहाँ हमने फ़िल्टर ठीक कर दिया है: अगर All है तो सब दिखेगा, नहीं तो सिर्फ मैचिंग कैटेगरी
-        let filtered = (currentCat === 'All') ? products : products.filter(p => p.cat === currentCat);
-        
-        list.innerHTML = filtered.map(p => `
-            <div class="product-card">
-                <div class="img-slider">
-                    ${p.imgs.map(img => `<img src="${img}">`).join('')}
-                </div>
-                <div class="p-name">${p.name}</div>
-                <div class="price-box">
-                    <span class="mrp">₹${p.mrp}</span><br>
-                    <span class="off-price">₹${p.sale}</span>
-                </div>
-                <button class="btn-amazon" onclick="startOrder('${p.name}', ${p.sale})">Buy Now</button>
-            </div>
-        `).join('');
-    }
-
-    function liveProduct() {
-        const name = document.getElementById('p_name').value;
-        const desc = document.getElementById('p_desc').value;
-        const size = document.getElementById('p_size').value;
-        const mrp = document.getElementById('p_mrp').value;
-        const sale = document.getElementById('p_sale').value;
-        const cat = document.getElementById('p_cat_val').value;
-        const files = document.getElementById('p_files').files;
-
-        if(!name || files.length === 0) return alert("नाम और फोटो भरें!");
-
-        let imgUrls = [];
-        let loaded = 0;
-        for(let i=0; i<files.length; i++) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                imgUrls.push(e.target.result);
-                loaded++;
-                if(loaded === files.length) {
-                    products.unshift({ id:Date.now(), name, desc, size, mrp, sale, imgs: imgUrls, cat: cat });
-                    localStorage.setItem('amazon_prods', JSON.stringify(products));
-                    alert("सफलतापूर्वक लाइव हो गया!");
-                    location.reload();
-                }
-            };
-            reader.readAsDataURL(files[i]);
-        }
-    }
-
-    function startOrder(name, price) {
-        selectedProd = { name, price };
-        document.getElementById('home-page').style.display = 'none';
+    function startOrder() {
+        document.getElementById('detail-page').style.display = 'none';
         document.getElementById('checkout-page').style.display = 'block';
     }
 
     function finalizeOrder() {
-        const n = document.getElementById('cName').value;
-        const p = document.getElementById('cPhone').value;
-        const a = document.getElementById('cAddr').value;
+        const n = document.getElementById('cName').value, p = document.getElementById('cPhone').value, a = document.getElementById('cAddr').value;
         if(!n || !p || !a) return alert("विवरण भरें!");
-        const msg = `*नया आर्डर!*\nसामान: ${selectedProd.name}\nदाम: ₹${selectedProd.price}\nनाम: ${n}\nफोन: ${p}\nपता: ${a}`;
-        window.open(`https://wa.me/919708797335?text=${encodeURIComponent(msg)}`, '_blank');
+        const msg = `*नया आर्डर!*%0Aसामान: ${selectedProd.name}%0Aनाम: ${n}%0Aफोन: ${p}%0Aपता: ${a}`;
+        window.open(`https://wa.me/919708797335?text=${msg}`, '_blank');
     }
 
-    function checkAdmin() {
-        if(prompt("Password:") === "7482") {
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById('admin-page').style.display = 'block';
+    function liveProduct() {
+        const name = document.getElementById('p_name').value, desc = document.getElementById('p_desc').value, mrp = document.getElementById('p_mrp').value, sale = document.getElementById('p_sale').value, cat = document.getElementById('p_cat_val').value, files = document.getElementById('p_files').files;
+        if(!name || files.length === 0) return alert("नाम और फोटो भरें!");
+        let imgUrls = [], loaded = 0;
+        for(let i=0; i<files.length; i++) {
+            let r = new FileReader();
+            r.onload = function(e) {
+                imgUrls.push(e.target.result);
+                if(++loaded === files.length) {
+                    products.unshift({id:Date.now(), name, desc, mrp, sale, cat, imgs: imgUrls});
+                    localStorage.setItem('amazon_prods', JSON.stringify(products));
+                    location.reload();
+                }
+            };
+            r.readAsDataURL(files[i]);
         }
     }
+
+    function checkAdmin() { if(prompt("Pass:") === "7482") { document.getElementById('home-view').style.display='none'; document.getElementById('admin-page').style.display='block'; } }
 
     render();
 </script>
