@@ -3,176 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>narayan.in | CP Plus Style Security & Computers</title>
+    <title>Narayan Computers - Runnisaidpur</title>
     <style>
-        :root { --cp-blue: #0054a6; --cp-red: #ed1c24; --bg: #ffffff; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8f9fa; margin: 0; color: #333; }
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; color: #333; }
+        header { background: #00468b; color: white; padding: 15px text-align: center; }
+        .contact-bar { background: #f4f4f4; padding: 5px 20px; font-size: 14px; display: flex; justify-content: space-between; }
         
-        /* प्रोफेशनल हेडर */
-        header { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--cp-blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .logo { font-size: 22px; font-weight: bold; color: var(--cp-blue); text-decoration: none; }
-        .logo span { color: var(--cp-red); }
-
-        /* खिसकने वाली सूचना पट्टी */
-        .top-bar { background: #232f3e; color: white; padding: 8px 0; font-size: 13px; }
-
-        /* CP Plus स्टाइल बड़े सर्विस बैनर */
-        .banner-slider { background: white; padding: 15px 0; border-bottom: 1px solid #ddd; }
-        .slider-track { display: flex; gap: 15px; padding: 0 15px; }
-        .slider-card { min-width: 320px; height: 200px; position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.15); flex-shrink: 0; }
-        .slider-card img { width: 100%; height: 100%; object-fit: cover; }
-        .slider-label { position: absolute; bottom: 0; background: rgba(0,84,166,0.85); color: white; width: 100%; padding: 10px; font-size: 14px; font-weight: bold; text-align: center; }
-
-        /* कैटेगरी बटन */
-        .category-container { display: flex; justify-content: space-around; padding: 20px; background: white; border-bottom: 1px solid #eee; overflow-x: auto; gap: 10px; }
-        .cat-btn { text-align: center; min-width: 80px; cursor: pointer; border: none; background: none; transition: 0.3s; }
-        .cat-btn img { width: 45px; height: 45px; margin-bottom: 5px; }
-        .cat-btn p { font-size: 11px; font-weight: bold; margin: 0; color: #555; }
-        .cat-btn.active p { color: var(--cp-blue); border-bottom: 2px solid var(--cp-blue); }
-
-        /* प्रोडक्ट ग्रिड */
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-        .p-card { background: white; border: 1px solid #eee; padding: 12px; border-radius: 8px; text-align: center; transition: 0.3s; position: relative; }
-        .p-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: var(--cp-blue); }
-        .p-card img { width: 100%; height: 120px; object-fit: contain; }
-        .p-card h3 { font-size: 14px; margin: 10px 0; height: 35px; overflow: hidden; color: #444; }
-        .p-price { color: var(--cp-red); font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        /* Banner Section */
+        .banner { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover; height: 400px; color: white; display: flex; 
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
         
-        .buy-button { background: var(--cp-blue); color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 13px; }
-
-        /* फुटर */
-        .footer { background: #1a1a1a; color: #999; padding: 40px 20px; font-size: 14px; }
-        .footer b { color: white; font-size: 18px; }
-        .footer span { color: var(--cp-red); }
-
-        #admin-page { display: none; padding: 20px; background: white; min-height: 100vh; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .services { padding: 40px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; transition: 0.3s; }
+        .card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
+        
+        .btn-whatsapp { 
+            background: #25D366; color: white; padding: 10px 20px; text-decoration: none; 
+            border-radius: 5px; display: inline-block; margin-top: 10px; font-weight: bold;
+        }
+        
+        footer { background: #222; color: white; padding: 20px; text-align: center; margin-top: 40px; }
     </style>
 </head>
 <body>
 
+<div class="contact-bar">
+    <span>📞 +91 9708797335</span>
+    <span>📍 DAV School Road, Runnisaidpur, Sitamarhi</span>
+</div>
+
 <header>
-    <div class="logo" onclick="goHome()">NARAYAN <span>SECURITY</span></div>
-    <div onclick="goHome()" style="cursor:pointer; font-size: 20px;">🏠</div>
+    <h1>NARAYAN.IN</h1>
+    <p>कंप्यूटर, प्रिंटर, टीवी एवं CCTV कैमरा के विश्वसनीय विक्रेता एवं सर्विस सेंटर</p>
 </header>
 
-<div class="top-bar">
-    <marquee>🚀 narayan.in: लैपटॉप, प्रिंटर, टीवी और CCTV कैमरा की प्रोफेशनल रिपेयरिंग और बिक्री केंद्र | रुन्नीसैदपुर, सीतामढ़ी</marquee>
+<section class="banner">
+    <h2>Narayan Computers & Services</h2>
+    <p>हम बेहतरीन सर्विस और क्वालिटी प्रोडक्ट्स में विश्वास रखते हैं</p>
+    <a href="https://wa.me/919708797335" class="btn-whatsapp">Chat with Us</a>
+</section>
+
+<div style="text-align:center; padding-top:40px;">
+    <h2>हमारी सेवाएं एवं प्रोडक्ट्स</h2>
 </div>
 
-<div id="home-view">
-    <div class="banner-slider">
-        <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
-            <div class="slider-track">
-                <div class="slider-card">
-                    <img src="2329.jpg" alt="Printer Mechanic" onerror="this.src='https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?w=600'">
-                    <div class="slider-label">प्रोफेशनल प्रिंटर रिपेयरिंग सर्विस</div>
-                </div>
-                <div class="slider-card">
-                    <img src="2334.jpg" alt="CCTV Service" onerror="this.src='https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=600'">
-                    <div class="slider-label">CCTV कैमरा सुरक्षा सिस्टम</div>
-                </div>
-                <div class="slider-card">
-                    <img src="2327.jpg" alt="Laptop Service" onerror="this.src='https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600'">
-                    <div class="slider-label">कंप्यूटर और टीवी रिपेयर एक्सपर्ट</div>
-                </div>
-            </div>
-        </marquee>
+<section class="services">
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&q=80&w=400" alt="Printer Service">
+        <h3>प्रिंटर सर्विस (Repairing)</h3>
+        <p>हमारे यहाँ एक्सपर्ट मैकेनिक द्वारा सभी प्रकार के प्रिंटर की सर्विस की जाती है।</p>
+        <a href="https://wa.me/919708797335?text=I%20need%20printer%20service" class="btn-whatsapp">WhatsApp Service</a>
     </div>
 
-    <div class="category-container">
-        <div class="cat-btn active" onclick="setCat('All', this)"><img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png"><p>All</p></div>
-        <div class="cat-btn" onclick="setCat('CCTV', this)"><img src="https://cdn-icons-png.flaticon.com/512/2888/2888631.png"><p>CCTV</p></div>
-        <div class="cat-btn" onclick="setCat('Laptop', this)"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png"><p>Laptop/TV</p></div>
-        <div class="cat-btn" onclick="setCat('Printer', this)"><img src="https://cdn-icons-png.flaticon.com/512/3004/3004613.png"><p>Printer</p></div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=400" alt="CCTV">
+        <h3>CCTV कैमरा सेटअप</h3>
+        <p>CP Plus, Hikvision और अन्य ब्रांड्स के हाई-क्वालिटी कैमरा उपलब्ध हैं।</p>
+        <a href="https://wa.me/919708797335?text=I%20want%20CCTV%20Camera" class="btn-whatsapp">WhatsApp Order</a>
     </div>
 
-    <div id="product-list" class="product-grid"></div>
-
-    <div class="footer">
-        <b>NARAYAN <span>COMPUTER</span></b><br>
-        📍 डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी<br>
-        📞 फोन: +91 9708797335<br>
-        ✉️ ईमेल: narayan_computer034@gmail.com<br>
-        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#444; margin-top:30px;">🔐 एडमिन लॉगिन</button></center>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=400" alt="Computer">
+        <h3>कंप्यूटर और लैपटॉप</h3>
+        <p>नया कंप्यूटर और सभी प्रकार के स्पेयर पार्ट्स के लिए संपर्क करें।</p>
+        <a href="https://wa.me/919708797335?text=I%20want%20to%20buy%20Computer" class="btn-whatsapp">WhatsApp Order</a>
     </div>
-</div>
+</section>
 
-<div id="admin-page">
-    <h2>Add New Product</h2>
-    <input type="text" id="p_name" placeholder="Product Name">
-    <input type="number" id="p_sale" placeholder="Price (₹)">
-    <select id="p_cat_val">
-        <option value="CCTV">CCTV Camera</option>
-        <option value="Laptop">Computer/TV</option>
-        <option value="Printer">Printer</option>
-    </select>
-    <input type="file" id="p_files" multiple>
-    <button class="buy-button" onclick="liveProduct()">🚀 Live Now</button>
-    <button onclick="goHome()" style="background:none; color:#666; border:none; width:100%; margin-top:10px;">Cancel</button>
-</div>
+<footer>
+    <p>&copy; 2024 Narayan Computers | narayan.in</p>
+    <p>Email: narayan_computer034@gmail.com</p>
+    <p>पता: डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी</p>
+</footer>
 
-<script>
-    let products = JSON.parse(localStorage.getItem('narayan_db')) || [];
-    let currentCat = 'All';
-
-    function render() {
-        const list = document.getElementById('product-list');
-        let filtered = (currentCat === 'All') ? products : products.filter(p => p.cat === currentCat);
-        list.innerHTML = filtered.map(p => `
-            <div class="p-card">
-                <img src="${p.imgs[0]}" onerror="this.src='https://via.placeholder.com/150'">
-                <h3>${p.name}</h3>
-                <div class="p-price">₹${p.sale}</div>
-                <button class="buy-button" onclick="whatsappOrder('${p.name}', '${p.sale}')">Buy on WhatsApp</button>
-            </div>
-        `).join('');
-    }
-
-    function setCat(cat, el) {
-        currentCat = cat;
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        render();
-    }
-
-    function whatsappOrder(name, price) {
-        const msg = `नमस्ते narayan.in, मुझे यह सामान खरीदना है:\n📦 सामान: ${name}\n💰 दाम: ₹${price}`;
-        window.open(`https://wa.me/919708797335?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    function goHome() {
-        document.getElementById('admin-page').style.display = 'none';
-        document.getElementById('home-view').style.display = 'block';
-        render();
-    }
-
-    function checkAdmin() {
-        if(prompt("Admin Password:") === "7482") {
-            document.getElementById('home-view').style.display = 'none';
-            document.getElementById('admin-page').style.display = 'block';
-        }
-    }
-
-    function liveProduct() {
-        const name = document.getElementById('p_name').value, sale = document.getElementById('p_sale').value, cat = document.getElementById('p_cat_val').value, files = document.getElementById('p_files').files;
-        if(!name || files.length === 0) return alert("Please fill all details!");
-        let imgUrls = [], loaded = 0;
-        for(let i=0; i<files.length; i++) {
-            let r = new FileReader();
-            r.onload = function(e) {
-                imgUrls.push(e.target.result);
-                if(++loaded === files.length) {
-                    products.unshift({id:Date.now(), name, sale, cat, imgs: imgUrls});
-                    localStorage.setItem('narayan_db', JSON.stringify(products));
-                    location.reload();
-                }
-            };
-            r.readAsDataURL(files[i]);
-        }
-    }
-
-    render();
-</script>
 </body>
 </html>
