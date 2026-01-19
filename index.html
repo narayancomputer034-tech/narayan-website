@@ -3,95 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Narayan Seller Central</title>
+    <title>Narayan Computer Services</title>
     <style>
         :root { --amazon-blue: #232f3e; --amazon-orange: #febd69; --amazon-yellow: #ffd814; --bg: #eaeded; }
         body { font-family: Arial, sans-serif; background: var(--bg); margin: 0; }
         header { background: var(--amazon-blue); color: white; padding: 12px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        
+        /* ऊपर वाला कैटेगरी बार */
+        .cat-bar { background: #37475a; display: flex; overflow-x: auto; padding: 10px; gap: 10px; scrollbar-width: none; }
+        .cat-item { color: white; font-size: 14px; white-space: nowrap; cursor: pointer; padding: 6px 12px; border: 1px solid transparent; border-radius: 4px; }
+        .cat-item:hover, .cat-item.active { border: 1px solid white; }
+
         .product-card { background: white; margin: 10px; padding: 12px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        /* Image Slider Style */
         .img-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 5px; scrollbar-width: none; }
         .img-slider img { width: 100%; height: 250px; object-fit: contain; scroll-snap-align: start; flex-shrink: 0; }
+        
         .price-box { margin: 10px 0; }
         .mrp { text-decoration: line-through; color: #565959; font-size: 14px; }
         .off-price { color: #B12704; font-size: 20px; font-weight: bold; }
+        
         .btn-amazon { background: var(--amazon-yellow); border: 1px solid #fcd200; border-radius: 20px; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        
+        /* सर्विस और एड्रेस सेक्शन */
+        .service-info { background: white; margin: 10px; padding: 15px; border-radius: 4px; border-top: 4px solid var(--amazon-orange); }
+        .footer { background: var(--amazon-blue); color: white; padding: 30px 20px; text-align: left; line-height: 1.6; }
+        
         .step-page { display: none; padding: 20px; background: white; min-height: 100vh; }
         input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #888; border-radius: 4px; box-sizing: border-box; }
-        .payment-opt { border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
     </style>
 </head>
 <body>
 
 <header>
     <div style="font-size: 20px; font-weight: bold; color: var(--amazon-orange);">narayan.in</div>
-    <div onclick="location.reload()" style="cursor: pointer;">🏠 Home</div>
+    <div onclick="location.reload()" style="cursor: pointer;">🏠 होम</div>
 </header>
+
+<div class="cat-bar">
+    <div class="cat-item active" onclick="setCat('All', this)">ऑल (All)</div>
+    <div class="cat-item" onclick="setCat('Laptop', this)">लैपटॉप</div>
+    <div class="cat-item" onclick="setCat('Mobile', this)">मोबाइल</div>
+    <div class="cat-item" onclick="setCat('Printer', this)">प्रिंटर</div>
+    <div class="cat-item" onclick="setCat('TV', this)">टीवी (TV)</div>
+    <div class="cat-item" onclick="setCat('Services', this)">सर्विस</div>
+</div>
 
 <div id="home-page">
     <div id="product-list"></div>
-    <div style="text-align: center; padding: 20px;">
-        <button onclick="checkAdmin()" style="background:none; border:none; color:#777; font-size:12px;">🔐 Admin Login</button>
+
+    <div class="service-info">
+        <h3 style="margin-top:0;">🛠️ हमारी रिपेयरिंग सेवाएं</h3>
+        <p>हम लैपटॉप, मोबाइल, प्रिंटर और टीवी की सबसे अच्छी रिपेयरिंग करते हैं। CCTV कैमरा इंस्टॉलेशन के लिए भी संपर्क करें।</p>
+        <button class="btn-amazon" style="background:var(--amazon-orange); border:none;" onclick="window.open('https://wa.me/919708797335?text=मुझे सर्विस चाहिए')">सर्विस के लिए WhatsApp करें</button>
+    </div>
+
+    <div class="footer">
+        <b style="font-size: 18px; color: var(--amazon-orange);">नारायण कंप्यूटर सर्विसेज</b><br><br>
+        📍 <b>पता:</b> डीएवी स्कूल रोड, रुन्नीसैदपुर, सीतामढ़ी, बिहार - 843328<br>
+        📞 <b>संपर्क:</b> +91 9708797335<br>
+        ✉️ <b>ईमेल:</b> narayancomputer034@gmail.com<br>
+        <br>
+        <center><button onclick="checkAdmin()" style="background:none; border:none; color:#777; font-size:10px;">🔐 एडमिन लॉगिन</button></center>
     </div>
 </div>
 
 <div id="checkout-page" class="step-page">
-    <h2>Checkout</h2>
+    <h2>आर्डर की जानकारी</h2>
     <input type="text" id="cName" placeholder="आपका नाम">
     <input type="number" id="cPhone" placeholder="मोबाइल नंबर">
-    <textarea id="cAddr" placeholder="पूरा पता"></textarea>
-    
-    <h3>Payment Method</h3>
-    <div class="payment-opt">
-        <input type="radio" name="pay" value="UPI Online" checked> UPI Online (9708797335@ybl)
-    </div>
-    <div class="payment-opt">
-        <input type="radio" name="pay" value="Cash on Delivery"> Cash on Delivery
-    </div>
-    
-    <button class="btn-amazon" onclick="finalizeOrder()">Order on WhatsApp</button>
-    <button onclick="location.reload()" style="width:100%; margin-top:10px; border:none; background:none;">Cancel</button>
+    <textarea id="cAddr" placeholder="पूरा पता (एड्रेस)"></textarea>
+    <button class="btn-amazon" onclick="finalizeOrder()">WhatsApp पर आर्डर भेजें</button>
+    <button onclick="location.reload()" style="width:100%; border:none; background:none; margin-top:10px;">कैंसिल करें</button>
 </div>
 
 <div id="admin-page" class="step-page">
-    <h2 style="color: var(--amazon-blue);">Add New Product</h2>
+    <h2>नया प्रोडक्ट लाइव करें</h2>
     <input type="text" id="p_name" placeholder="प्रोडक्ट का नाम">
-    <textarea id="p_desc" placeholder="प्रोडक्ट की जानकारी (Detail)"></textarea>
-    <input type="text" id="p_size" placeholder="साइज़ (जैसे: 15.6 inch, XL, आदि)">
+    <textarea id="p_desc" placeholder="प्रोडक्ट की डिटेल"></textarea>
+    <input type="text" id="p_size" placeholder="साइज़">
     <input type="number" id="p_mrp" placeholder="MRP (असली दाम)">
-    <input type="number" id="p_sale" placeholder="Offer Price (बेचने वाला दाम)">
+    <input type="number" id="p_sale" placeholder="Offer Price (कम वाला दाम)">
     
-    <label>प्रोडक्ट की फोटो चुनें (एक साथ कई चुनें):</label>
-    <input type="file" id="p_files" accept="image/*" multiple style="border:none;">
+    <label>गैलरी से फोटो चुनें:</label>
+    <input type="file" id="p_files" accept="image/*" multiple>
     
-    <button class="btn-amazon" onclick="liveProduct()">🚀 Live करें</button>
-    <button onclick="location.reload()" style="width:100%; margin-top:10px;">Back</button>
+    <button class="btn-amazon" onclick="liveProduct()">🚀 लाइव (Live) करें</button>
+    <button onclick="location.reload()" style="width:100%; margin-top:10px;">वापस</button>
 </div>
 
 <script>
     let products = JSON.parse(localStorage.getItem('amazon_prods')) || [];
     let selectedProd = null;
+    let currentCat = 'All';
+
+    function setCat(cat, el) {
+        currentCat = cat;
+        document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        render();
+    }
 
     function render() {
         const list = document.getElementById('product-list');
-        if(products.length === 0) {
-            list.innerHTML = `<p style="text-align:center; padding:50px;">कोई प्रोडक्ट नहीं है। एडमिन में जाकर जोड़ें।</p>`;
+        let filtered = currentCat === 'All' ? products : products.filter(p => p.cat === currentCat);
+        
+        if(filtered.length === 0) {
+            list.innerHTML = `<p style="text-align:center; padding:50px;">इस कैटेगरी में अभी कोई सामान नहीं है।</p>`;
             return;
         }
-        list.innerHTML = products.map(p => `
+
+        list.innerHTML = filtered.map(p => `
             <div class="product-card">
                 <div class="img-slider">
                     ${p.imgs.map(img => `<img src="${img}">`).join('')}
                 </div>
-                <p style="font-size:12px; color:#565959; margin-top:5px;">Swipe ↔ to see more</p>
                 <h3 style="margin:10px 0 5px 0;">${p.name}</h3>
                 <p style="font-size:14px; color:#333; margin:0;">${p.desc}</p>
-                <p style="font-size:13px; color:#565959;">Size: ${p.size}</p>
                 <div class="price-box">
                     <span class="mrp">M.R.P: ₹${p.mrp}</span><br>
                     <span class="off-price">₹${p.sale}</span>
                 </div>
-                <button class="btn-amazon" onclick="startOrder('${p.name}', ${p.sale})">Buy Now</button>
+                <button class="btn-amazon" onclick="startOrder('${p.name}', ${p.sale})">अभी खरीदें</button>
             </div>
         `).join('');
     }
@@ -102,20 +134,20 @@
         const size = document.getElementById('p_size').value;
         const mrp = document.getElementById('p_mrp').value;
         const sale = document.getElementById('p_sale').value;
+        const cat = prompt("कैटेगरी लिखें (Laptop, Mobile, Printer, TV, Services):");
         const files = document.getElementById('p_files').files;
 
-        if(!name || files.length === 0) return alert("नाम और फोटो ज़रूरी हैं!");
+        if(!name || files.length === 0) return alert("नाम और फोटो भरें!");
 
         let imgUrls = [];
         let loaded = 0;
-
         for(let i=0; i<files.length; i++) {
             let reader = new FileReader();
             reader.onload = function(e) {
                 imgUrls.push(e.target.result);
                 loaded++;
                 if(loaded === files.length) {
-                    products.unshift({ id:Date.now(), name, desc, size, mrp, sale, imgs: imgUrls });
+                    products.unshift({ id:Date.now(), name, desc, size, mrp, sale, imgs: imgUrls, cat: cat || 'All' });
                     localStorage.setItem('amazon_prods', JSON.stringify(products));
                     alert("प्रोडक्ट लाइव हो गया!");
                     location.reload();
@@ -135,12 +167,9 @@
         const n = document.getElementById('cName').value;
         const p = document.getElementById('cPhone').value;
         const a = document.getElementById('cAddr').value;
-        const pay = document.querySelector('input[name="pay"]:checked').value;
-
         if(!n || !p || !a) return alert("पूरी जानकारी भरें!");
-
-        const msg = `*नया आर्डर!*%0A*सामान:* ${selectedProd.name}%0A*दाम:* ₹${selectedProd.price}%0A*ग्राहक:* ${n}%0A*फोन:* ${p}%0A*पता:* ${a}%0A*पेमेंट:* ${pay}`;
-        window.open(`https://wa.me/919708797335?text=${msg}`, '_blank');
+        const msg = `*नया आर्डर!*\n*सामान:* ${selectedProd.name}\n*दाम:* ₹${selectedProd.price}\n*नाम:* ${n}\n*फोन:* ${p}\n*पता:* ${a}`;
+        window.open(`https://wa.me/919708797335?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function checkAdmin() {
