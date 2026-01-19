@@ -83,20 +83,30 @@
     <button class="btn-buy" onclick="location.reload()">Back to Home</button>
 </div>
 
-<div id="my-account-page" class="step-page">
-    <div id="admin-page" class="step-page">
-    <h2>नया प्रोडक्ट जोड़ें</h2>
-    <input type="text" id="p_name" placeholder="सामान का नाम">
-    <input type="number" id="p_price" placeholder="बेचने का दाम (Price)">
-    <input type="text" id="p_img" placeholder="फोटो का नाम (जैसे mouse.jpg)">
-    <select id="p_cat">
+<div id="admin-page" class="step-page" style="padding:20px; background:white;">
+    <h2 style="text-align:center; color:#2874f0;">नया प्रोडक्ट जोड़ें</h2>
+    
+    <label>प्रोडक्ट का नाम:</label>
+    <input type="text" id="p_name" placeholder="जैसे: HP Wired Mouse" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:4px;">
+    
+    <label>बेचने का दाम (₹):</label>
+    <input type="number" id="p_price" placeholder="जैसे: 350" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:4px;">
+    
+    <label>फोटो का नाम (GitHub वाला):</label>
+    <input type="text" id="p_img" placeholder="जैसे: mouse.jpg" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:4px;">
+    
+    <label>कैटेगरी चुनें:</label>
+    <select id="p_cat" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:4px;">
         <option value="Laptop">Laptop</option>
         <option value="Mobile">Mobile</option>
         <option value="Printer">Printer</option>
         <option value="TV">TV</option>
+        <option value="Electronics">Electronics</option>
     </select>
-    <button class="btn-buy" onclick="saveProduct()">Live Product करें</button>
-    <button onclick="openPage('home')">बंद करें</button>
+    
+    <button class="btn-buy" onclick="saveProduct()" style="background:#fb641b; color:white; border:none; padding:15px; width:100%; font-weight:bold; cursor:pointer; border-radius:4px; margin-top:10px;">Live Product करें</button>
+    
+    <button onclick="openPage('home')" style="width:100%; padding:10px; margin-top:15px; background:#ddd; border:none; border-radius:4px; cursor:pointer;">वापस दुकान पर जाएँ</button>
 </div>
     <h2>My Orders</h2>
     <div id="order-history">No orders found.</div>
