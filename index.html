@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>narayan.in | Security & Computers</title>
+    <title>narayan.in | Security Systems & IT Solutions</title>
     <style>
-        :root { --blue: #0054a6; --red: #ed1c24; --gray: #f4f7f6; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--gray); margin: 0; overflow-x: hidden; }
-        
-        header { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--blue); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: bold; color: var(--blue); text-transform: uppercase; }
-        .logo span { color: var(--red); }
+        :root { --blue: #004a99; --red: #e31e24; --dark: #1a1a1a; }
+        body { font-family: 'Roboto', Arial, sans-serif; margin: 0; background: #f4f4f4; color: #333; }
 
-        /* फुल स्क्रीन फ्रेम स्लाइडर */
-        .slider-box { width: 100%; height: 450px; overflow: hidden; position: relative; background: #000; }
-        .slides-container { display: flex; width: 400%; height: 100%; animation: slideAnim 16s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Static Systems जैसा हेडर */
+        header { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { font-size: 28px; font-weight: 800; color: var(--blue); text-transform: uppercase; text-decoration: none; }
+        .logo span { color: var(--red); }
+        .nav-links { display: flex; gap: 20px; font-weight: bold; font-size: 14px; }
+
+        /* फुल विड्थ प्रोफेशनल स्लाइडर (4 सेकंड ठहराव) */
+        .slider { width: 100%; height: 500px; overflow: hidden; position: relative; }
+        .slides { display: flex; width: 400%; height: 100%; animation: slideAnim 16s infinite cubic-bezier(0.4, 0, 0.2, 1); }
         .slide { width: 25%; height: 100%; position: relative; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; } /* पूरी स्क्रीन पर फिट */
+        .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); }
         
         @keyframes slideAnim {
             0%, 20% { transform: translateX(0); }
@@ -26,130 +28,154 @@
             100% { transform: translateX(0); }
         }
 
-        .banner-text { position: absolute; bottom: 0; background: rgba(0,0,0,0.75); color: white; width: 100%; padding: 20px; font-size: 20px; font-weight: bold; text-align: center; }
+        .slide-content { position: absolute; top: 50%; left: 10%; transform: translateY(-50%); color: white; }
+        .slide-content h2 { font-size: 45px; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+        .slide-content p { font-size: 22px; background: var(--red); display: inline-block; padding: 8px 20px; border-radius: 5px; margin-top: 15px; }
 
-        /* केटलॉग बार */
-        .catalog-bar { display: flex; overflow-x: auto; padding: 20px 10px; background: white; gap: 20px; scrollbar-width: none; border-bottom: 1px solid #ddd; }
-        .catalog-btn { text-align: center; min-width: 90px; cursor: pointer; }
-        .cat-img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #ddd; padding: 3px; object-fit: cover; }
-        .catalog-btn.active .cat-img { border-color: var(--blue); transform: scale(1.1); }
-        .catalog-btn p { font-size: 14px; font-weight: 600; margin-top: 8px; color: #333; }
+        /* केटलॉग सेक्शन */
+        .services-head { text-align: center; padding: 40px 0 10px; }
+        .services-head h3 { font-size: 30px; color: var(--blue); margin-bottom: 5px; }
+        .services-head div { width: 80px; height: 4px; background: var(--red); margin: 0 auto; }
 
-        /* प्रोडक्ट ग्रिड */
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 15px; }
-        .p-card { background: white; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .p-card img { width: 100%; height: 140px; object-fit: contain; }
-        .p-price { color: var(--red); font-size: 20px; font-weight: bold; margin: 10px 0; }
-        .whatsapp-btn { background: #25D366; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .catalog-container { display: flex; overflow-x: auto; padding: 30px 5%; gap: 30px; justify-content: center; background: white; }
+        .cat-item { text-align: center; cursor: pointer; min-width: 130px; }
+        .cat-item img { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #eee; padding: 5px; transition: 0.3s; object-fit: cover; }
+        .cat-item.active img { border-color: var(--blue); transform: scale(1.1); }
+        .cat-item p { font-weight: bold; margin-top: 15px; font-size: 16px; }
 
-        .footer { background: #232f3e; color: white; padding: 35px 20px; font-size: 14px; line-height: 1.8; }
-        .footer b { color: #febd69; font-size: 20px; display: block; margin-bottom: 10px; }
-        .contact-link { color: #00a8e1; text-decoration: none; font-weight: bold; }
-        
-        #admin-panel { display: none; padding: 20px; background: white; min-height: 100vh; }
-        .admin-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0; }
-        .del-btn { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 3px; }
+        /* प्रोडक्ट डिस्प्ले */
+        .product-section { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; padding: 40px 5%; }
+        .product-card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 10px; text-align: center; transition: 0.3s; }
+        .product-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 160px; object-fit: contain; }
+        .product-card h4 { font-size: 16px; margin: 15px 0; height: 40px; overflow: hidden; }
+        .price { color: var(--red); font-size: 24px; font-weight: bold; margin-bottom: 15px; }
+        .buy-btn { background: #25D366; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 15px; }
+
+        /* प्रोफेशनल फुटर */
+        footer { background: var(--dark); color: #bbb; padding: 60px 5% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .footer-grid h5 { color: white; font-size: 20px; margin-bottom: 20px; border-left: 5px solid var(--red); padding-left: 15px; }
+        .footer-grid a { color: #00a8e1; text-decoration: none; }
+        .copy { text-align: center; border-top: 1px solid #333; margin-top: 40px; padding-top: 20px; font-size: 13px; }
+
+        #admin-panel { display: none; padding: 50px; background: white; min-height: 100vh; }
+        input, select { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Narayan<span>.in</span></div>
-    <div onclick="goHome()" style="cursor:pointer; font-size: 24px;">🏠</div>
+    <a href="#" class="logo" onclick="goHome()">Narayan<span>.in</span></a>
+    <div class="nav-links">
+        <span onclick="goHome()" style="cursor:pointer; color: var(--blue);">HOME</span>
+        <span onclick="openAdmin()" style="cursor:pointer; color: #999;">ADMIN</span>
+    </div>
 </header>
 
-<div id="home-page">
-    <div class="slider-box">
-        <div class="slides-container">
+<div id="user-view">
+    <div class="slider">
+        <div class="slides">
             <div class="slide">
                 <img src="2329.jpg.jpeg" alt="Printer Repair">
-                <div class="banner-text">Professional Printer Repair | प्रिंटर रिपेयरिंग सर्विस</div>
+                <div class="slide-content"><h2>Expert Printer Repair</h2><p>प्रिंटर रिपेयरिंग सर्विस</p></div>
             </div>
             <div class="slide">
-                <img src="2334.jpg.jpeg" alt="CCTV Service">
-                <div class="banner-text">CCTV Camera Installation | सीसीटीवी कैमरा सर्विस</div>
+                <img src="2334.jpg.jpeg" alt="CCTV Solution">
+                <div class="slide-content"><h2>High-Tech CCTV Security</h2><p>सीसीटीवी कैमरा इंस्टालेशन</p></div>
             </div>
             <div class="slide">
-                <img src="778.jpeg" alt="Computer Repair">
-                <div class="banner-text">Computer & Laptop Repair | कंप्यूटर रिपेयरिंग</div>
+                <img src="778.jpeg" alt="Laptop Repair">
+                <div class="slide-content"><h2>IT & Laptop Solutions</h2><p>कंप्यूटर और लैपटॉप सर्विस</p></div>
             </div>
             <div class="slide">
-                <img src="2325.jpg.jpeg" alt="Happy Customer">
-                <div class="banner-text">Our Satisfied Customers | हमारे संतुष्ट ग्राहक</div>
+                <img src="2325.jpg.jpeg" alt="Customer Support">
+                <div class="slide-content"><h2>Trusted Maintenance</h2><p>बेस्ट सर्विस सपोर्ट</p></div>
             </div>
         </div>
     </div>
 
-    <div class="catalog-bar">
-        <div class="catalog-btn active" onclick="setCat('All', this)"><img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png" class="cat-img"><p>All</p></div>
-        <div class="catalog-btn" onclick="setCat('Printer', this)"><img src="2330.jpg" class="cat-img" onerror="this.src='https://via.placeholder.com/150?text=Printer'"><p>Printers</p></div>
-        <div class="catalog-btn" onclick="setCat('CCTV', this)"><img src="2332.jpg" class="cat-img" onerror="this.src='https://via.placeholder.com/150?text=CCTV'"><p>CCTV</p></div>
-        <div class="catalog-btn" onclick="setCat('Laptop', this)"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-img"><p>Computers</p></div>
+    <div class="services-head">
+        <h3>Our Premium Services</h3>
+        <div></div>
     </div>
 
-    <div id="p-list" class="product-grid"></div>
-
-    <div class="footer">
-        <b>Narayan Computer Services</b>
-        📍 DAV School Road, Runnisaidpur, Sitamarhi<br>
-        📞 Phone: <a href="tel:9708797335" class="contact-link">+91 9708797335</a><br>
-        ✉️ Email: <a href="mailto:narayan_computer034@gmail.com" class="contact-link">narayan_computer034@gmail.com</a><br>
-        <button onclick="openAdmin()" style="background:none; border:none; color:#777; margin-top:30px; cursor:pointer;">🔐 Admin Login</button>
+    <div class="catalog-container">
+        <div class="cat-item active" onclick="filterCat('All', this)"><img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png"><p>All Products</p></div>
+        <div class="cat-item" onclick="filterCat('Printer', this)"><img src="2330.jpg" onerror="this.src='https://via.placeholder.com/150?text=Printer'"><p>Printers</p></div>
+        <div class="cat-item" onclick="filterCat('CCTV', this)"><img src="2332.jpg" onerror="this.src='https://via.placeholder.com/150?text=CCTV'"><p>CCTV Cameras</p></div>
+        <div class="cat-item" onclick="filterCat('Laptop', this)"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png"><p>Computers</p></div>
     </div>
+
+    <div id="products-list" class="product-section"></div>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h5>Connect With Us</h5>
+                📍 DAV School Road, Runnisaidpur, Sitamarhi<br>
+                📞 Phone: <a href="tel:9708797335">+91 9708797335</a><br>
+                ✉️ Email: <a href="mailto:narayan_computer034@gmail.com">narayan_computer034@gmail.com</a>
+            </div>
+            <div>
+                <h5>Our Expertise</h5>
+                Advanced CCTV Solutions | Industrial Printer Repair | Network Security | IT Consulting | Laptop Hardware
+            </div>
+        </div>
+        <div class="copy">© 2026 narayan.in | Designed for Excellence.</div>
+    </footer>
 </div>
 
 <div id="admin-panel">
-    <h3>Add Product</h3>
-    <input type="text" id="name" placeholder="Name">
-    <input type="number" id="price" placeholder="Price">
-    <select id="cat"><option value="Printer">Printer</option><option value="CCTV">CCTV</option><option value="Laptop">Computer</option></select>
-    <input type="file" id="file" multiple>
-    <button onclick="addProd()" class="whatsapp-btn">Publish Product</button>
+    <h2>Admin Dashboard</h2>
+    <input type="text" id="pname" placeholder="Product Name"><input type="number" id="pprice" placeholder="Price (₹)">
+    <select id="pcat"><option value="Printer">Printer</option><option value="CCTV">CCTV</option><option value="Laptop">Computer</option></select>
+    <input type="file" id="pimg" multiple>
+    <button class="buy-btn" onclick="save()" style="background:var(--blue)">UPLOAD PRODUCT</button>
     <hr>
-    <h3>Manage Items</h3>
+    <h3>Delete Items</h3>
     <div id="del-list"></div>
-    <button onclick="goHome()" style="width:100%; padding:10px; margin-top:10px; cursor:pointer;">Back to Home</button>
+    <button onclick="goHome()" style="background:none; border:none; margin-top:20px; cursor:pointer;">🏠 Back to Home</button>
 </div>
 
 <script>
-    let db = JSON.parse(localStorage.getItem('n_db_final')) || [];
-    let currentCat = 'All';
+    let db = JSON.parse(localStorage.getItem('n_db_final_v9')) || [];
+    let current = 'All';
 
     function render() {
-        const list = document.getElementById('p-list');
-        let filtered = (currentCat === 'All') ? db : db.filter(p => p.cat === currentCat);
+        const list = document.getElementById('products-list');
+        let filtered = (current === 'All') ? db : db.filter(p => p.cat === current);
         list.innerHTML = filtered.map(p => `
-            <div class="p-card">
+            <div class="product-card">
                 <img src="${p.imgs[0]}" onerror="this.src='https://via.placeholder.com/150'">
-                <div style="font-weight:bold; font-size:14px; height:40px; overflow:hidden;">${p.name}</div>
-                <div class="p-price">₹${p.sale}</div>
-                <button class="whatsapp-btn" onclick="order('${p.name}', '${p.sale}')">Order on WhatsApp</button>
+                <h4>${p.name}</h4>
+                <div class="price">₹${p.sale}</div>
+                <button class="buy-btn" onclick="order('${p.name}', '${p.sale}')">WhatsApp Order</button>
             </div>
         `).join('');
     }
 
-    function setCat(c, el) {
-        currentCat = c;
-        document.querySelectorAll('.catalog-btn').forEach(b => b.classList.remove('active'));
+    function filterCat(c, el) {
+        current = c;
+        document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
         render();
     }
 
-    function order(n, p) { window.open(`https://wa.me/919708797335?text=Hello, I want to buy: ${n} (Price: ₹${p})`); }
-    function openAdmin() { if(prompt("Password:") === "7482") { document.getElementById('home-page').style.display='none'; document.getElementById('admin-panel').style.display='block'; showDelList(); } }
-    function goHome() { document.getElementById('admin-panel').style.display='none'; document.getElementById('home-page').style.display='block'; render(); }
+    function order(n, p) { window.open(`https://wa.me/919708797335?text=Hello, I want to order: ${n} (₹${p})`); }
+    function openAdmin() { if(prompt("Password:") === "7482") { document.getElementById('user-view').style.display='none'; document.getElementById('admin-panel').style.display='block'; showDel(); } }
+    function goHome() { document.getElementById('admin-panel').style.display='none'; document.getElementById('user-view').style.display='block'; render(); }
 
-    function addProd() {
-        const name = document.getElementById('name').value, sale = document.getElementById('price').value, cat = document.getElementById('cat').value, files = document.getElementById('file').files;
-        let imgUrls = [], loaded = 0;
-        for(let i=0; i<files.length; i++) {
+    function save() {
+        const name = document.getElementById('pname').value, sale = document.getElementById('pprice').value, cat = document.getElementById('pcat').value, files = document.getElementById('pimg').files;
+        let urls = [], loaded = 0;
+        for(let i=0; i<files.length; i++){
             let r = new FileReader();
-            r.onload = function(e) {
-                imgUrls.push(e.target.result);
-                if(++loaded === files.length) {
-                    db.unshift({name, sale, cat, imgs: imgUrls});
-                    localStorage.setItem('n_db_final', JSON.stringify(db));
-                    alert("Added!");
+            r.onload = function(e){
+                urls.push(e.target.result);
+                if(++loaded === files.length){
+                    db.unshift({name, sale, cat, imgs: urls});
+                    localStorage.setItem('n_db_final_v9', JSON.stringify(db));
                     location.reload();
                 }
             };
@@ -157,14 +183,9 @@
         }
     }
 
-    function showDelList() {
-        document.getElementById('del-list').innerHTML = db.map((p, i) => `
-            <div class="admin-item"><span>${p.name}</span> <button class="del-btn" onclick="del(${i})">Delete</button></div>
-        `).join('');
-    }
+    function showDel() { document.getElementById('del-list').innerHTML = db.map((p, i) => `<div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;"><span>${p.name}</span><button onclick="del(${i})" style="color:red; border:none; background:none; cursor:pointer;">Delete</button></div>`).join(''); }
+    function del(i) { if(confirm("Delete?")){ db.splice(i, 1); localStorage.setItem('n_db_final_v9', JSON.stringify(db)); showDel(); } }
 
-    function del(i) { if(confirm("Delete this?")) { db.splice(i, 1); localStorage.setItem('n_db_final', JSON.stringify(db)); showDelList(); } }
-    
     render();
 </script>
 </body>
