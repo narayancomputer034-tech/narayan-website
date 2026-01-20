@@ -8,23 +8,32 @@
         :root { --blue: #0054a6; --red: #ed1c24; --gray: #f4f7f6; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--gray); margin: 0; overflow-x: hidden; }
         
-        /* प्रोफेशनल हेडर */
         header { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .logo { font-size: 24px; font-weight: bold; color: var(--blue); text-transform: uppercase; }
         .logo span { color: var(--red); }
 
-        /* 1. बड़े फोटो बैनर (Big Slider) */
-        .big-banner-section { background: white; padding: 5px 0; }
-        .banner-track { display: flex; gap: 10px; padding: 0 5px; }
-        .banner-card { min-width: 95vw; height: 350px; position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .banner-card img { width: 100%; height: 100%; object-fit: cover; }
+        /* नया स्लाइडर - जो 4 सेकंड रुकेगा */
+        .slider-container { width: 100%; height: 350px; overflow: hidden; position: relative; background: white; }
+        .slides { display: flex; width: 400%; height: 100%; animation: slideAnim 16s infinite; }
+        .slide { width: 100%; height: 100%; position: relative; flex-shrink: 0; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* स्लाइडर एनीमेशन: 4 फोटो के लिए (प्रत्येक 4 सेकंड) */
+        @keyframes slideAnim {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
         .banner-label { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: white; width: 100%; padding: 15px; font-size: 16px; font-weight: bold; text-align: center; }
 
-        /* 2. Amazon जैसे गोल केटलॉग */
+        /* Amazon जैसे गोल केटलॉग */
         .catalog-scroll { display: flex; overflow-x: auto; padding: 20px 10px; background: white; gap: 20px; scrollbar-width: none; border-bottom: 1px solid #ddd; }
         .catalog-item { text-align: center; min-width: 90px; cursor: pointer; }
-        .cat-circle { width: 75px; height: 75px; border-radius: 50%; border: 2px solid #ddd; padding: 3px; object-fit: cover; transition: 0.3s; }
-        .catalog-item.active .cat-circle { border-color: var(--blue); transform: scale(1.1); box-shadow: 0 0 10px rgba(0,84,166,0.3); }
+        .cat-circle { width: 75px; height: 75px; border-radius: 50%; border: 2px solid #ddd; padding: 3px; object-fit: cover; }
+        .catalog-item.active .cat-circle { border-color: var(--blue); transform: scale(1.1); }
         .catalog-item p { font-size: 13px; font-weight: 600; margin-top: 8px; color: #444; }
 
         /* प्रोडक्ट ग्रिड */
@@ -32,13 +41,11 @@
         .p-card { background: white; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid #eee; }
         .p-card img { width: 100%; height: 140px; object-fit: contain; }
         .p-title { font-size: 14px; font-weight: bold; margin: 10px 0; height: 35px; overflow: hidden; }
-        .p-price { color: var(--red); font-size: 18px; font-weight: bold; margin-bottom: 10px; }
-        .whatsapp-btn { background: #25D366; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .p-price { color: var(--red); font-size: 18px; font-weight: bold; }
+        .whatsapp-btn { background: #25D366; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
 
-        /* फुटर */
-        .footer { background: #232f3e; color: white; padding: 30px 20px; font-size: 14px; text-align: left; }
+        .footer { background: #232f3e; color: white; padding: 30px 20px; font-size: 14px; }
         .footer b { color: #febd69; font-size: 18px; }
-        
         #admin-view { display: none; padding: 20px; background: white; min-height: 100vh; }
         input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
     </style>
@@ -51,38 +58,32 @@
 </header>
 
 <div id="main-view">
-    <div class="big-banner-section">
-        <marquee behavior="scroll" direction="left" scrollamount="8" onmouseover="this.stop();" onmouseout="this.start();">
-            <div class="banner-track">
-                <div class="banner-card">
-                    <img src="2329.jpg.jpeg" onerror="this.src='https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?w=800'">
-                    <div class="banner-label">Printer Repair Service | प्रिंटर रिपेयरिंग</div>
-                </div>
-                <div class="banner-card">
-                    <img src="2334.jpg.jpeg" onerror="this.src='https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?w=800'">
-                    <div class="banner-label">CCTV Installation | सीसीटीवी कैमरा सर्विस</div>
-                </div>
-                <div class="banner-card">
-                    <img src="778.jpeg" onerror="this.src='https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800'">
-                    <div class="banner-label">Computer & Laptop Repair | कंप्यूटर सर्विस</div>
-                </div>
+    <div class="slider-container">
+        <div class="slides">
+            <div class="slide">
+                <img src="2329.jpg.jpeg" onerror="this.src='https://via.placeholder.com/800x350?text=Printer+Repair'">
+                <div class="banner-label">Printer Repair Service | प्रिंटर रिपेयरिंग</div>
             </div>
-        </marquee>
+            <div class="slide">
+                <img src="2334.jpg.jpeg" onerror="this.src='https://via.placeholder.com/800x350?text=CCTV+Service'">
+                <div class="banner-label">CCTV Installation | सीसीटीवी कैमरा सर्विस</div>
+            </div>
+            <div class="slide">
+                <img src="778.jpeg" onerror="this.src='https://via.placeholder.com/800x350?text=Computer+Repair'">
+                <div class="banner-label">Computer & Laptop Repair | कंप्यूटर सर्विस</div>
+            </div>
+            <div class="slide">
+                <img src="2325.jpg.jpeg" onerror="this.src='https://via.placeholder.com/800x350?text=Happy+Customer'">
+                <div class="banner-label">Our Happy Customers | हमारे संतुष्ट ग्राहक</div>
+            </div>
+        </div>
     </div>
 
     <div class="catalog-scroll">
-        <div class="catalog-item active" onclick="setCat('All', this)">
-            <img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png" class="cat-circle"><p>All Items</p>
-        </div>
-        <div class="catalog-item" onclick="setCat('Printer', this)">
-            <img src="2330.jpg" class="cat-circle" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3004/3004613.png'"><p>Printers</p>
-        </div>
-        <div class="catalog-item" onclick="setCat('CCTV', this)">
-            <img src="2332.jpg" class="cat-circle" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2888/2888631.png'"><p>CCTV</p>
-        </div>
-        <div class="catalog-item" onclick="setCat('Laptop', this)">
-            <img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-circle"><p>Computers</p>
-        </div>
+        <div class="catalog-item active" onclick="setCat('All', this)"><img src="https://cdn-icons-png.flaticon.com/512/3502/3502601.png" class="cat-circle"><p>All</p></div>
+        <div class="catalog-item" onclick="setCat('Printer', this)"><img src="2330.jpg" class="cat-circle" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3004/3004613.png'"><p>Printers</p></div>
+        <div class="catalog-item" onclick="setCat('CCTV', this)"><img src="2332.jpg" class="cat-circle" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2888/2888631.png'"><p>CCTV</p></div>
+        <div class="catalog-item" onclick="setCat('Laptop', this)"><img src="https://cdn-icons-png.flaticon.com/512/428/428001.png" class="cat-circle"><p>Computers</p></div>
     </div>
 
     <div id="product-list" class="product-grid"></div>
@@ -90,28 +91,27 @@
     <div class="footer">
         <b>Narayan Computer Services</b><br>
         📍 DAV School Road, Runnisaidpur, Sitamarhi<br>
-        📞 Call: +91 9708797335<br>
-        ✉️ Email: narayan_computer034@gmail.com<br>
+        📞 +91 9708797335<br>
         <center><button onclick="adminLogin()" style="background:none; border:none; color:#777; margin-top:30px;">🔐 Admin Login</button></center>
     </div>
 </div>
 
 <div id="admin-view">
-    <h3>Add New Product | नया सामान जोड़ें</h3>
-    <input type="text" id="p_name" placeholder="Item Name (नाम)">
-    <input type="number" id="p_sale" placeholder="Price (दाम ₹)">
+    <h3>Add Product | सामान जोड़ें</h3>
+    <input type="text" id="p_name" placeholder="Name">
+    <input type="number" id="p_sale" placeholder="Price ₹">
     <select id="p_cat">
         <option value="Printer">Printer</option>
-        <option value="CCTV">CCTV Camera</option>
-        <option value="Laptop">Computer/TV</option>
+        <option value="CCTV">CCTV</option>
+        <option value="Laptop">Computer</option>
     </select>
     <input type="file" id="p_img" multiple>
-    <button class="whatsapp-btn" onclick="saveProduct()" style="background:var(--blue)">🚀 Publish Now</button>
-    <button onclick="goHome()" style="width:100%; background:none; border:none; margin-top:15px;">Cancel</button>
+    <button class="whatsapp-btn" onclick="saveProduct()" style="background:var(--blue)">Publish</button>
+    <button onclick="goHome()" style="width:100%; border:none; margin-top:10px;">Back</button>
 </div>
 
 <script>
-    let db = JSON.parse(localStorage.getItem('narayan_v5')) || [];
+    let db = JSON.parse(localStorage.getItem('narayan_v6')) || [];
     let currentCat = 'All';
 
     function render() {
@@ -134,16 +134,12 @@
         render();
     }
 
-    function order(n, p) {
-        window.open(`https://wa.me/919708797335?text=Hello narayan.in, I want to buy: ${n} (Price: ₹${p})`, '_blank');
-    }
-
-    function adminLogin() { if(prompt("Password:") === "7482") { document.getElementById('main-view').style.display='none'; document.getElementById('admin-view').style.display='block'; } }
+    function order(n, p) { window.open(`https://wa.me/919708797335?text=I want to buy: ${n} at ₹${p}`, '_blank'); }
+    function adminLogin() { if(prompt("Pass:") === "7482") { document.getElementById('main-view').style.display='none'; document.getElementById('admin-view').style.display='block'; } }
     function goHome() { document.getElementById('admin-view').style.display='none'; document.getElementById('main-view').style.display='block'; render(); }
 
     function saveProduct() {
         const name = document.getElementById('p_name').value, sale = document.getElementById('p_sale').value, cat = document.getElementById('p_cat').value, files = document.getElementById('p_img').files;
-        if(!name || files.length === 0) return alert("Fill details!");
         let imgUrls = [], loaded = 0;
         for(let i=0; i<files.length; i++) {
             let r = new FileReader();
@@ -151,7 +147,7 @@
                 imgUrls.push(e.target.result);
                 if(++loaded === files.length) {
                     db.unshift({name, sale, cat, imgs: imgUrls});
-                    localStorage.setItem('narayan_v5', JSON.stringify(db));
+                    localStorage.setItem('narayan_v6', JSON.stringify(db));
                     location.reload();
                 }
             };
