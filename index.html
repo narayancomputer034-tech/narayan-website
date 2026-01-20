@@ -1,64 +1,43 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JALDI - बायर (Order Anything)</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; background: #f4f4f4; padding-bottom: 80px; }
+        header { background: #e63946; color: white; padding: 20px; text-align: center; }
+        .location-bar { background: white; padding: 15px; text-align: center; border-bottom: 1px solid #ddd; }
+        input { width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+        .card { background: white; padding: 30px 10px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-weight: bold; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; height: 70px; }
+        .nav-btn { flex: 1; color: white; border: none; background: none; text-align: center; text-decoration: none; padding-top: 15px; font-size: 14px; border-right: 1px solid #333; }
+        .active { background: #333; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JALDI</h1>
+        <p>5 शहरों में 40 मिनट डिलीवरी ⚡</p>
+    </header>
 
-export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.logo}>JALDI</Text>
-        <Text style={styles.location}>सीतामढ़ी, बिहार</Text>
-      </View>
+    <div class="location-bar">
+        <input type="text" placeholder="📍 अपनी लोकेशन डालें (5km दायरा)">
+    </div>
 
-      {/* Categories Area */}
-      <ScrollView style={styles.content}>
-        <Text style={styles.title}>क्या चाहिए आपको?</Text>
-        
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.card}><Text style={styles.cardText}>🍔 खाना</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.card}><Text style={styles.cardText}>🛒 राशन</Text></TouchableOpacity>
-        </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.card}><Text style={styles.cardText}>👕 कपड़े</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.card}><Text style={styles.cardText}>📦 अन्य</Text></TouchableOpacity>
-        </View>
+    <div class="grid">
+        <div class="card" style="border-top: 5px solid #ff6b6b;">🍔<br>खाना</div>
+        <div class="card" style="border-top: 5px solid #4ecdc4;">🛒<br>राशन</div>
+        <div class="card" style="border-top: 5px solid #45b7d1;">👕<br>कपड़े</div>
+        <div class="card" style="border-top: 5px solid #96ceb4;">🥦<br>सब्जी-फल</div>
+        <div class="card" style="border-top: 5px solid #ffeead;">💊<br>दवाइयां</div>
+        <div class="card" style="border-top: 5px solid #d4a5a5;">📱<br>इलेक्ट्रॉनिक्स</div>
+    </div>
 
-        {/* Contact Info from User */}
-        <View style={styles.infoBox}>
-          <Text style={styles.infoText}>संपर्क: {rajprincebpatel@gmail.com}</Text>
-          <Text style={styles.infoText}>फोन: 9142117783</Text>
-          <Text style={styles.infoText}>पता: DAV स्कूल, रननीसैदपुर</Text>
-        </View>
-      </ScrollView>
-
-      {/* FOOTER with your 2 Special Buttons */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerBtnRed}>
-          <Text style={styles.btnText}>बिज़नेस करो</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.footerBtnGreen}>
-          <Text style={styles.btnText}>राइडर बनो</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5' },
-  header: { padding: 20, backgroundColor: '#fff', alignItems: 'center', borderBottomWidth: 1, borderColor: '#ddd' },
-  logo: { fontSize: 24, fontWeight: 'bold', color: '#e74c3c' },
-  location: { fontSize: 12, color: '#666' },
-  content: { padding: 15 },
-  title: { fontSize: 20, fontWeight: 'bold', marginBottom: 20 },
-  row: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 },
-  card: { width: '48%', height: 100, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center', borderRadius: 10, elevation: 3 },
-  cardText: { fontSize: 18, fontWeight: '500' },
-  infoBox: { marginTop: 30, padding: 15, backgroundColor: '#eee', borderRadius: 10 },
-  infoText: { fontSize: 12, color: '#333' },
-  footer: { flexDirection: 'row', padding: 10, backgroundColor: '#fff', borderTopWidth: 1, borderColor: '#ddd' },
-  footerBtnRed: { flex: 1, backgroundColor: '#e74c3c', padding: 15, marginRight: 5, borderRadius: 5, alignItems: 'center' },
-  footerBtnGreen: { flex: 1, backgroundColor: '#27ae60', padding: 15, marginLeft: 5, borderRadius: 5, alignItems: 'center' },
-  btnText: { color: '#fff', fontWeight: 'bold', fontSize: 16 }
-});
+    <footer class="footer">
+        <a href="index.html" class="nav-btn active">🛒 सामान खरीदें</a>
+        <a href="business.html" class="nav-btn">💼 बिजनेस/दुकान</a>
+    </footer>
+</body>
+</html>
