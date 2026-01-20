@@ -12,11 +12,11 @@
         .logo { font-size: 24px; font-weight: bold; color: var(--blue); text-transform: uppercase; }
         .logo span { color: var(--red); }
 
-        /* बड़ा फोटो बैनर - 4 सेकंड रुकेगा */
-        .slider-box { width: 100%; height: 400px; overflow: hidden; position: relative; background: #eee; }
+        /* फुल स्क्रीन फ्रेम स्लाइडर */
+        .slider-box { width: 100%; height: 450px; overflow: hidden; position: relative; background: #000; }
         .slides-container { display: flex; width: 400%; height: 100%; animation: slideAnim 16s infinite cubic-bezier(0.4, 0, 0.2, 1); }
         .slide { width: 25%; height: 100%; position: relative; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; } /* पूरी स्क्रीन पर फिट */
         
         @keyframes slideAnim {
             0%, 20% { transform: translateX(0); }
@@ -26,7 +26,7 @@
             100% { transform: translateX(0); }
         }
 
-        .banner-text { position: absolute; bottom: 0; background: rgba(0,0,0,0.7); color: white; width: 100%; padding: 15px; font-size: 18px; font-weight: bold; text-align: center; }
+        .banner-text { position: absolute; bottom: 0; background: rgba(0,0,0,0.75); color: white; width: 100%; padding: 20px; font-size: 20px; font-weight: bold; text-align: center; }
 
         /* केटलॉग बार */
         .catalog-bar { display: flex; overflow-x: auto; padding: 20px 10px; background: white; gap: 20px; scrollbar-width: none; border-bottom: 1px solid #ddd; }
@@ -42,7 +42,6 @@
         .p-price { color: var(--red); font-size: 20px; font-weight: bold; margin: 10px 0; }
         .whatsapp-btn { background: #25D366; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; }
 
-        /* फुटर सेक्शन */
         .footer { background: #232f3e; color: white; padding: 35px 20px; font-size: 14px; line-height: 1.8; }
         .footer b { color: #febd69; font-size: 20px; display: block; margin-bottom: 10px; }
         .contact-link { color: #00a8e1; text-decoration: none; font-weight: bold; }
@@ -63,20 +62,20 @@
     <div class="slider-box">
         <div class="slides-container">
             <div class="slide">
-                <img src="2329.jpg.jpeg" onerror="this.src='https://via.placeholder.com/800x400?text=Printer+Expert'">
-                <div class="banner-text">Printer Service | प्रिंटर रिपेयरिंग</div>
+                <img src="2329.jpg.jpeg" alt="Printer Repair">
+                <div class="banner-text">Professional Printer Repair | प्रिंटर रिपेयरिंग सर्विस</div>
             </div>
             <div class="slide">
-                <img src="2334.jpg.jpeg" onerror="this.src='https://via.placeholder.com/800x400?text=CCTV+Expert'">
-                <div class="banner-text">CCTV Installation | कैमरा सर्विस</div>
+                <img src="2334.jpg.jpeg" alt="CCTV Service">
+                <div class="banner-text">CCTV Camera Installation | सीसीटीवी कैमरा सर्विस</div>
             </div>
             <div class="slide">
-                <img src="778.jpeg" onerror="this.src='https://via.placeholder.com/800x400?text=Laptop+Expert'">
-                <div class="banner-text">Computer & Laptop | कंप्यूटर सर्विस</div>
+                <img src="778.jpeg" alt="Computer Repair">
+                <div class="banner-text">Computer & Laptop Repair | कंप्यूटर रिपेयरिंग</div>
             </div>
             <div class="slide">
-                <img src="2325.jpg.jpeg" onerror="this.src='https://via.placeholder.com/800x400?text=Best+Service'">
-                <div class="banner-text">Best Customer Support | बेस्ट सर्विस</div>
+                <img src="2325.jpg.jpeg" alt="Happy Customer">
+                <div class="banner-text">Our Satisfied Customers | हमारे संतुष्ट ग्राहक</div>
             </div>
         </div>
     </div>
