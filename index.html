@@ -3,41 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JALDI - बायर (Order Anything)</title>
+    <title>Narayan Computer Services</title>
     <style>
-        body { font-family: sans-serif; margin: 0; background: #f4f4f4; padding-bottom: 80px; }
-        header { background: #e63946; color: white; padding: 20px; text-align: center; }
-        .location-bar { background: white; padding: 15px; text-align: center; border-bottom: 1px solid #ddd; }
-        input { width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
-        .card { background: white; padding: 30px 10px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-weight: bold; }
-        .footer { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; height: 70px; }
-        .nav-btn { flex: 1; color: white; border: none; background: none; text-align: center; text-decoration: none; padding-top: 15px; font-size: 14px; border-right: 1px solid #333; }
-        .active { background: #333; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 16px;
+        }
+        nav {
+            background-color: #b71c1c;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        h2 {
+            color: #d32f2f;
+        }
+        ul {
+            list-style: disc inside;
+        }
+        footer {
+            background-color: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>JALDI</h1>
-        <p>5 शहरों में 40 मिनट डिलीवरी ⚡</p>
-    </header>
 
-    <div class="location-bar">
-        <input type="text" placeholder="📍 अपनी लोकेशन डालें (5km दायरा)">
-    </div>
+<header>
+    <h1>Narayan Computer Services</h1>
+    <p>Near DAV School, Runnisaidpur, Sitamarhi</p>
+    <p>मोबाइल: 9708797335</p>
+</header>
 
-    <div class="grid">
-        <div class="card" style="border-top: 5px solid #ff6b6b;">🍔<br>खाना</div>
-        <div class="card" style="border-top: 5px solid #4ecdc4;">🛒<br>राशन</div>
-        <div class="card" style="border-top: 5px solid #45b7d1;">👕<br>कपड़े</div>
-        <div class="card" style="border-top: 5px solid #96ceb4;">🥦<br>सब्जी-फल</div>
-        <div class="card" style="border-top: 5px solid #ffeead;">💊<br>दवाइयां</div>
-        <div class="card" style="border-top: 5px solid #d4a5a5;">📱<br>इलेक्ट्रॉनिक्स</div>
-    </div>
+<nav>
+    <a href="#home">होम</a>
+    <a href="#products">उत्पाद</a>
+    <a href="#services">सेवाएं</a>
+    <a href="#about">हमारे बारे में</a>
+    <a href="#contact">संपर्क करें</a>
+</nav>
 
-    <footer class="footer">
-        <a href="index.html" class="nav-btn active">🛒 सामान खरीदें</a>
-        <a href="business.html" class="nav-btn">💼 बिजनेस/दुकान</a>
-    </footer>
+<div class="container" id="home">
+    <h2>स्वागत है!</h2>
+    <p>नारायण कंप्यूटर सर्विसेज में आपका स्वागत है! हम प्रिंटर, टीवी, कंप्यूटर और CCTV कैमरों की बिक्री और मरम्मत की विश्वसनीय सेवा प्रदान करते हैं।</p>
+</div>
+
+<div class="container" id="products">
+    <h2>उत्पाद</h2>
+    <ul>
+        <li>कंप्यूटर</li>
+        <li>लैपटॉप</li>
+        <li>प्रिंटर</li>
+        <li>CCTV कैमरा और एक्सेसरीज़</li>
+    </ul>
+    <p>हर उत्पाद की विस्तृत जानकारी के लिए कृपया संपर्क करें।</p>
+</div>
+
+<div class="container" id="services">
+    <h2>सेवाएं</h2>
+    <ul>
+        <li>प्रिंटर रिपेयरिंग</li>
+        <li>टीवी रिपेयरिंग</li>
+        <li>कंप्यूटर रिपेयरिंग</li>
+        <li>CCTV कैमरा इंस्टॉलेशन और मरम्मत</li>
+    </ul>
+    <p>हम आपके प्रोडक्ट की ऑन-साइट या इनशॉप मरम्मत सेवा उपलब्ध कराते हैं।</p>
+    <p>संपर्क करें: 9708797335</p>
+</div>
+
+<div class="container" id="about">
+    <h2>हमारे बारे में</h2>
+    <p>नारायण कंप्यूटर सर्विसेज में हम ग्राहक संतुष्टि को सर्वोपरि मानते हैं। हमारा मिशन विश्वसनीय और किफायती सेवा प्रदान करना है।</p>
+</div>
+
+<div class="container" id="contact">
+    <h2>संपर्क करें</h2>
+    <p>पता: Near DAV School, Runnisaidpur, Sitamarhi</p>
+    <p>मोबाइल: 9708797335</p>
+    <p>ईमेल: info@narayancomputerservices.com (यह वैकल्पिक है)</p>
+</div>
+
+<footer>
+    © 2024 Narayan Computer Services. सभी अधिकार सुरक्षित।
+</footer>
+
 </body>
 </html>
