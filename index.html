@@ -1,126 +1,434 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Narayan Computer Services</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0; padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #d32f2f;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        header h1 {
+        /* Reset */
+        * {
             margin: 0;
-            font-size: 36px;
+            padding: 0;
+            box-sizing: border-box;
         }
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f6f6f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #cc0000;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
         header p {
-            margin: 5px 0 0 0;
-            font-size: 16px;
+            font-size: 1rem;
+            margin-top: 5px;
+            font-weight: 600;
         }
+
         nav {
-            background-color: #b71c1c;
+            background: #f44336;
             display: flex;
             justify-content: center;
             padding: 10px 0;
         }
+
         nav a {
             color: white;
+            padding: 10px 20px;
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            font-size: 1rem;
         }
+
         nav a:hover {
+            background: #b71c1c;
+        }
+
+        /* Banner / Slider styles */
+        .banner-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        .banner-slide {
+            display: none;
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+        }
+
+        .banner-slide.active {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+
+        .banner-text {
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: rgba(204,0,0,0.6);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity:1;}
+        }
+
+        /* Products section */
+        .products-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #cc0000;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #cc0000;
+        }
+
+        .product-caption {
+            font-size: 0.9rem;
+            color: #444;
+            flex-grow: 1;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .product-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            flex: 1;
+            background-color: #cc0000;
+            color: white;
+            padding: 10px 0;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #b71c1c;
+        }
+
+        /* Services Section */
+        .services-section {
+            background: white;
+            padding: 35px 15px;
+            max-width: 1200px;
+            margin: 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+
+        .services-section h2 {
+            color: #cc0000;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .service-list {
+            max-width: 800px;
+            margin: auto;
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: #cc0000;
+            color: white;
+            padding: 30px 15px;
+            text-align: center;
+        }
+
+        .contact-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .contact-section a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        footer a {
+            color: #cc0000;
+            text-decoration: none;
+        }
+
+        footer a:hover {
             text-decoration: underline;
         }
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 0 10px #ccc;
-        }
-        h2 {
-            color: #d32f2f;
-        }
-        ul {
-            list-style: disc inside;
-        }
-        footer {
-            background-color: #d32f2f;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 30px;
+
+        /* Responsive */
+        @media screen and (max-width:650px) {
+            .banner-text {
+                font-size: 1.3rem;
+                left: 15px;
+                bottom: 20px;
+            }
+            nav {
+                flex-wrap: wrap;
+            }
+            nav a {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Narayan Computer Services</h1>
-    <p>Near DAV School, Runnisaidpur, Sitamarhi</p>
-    <p>मोबाइल: 9708797335</p>
-</header>
+    <header>
+        <h1>NARAYAN COMPUTER SERVICES</h1>
+        <p>Near DAV School, Runnisaidpur, Sitamarhi | Mob: 9708797335</p>
+    </header>
 
-<nav>
-    <a href="#home">होम</a>
-    <a href="#products">उत्पाद</a>
-    <a href="#services">सेवाएं</a>
-    <a href="#about">हमारे बारे में</a>
-    <a href="#contact">संपर्क करें</a>
-</nav>
+    <nav>
+        <a href="#home" onclick="showSection('home')">होम</a>
+        <a href="#products" onclick="showSection('products')">प्रोडक्ट्स</a>
+        <a href="#services" onclick="showSection('services')">सेवाएं</a>
+        <a href="#contact" onclick="showSection('contact')">संपर्क करें</a>
+    </nav>
 
-<div class="container" id="home">
-    <h2>स्वागत है!</h2>
-    <p>नारायण कंप्यूटर सर्विसेज में आपका स्वागत है! हम प्रिंटर, टीवी, कंप्यूटर और CCTV कैमरों की बिक्री और मरम्मत की विश्वसनीय सेवा प्रदान करते हैं।</p>
-</div>
+    <main>
 
-<div class="container" id="products">
-    <h2>उत्पाद</h2>
-    <ul>
-        <li>कंप्यूटर</li>
-        <li>लैपटॉप</li>
-        <li>प्रिंटर</li>
-        <li>CCTV कैमरा और एक्सेसरीज़</li>
-    </ul>
-    <p>हर उत्पाद की विस्तृत जानकारी के लिए कृपया संपर्क करें।</p>
-</div>
+        <!-- Banner Section -->
+        <section id="home" class="banner-container">
+            <div class="banner-slide active" style="background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80');">
+                <div class="banner-text">प्रिंटर & रिपेयरिंग ऑफर्स</div>
+            </div>
+            <div class="banner-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');">
+                <div class="banner-text">कंप्यूटर तथा टीवी प्रोडक्ट्स</div>
+            </div>
+            <div class="banner-slide" style="background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80');">
+                <div class="banner-text">CCTV कैमरा और इंस्टॉलेशन सेवा</div>
+            </div>
+        </section>
 
-<div class="container" id="services">
-    <h2>सेवाएं</h2>
-    <ul>
-        <li>प्रिंटर रिपेयरिंग</li>
-        <li>टीवी रिपेयरिंग</li>
-        <li>कंप्यूटर रिपेयरिंग</li>
-        <li>CCTV कैमरा इंस्टॉलेशन और मरम्मत</li>
-    </ul>
-    <p>हम आपके प्रोडक्ट की ऑन-साइट या इनशॉप मरम्मत सेवा उपलब्ध कराते हैं।</p>
-    <p>संपर्क करें: 9708797335</p>
-</div>
+        <!-- Products Section -->
+        <section id="products" class="products-section" style="display:none;">
+            <h2 class="section-title">हमारे प्रोडक्ट्स</h2>
+            <div class="products-grid" id="productGrid">
+                <!-- Products will be injected here -->
+            </div>
+        </section>
 
-<div class="container" id="about">
-    <h2>हमारे बारे में</h2>
-    <p>नारायण कंप्यूटर सर्विसेज में हम ग्राहक संतुष्टि को सर्वोपरि मानते हैं। हमारा मिशन विश्वसनीय और किफायती सेवा प्रदान करना है।</p>
-</div>
+        <!-- Services Section -->
+        <section id="services" class="services-section" style="display:none;">
+            <h2>हमारी सेवाएं</h2>
+            <ul class="service-list">
+                <li>प्रिंटर रिपेयरिंग - Epson, Canon, HP प्रिंटर</li>
+                <li>टीवी रिपेयरिंग - LG, Samsung, Sony टीवी</li>
+                <li>कंप्यूटर और लैपटॉप मरम्मत और मेंटेनेंस</li>
+                <li>CCTV कैमरा इंस्टॉलेशन और मरम्मत - Hikvision, CP Plus</li>
+                <li>ऑन-साइट तथा वर्कशॉप रिपेयर सेवा उपलब्ध</li>
+                <li>गुणवत्ता गारंटी और त्वरित सेवाएं</li>
+            </ul>
+        </section>
 
-<div class="container" id="contact">
-    <h2>संपर्क करें</h2>
-    <p>पता: Near DAV School, Runnisaidpur, Sitamarhi</p>
-    <p>मोबाइल: 9708797335</p>
-    <p>ईमेल: info@narayancomputerservices.com (यह वैकल्पिक है)</p>
-</div>
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section" style="display:none;">
+            <h3>संपर्क करें</h3>
+            <p>नारायण कंप्यूटर सर्विसेज</p>
+            <p>Near DAV School, Runnisaidpur, Sitamarhi</p>
+            <p>Mobile: <a href="tel:+919708797335">9708797335</a></p>
+            <p>
+                WhatsApp ऑर्डर करने के लिए:  
+                <a href="https://wa.me/919708797335" target="_blank">यहाँ क्लिक करें</a>
+            </p>
+        </section>
 
-<footer>
-    © 2024 Narayan Computer Services. सभी अधिकार सुरक्षित।
-</footer>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Narayan Computer Services. सभी अधिकार सुरक्षित।</p>
+        <p>Contact: <a href="tel:+919708797335">9708797335</a> | Near DAV School, Runnisaidpur, Sitamarhi</p>
+        <p>Developed by Narayan Computer Services</p>
+    </footer>
+
+    <script>
+        // Banner slide rotation
+        const slides = document.querySelectorAll('.banner-slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+
+        // Navigation and section toggling
+        function showSection(sectionId) {
+            const sections = ['home', 'products', 'services', 'contact'];
+            sections.forEach(id => {
+                document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
+            });
+        }
+
+        // Show home section by default
+        showSection('home');
+
+        // Products list JSON
+        const products = [
+            {
+                name: "Epson L3150 प्रिंटर",
+                caption: "Epson L3150 मल्टीफ़ंक्शन इंकटैंक प्रिंटर, WIFI कनेक्टिविटी",
+                price: 12999,
+                img: "https://m.media-amazon.com/images/I/61plzsJ4IaL._SL1500_.jpg"
+            },
+            {
+                name: "Canon G2010 प्रिंटर",
+                caption: "Canon PIXMA G2010 इंकटैंक प्रिंटर, हाई क्वालिटी प्रिंटिंग",
+                price: 11500,
+                img: "https://m.media-amazon.com/images/I/81cIppjizlL._SL1500_.jpg"
+            },
+            {
+                name: "LG Full HD LED TV 32 inch",
+                caption: "LG 32 inch HD Ready LED टीवी, बेहतर विज़ुअल क्वालिटी",
+                price: 14999,
+                img: "https://m.media-amazon.com/images/I/71tSr-OxTBL._SL1500_.jpg"
+            },
+            {
+                name: "HP Desktop कंप्यूटर",
+                caption: "HP Desktop Core i3, 8GB RAM, 1TB HDD",
+                price: 25000,
+                img: "https://m.media-amazon.com/images/I/71B8GLx-vNL._SL1500_.jpg"
+            },
+            {
+                name: "Hikvision CCTV कैमरा सेट",
+                caption: "Hikvision 4 कैमरा CCTV सेट, 2MP HD",
+                price: 8000,
+                img: "https://m.media-amazon.com/images/I/61RxmYbP76L._SL1500_.jpg"
+            },
+            {
+                name: "CP Plus CCTV कैमरा",
+                caption: "CP Plus CCTV कैमरा सेट, हाई डेफिनिशन",
+                price: 7500,
+                img: "https://m.media-amazon.com/images/I/61XzRQcqlmL._SL1500_.jpg"
+            }
+        ];
+
+        // Function to load products
+        const productGrid = document.getElementById('productGrid');
+        products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product-card';
+
+            productDiv.innerHTML = `
+                <img src="${product.img}" alt="${product.name}" class="product-img" />
+                <div class="product-name">${product.name}</div>
+                <div class="product-caption">${product.caption}</div>
+                <div class="product-price">₹${product.price.toLocaleString('hi-IN')}</div>
+                <div class="product-buttons">
+                    <a class="btn" href="https://wa.me/919708797335?text=${encodeURIComponent('नमस्ते, मैं ' + product.name + ' ऑर्डर करना चाहता हूँ। कृपया डिलीवरी और भुगतान जानकारी साझा करें। मेरा पता: __________, मोबाइल नंबर: __________। धन्यवाद!')}" target="_blank">WhatsApp से ऑर्डर करें</a>
+                </div>
+            `;
+            productGrid.appendChild(productDiv);
+        });
+    </script>
 
 </body>
 </html>
