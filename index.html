@@ -1,434 +1,71 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Narayan Computer Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince Look - Official Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f6f6f6;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            background: #cc0000;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            letter-spacing: 2px;
-        }
-
-        header p {
-            font-size: 1rem;
-            margin-top: 5px;
-            font-weight: 600;
-        }
-
-        nav {
-            background: #f44336;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-        }
-
-        nav a {
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s ease;
-            font-size: 1rem;
-        }
-
-        nav a:hover {
-            background: #b71c1c;
-        }
-
-        /* Banner / Slider styles */
-        .banner-container {
-            position: relative;
-            max-width: 1200px;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.2);
-        }
-
-        .banner-slide {
-            display: none;
-            width: 100%;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            color: white;
-            text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
-        }
-
-        .banner-slide.active {
-            display: block;
-            animation: fadeIn 1s ease;
-        }
-
-        .banner-text {
-            position: absolute;
-            bottom: 30px;
-            left: 40px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: rgba(204,0,0,0.6);
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity:1;}
-        }
-
-        /* Products section */
-        .products-section {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 15px;
-        }
-
-        .section-title {
-            text-align: center;
-            color: #cc0000;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-            gap: 25px;
-        }
-
-        .product-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: scale(1.03);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 180px;
-            object-fit: contain;
-            margin-bottom: 15px;
-        }
-
-        .product-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #cc0000;
-        }
-
-        .product-caption {
-            font-size: 0.9rem;
-            color: #444;
-            flex-grow: 1;
-            margin-bottom: 10px;
-        }
-
-        .product-price {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .product-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .btn {
-            flex: 1;
-            background-color: #cc0000;
-            color: white;
-            padding: 10px 0;
-            font-weight: 600;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-decoration: none;
-            text-align: center;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background-color: #b71c1c;
-        }
-
-        /* Services Section */
-        .services-section {
-            background: white;
-            padding: 35px 15px;
-            max-width: 1200px;
-            margin: 40px auto;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
-
-        .services-section h2 {
-            color: #cc0000;
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-
-        .service-list {
-            max-width: 800px;
-            margin: auto;
-            font-size: 1.1rem;
-            color: #444;
-            line-height: 1.7;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: #cc0000;
-            color: white;
-            padding: 30px 15px;
-            text-align: center;
-        }
-
-        .contact-section h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .contact-section p {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .contact-section a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #222;
-            color: #ddd;
-            padding: 20px 15px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        footer p {
-            margin-bottom: 8px;
-        }
-
-        footer a {
-            color: #cc0000;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media screen and (max-width:650px) {
-            .banner-text {
-                font-size: 1.3rem;
-                left: 15px;
-                bottom: 20px;
-            }
-            nav {
-                flex-wrap: wrap;
-            }
-            nav a {
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
-        }
+        .gold-border { border: 2px solid #ffd700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+        .bg-dark { background-color: #0a0a0a; }
     </style>
 </head>
-<body>
-
-    <header>
-        <h1>NARAYAN COMPUTER SERVICES</h1>
-        <p>Near DAV School, Runnisaidpur, Sitamarhi | Mob: 9708797335</p>
+<body class="bg-dark text-white font-sans">
+    <header class="p-6 text-center border-b border-yellow-600 bg-black">
+        <h1 class="text-3xl font-bold text-yellow-500 tracking-tighter">PRINCE LOOK</h1>
+        <p class="text-xs text-gray-400 mt-1">BIHAR TO BHARAT 🇮🇳</p>
     </header>
 
-    <nav>
-        <a href="#home" onclick="showSection('home')">होम</a>
-        <a href="#products" onclick="showSection('products')">प्रोडक्ट्स</a>
-        <a href="#services" onclick="showSection('services')">सेवाएं</a>
-        <a href="#contact" onclick="showSection('contact')">संपर्क करें</a>
-    </nav>
-
-    <main>
-
-        <!-- Banner Section -->
-        <section id="home" class="banner-container">
-            <div class="banner-slide active" style="background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80');">
-                <div class="banner-text">प्रिंटर & रिपेयरिंग ऑफर्स</div>
+    <div class="container mx-auto p-4 max-w-4xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div class="bg-gray-900 p-4 rounded-2xl gold-border text-center">
+                <img src="https://via.placeholder.com/300" class="w-full rounded-xl mb-4" alt="Product">
+                <h3 class="text-xl font-bold">Premium Logo T-Shirt</h3>
+                <p class="text-yellow-500 text-2xl font-bold mt-2">₹499</p>
+                <button onclick="openOrderForm('Premium Logo T-Shirt', '499')" class="mt-4 bg-yellow-500 text-black font-bold py-3 px-8 rounded-full hover:bg-yellow-400 transition w-full">अभी खरीदें</button>
             </div>
-            <div class="banner-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');">
-                <div class="banner-text">कंप्यूटर तथा टीवी प्रोडक्ट्स</div>
-            </div>
-            <div class="banner-slide" style="background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80');">
-                <div class="banner-text">CCTV कैमरा और इंस्टॉलेशन सेवा</div>
-            </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- Products Section -->
-        <section id="products" class="products-section" style="display:none;">
-            <h2 class="section-title">हमारे प्रोडक्ट्स</h2>
-            <div class="products-grid" id="productGrid">
-                <!-- Products will be injected here -->
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="services-section" style="display:none;">
-            <h2>हमारी सेवाएं</h2>
-            <ul class="service-list">
-                <li>प्रिंटर रिपेयरिंग - Epson, Canon, HP प्रिंटर</li>
-                <li>टीवी रिपेयरिंग - LG, Samsung, Sony टीवी</li>
-                <li>कंप्यूटर और लैपटॉप मरम्मत और मेंटेनेंस</li>
-                <li>CCTV कैमरा इंस्टॉलेशन और मरम्मत - Hikvision, CP Plus</li>
-                <li>ऑन-साइट तथा वर्कशॉप रिपेयर सेवा उपलब्ध</li>
-                <li>गुणवत्ता गारंटी और त्वरित सेवाएं</li>
-            </ul>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section" style="display:none;">
-            <h3>संपर्क करें</h3>
-            <p>नारायण कंप्यूटर सर्विसेज</p>
-            <p>Near DAV School, Runnisaidpur, Sitamarhi</p>
-            <p>Mobile: <a href="tel:+919708797335">9708797335</a></p>
-            <p>
-                WhatsApp ऑर्डर करने के लिए:  
-                <a href="https://wa.me/919708797335" target="_blank">यहाँ क्लिक करें</a>
-            </p>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Narayan Computer Services. सभी अधिकार सुरक्षित।</p>
-        <p>Contact: <a href="tel:+919708797335">9708797335</a> | Near DAV School, Runnisaidpur, Sitamarhi</p>
-        <p>Developed by Narayan Computer Services</p>
-    </footer>
+    <div id="orderModal" class="fixed inset-0 bg-black bg-opacity-90 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 p-6 rounded-2xl w-full max-w-md gold-border">
+            <h2 class="text-xl font-bold text-yellow-500 mb-4">ऑर्डर की जानकारी भरें</h2>
+            <input type="text" id="custName" placeholder="आपका नाम" class="w-full p-3 mb-3 bg-gray-700 rounded text-white border-none">
+            <input type="text" id="custAddress" placeholder="पूरा पता (गाँव/शहर, जिला, पिनकोड)" class="w-full p-3 mb-3 bg-gray-700 rounded text-white border-none">
+            <p id="selectedItem" class="text-sm text-gray-400 mb-4"></p>
+            <button onclick="sendWhatsApp()" class="w-full bg-green-600 text-white font-bold py-3 rounded-lg">WhatsApp पर कन्फर्म करें</button>
+            <button onclick="closeModal()" class="w-full mt-2 text-gray-400 text-sm">कैंसिल करें</button>
+        </div>
+    </div>
 
     <script>
-        // Banner slide rotation
-        const slides = document.querySelectorAll('.banner-slide');
-        let currentSlide = 0;
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 5000);
+        let currentItem = "";
+        let currentPrice = "";
 
-        // Navigation and section toggling
-        function showSection(sectionId) {
-            const sections = ['home', 'products', 'services', 'contact'];
-            sections.forEach(id => {
-                document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
-            });
+        function openOrderForm(name, price) {
+            currentItem = name;
+            currentPrice = price;
+            document.getElementById('selectedItem').innerText = "प्रोडक्ट: " + name + " | कीमत: ₹" + price;
+            document.getElementById('orderModal').classList.remove('hidden');
         }
 
-        // Show home section by default
-        showSection('home');
+        function closeModal() {
+            document.getElementById('orderModal').classList.add('hidden');
+        }
 
-        // Products list JSON
-        const products = [
-            {
-                name: "Epson L3150 प्रिंटर",
-                caption: "Epson L3150 मल्टीफ़ंक्शन इंकटैंक प्रिंटर, WIFI कनेक्टिविटी",
-                price: 12999,
-                img: "https://m.media-amazon.com/images/I/61plzsJ4IaL._SL1500_.jpg"
-            },
-            {
-                name: "Canon G2010 प्रिंटर",
-                caption: "Canon PIXMA G2010 इंकटैंक प्रिंटर, हाई क्वालिटी प्रिंटिंग",
-                price: 11500,
-                img: "https://m.media-amazon.com/images/I/81cIppjizlL._SL1500_.jpg"
-            },
-            {
-                name: "LG Full HD LED TV 32 inch",
-                caption: "LG 32 inch HD Ready LED टीवी, बेहतर विज़ुअल क्वालिटी",
-                price: 14999,
-                img: "https://m.media-amazon.com/images/I/71tSr-OxTBL._SL1500_.jpg"
-            },
-            {
-                name: "HP Desktop कंप्यूटर",
-                caption: "HP Desktop Core i3, 8GB RAM, 1TB HDD",
-                price: 25000,
-                img: "https://m.media-amazon.com/images/I/71B8GLx-vNL._SL1500_.jpg"
-            },
-            {
-                name: "Hikvision CCTV कैमरा सेट",
-                caption: "Hikvision 4 कैमरा CCTV सेट, 2MP HD",
-                price: 8000,
-                img: "https://m.media-amazon.com/images/I/61RxmYbP76L._SL1500_.jpg"
-            },
-            {
-                name: "CP Plus CCTV कैमरा",
-                caption: "CP Plus CCTV कैमरा सेट, हाई डेफिनिशन",
-                price: 7500,
-                img: "https://m.media-amazon.com/images/I/61XzRQcqlmL._SL1500_.jpg"
+        function sendWhatsApp() {
+            const name = document.getElementById('custName').value;
+            const address = document.getElementById('custAddress').value;
+            const phone = "916204187686";
+
+            if(name === "" || address === "") {
+                alert("कृपया नाम और पता भरें!");
+                return;
             }
-        ];
 
-        // Function to load products
-        const productGrid = document.getElementById('productGrid');
-        products.forEach(product => {
-            const productDiv = document.createElement('div');
-            productDiv.className = 'product-card';
-
-            productDiv.innerHTML = `
-                <img src="${product.img}" alt="${product.name}" class="product-img" />
-                <div class="product-name">${product.name}</div>
-                <div class="product-caption">${product.caption}</div>
-                <div class="product-price">₹${product.price.toLocaleString('hi-IN')}</div>
-                <div class="product-buttons">
-                    <a class="btn" href="https://wa.me/919708797335?text=${encodeURIComponent('नमस्ते, मैं ' + product.name + ' ऑर्डर करना चाहता हूँ। कृपया डिलीवरी और भुगतान जानकारी साझा करें। मेरा पता: __________, मोबाइल नंबर: __________। धन्यवाद!')}" target="_blank">WhatsApp से ऑर्डर करें</a>
-                </div>
-            `;
-            productGrid.appendChild(productDiv);
-        });
+            const message = `*नया ऑर्डर - PRINCE LOOK*%0A--------------------------%0A*नाम:* ${name}%0A*पता:* ${address}%0A*प्रोडक्ट:* ${currentItem}%0A*कीमत:* ₹${currentPrice}%0A--------------------------%0Aकृपया ऑर्डर कन्फर्म करें।`;
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
     </script>
-
 </body>
 </html>
